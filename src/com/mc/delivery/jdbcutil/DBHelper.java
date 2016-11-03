@@ -13,7 +13,7 @@ public class DBHelper {
 	private final static String DB_ID ="root";
 	private final static String DB_PW = "1234";
 	
-	public static void makeConnection(){
+	public static Connection makeConnection(){
 		Connection con = null;
 		try {
 			con=DriverManager.getConnection(DB_URL, DB_ID, DB_PW);
@@ -22,6 +22,7 @@ public class DBHelper {
 			System.out.println("커넥션 생성 오류");
 			e.printStackTrace();
 		}
+		return con;
 		
 	}
 

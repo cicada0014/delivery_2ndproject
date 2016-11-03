@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>index.jsp</title>
 </head>
 <body>
-tt 
+
+
+
+화면 구성중
+<form action="list" >
+<input type="submit" value="리스트화면으로">
+
+</form>
+
+
+
 </body>
+
 </html>
