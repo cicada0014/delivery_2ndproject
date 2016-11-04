@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>pizzaCategory.jsp</title>
 </head>
 <body>
-테스트 입니다. 
+피자집만 모아놓았습니다!
 </body>
 </html>

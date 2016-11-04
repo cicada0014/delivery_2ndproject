@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>result.jsp</title>
 </head>
 <body>
-gg
+<<<<<<< HEAD:WebContent/test2.jsp
+tt t
+=======
+결과 : ${result }
+>>>>>>> 9960b1739d80be251a8691e0878804abd8ffbf51:WebContent/result.jsp
 </body>
 </html>
