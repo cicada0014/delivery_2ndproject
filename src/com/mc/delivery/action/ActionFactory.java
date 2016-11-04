@@ -1,7 +1,9 @@
 package com.mc.delivery.action;
 
-import com.mc.delivery.restaurantaction.InsertRestaurantAction;
-import com.mc.delivery.restaurantaction.TakeListAction;
+import com.mc.delivery.action.restaurantaction.CategoryOptionAction;
+import com.mc.delivery.action.restaurantaction.InsertRestaurantAction;
+import com.mc.delivery.action.restaurantaction.SelectCategoryListAction;
+import com.mc.delivery.action.restaurantaction.TakeListAction;
 
 public class ActionFactory {
 //////////////////////////액션 팩토리 싱글톤 패턴 생성
@@ -26,6 +28,10 @@ public class ActionFactory {
 			commandAction = new TakeListAction();
 		}else if(command.equals("insertRestaurantInfo")){
 			commandAction=new InsertRestaurantAction();
+		}else if(command.equals("selectCategoryList")){
+			commandAction = new SelectCategoryListAction();
+		}else if(command.equals("categoryOption")){
+			commandAction = new CategoryOptionAction();
 		}
 		
 		

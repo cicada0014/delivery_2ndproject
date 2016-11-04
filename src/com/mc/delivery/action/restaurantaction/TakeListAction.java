@@ -1,4 +1,4 @@
-package com.mc.delivery.restaurantaction;
+package com.mc.delivery.action.restaurantaction;
 
 import java.io.IOException;
 

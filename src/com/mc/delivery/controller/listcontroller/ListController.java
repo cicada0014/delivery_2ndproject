@@ -1,4 +1,4 @@
-package com.mc.delivery.listcontroller;
+package com.mc.delivery.controller.listcontroller;
 
 import java.io.IOException;
 
