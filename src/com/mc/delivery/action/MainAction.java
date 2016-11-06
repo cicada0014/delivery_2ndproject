@@ -11,7 +11,7 @@ public class MainAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String viewPath = "mainList.jsp";
+		String viewPath = "index.jsp";
 		
 		
 		

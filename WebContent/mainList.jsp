@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,17 +8,41 @@
 <title>mainList.jsp</title>
 </head>
 <body>
-
-테스트중. 
-<form aciton="list" method="post">
-레스토랑 이름<input type="text" name="restaurantName"><br>
-레스토랑 위치<input type="text" name="restaurantLocation"><br>
-레스토랑 카테고리<input type="text" name="restaurantCategory"><br>
-<input type="hidden" name="command" value="insertRestaurantInfo">
-<input type="submit" value="레스토랑 값 입력하기">
+<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
+${categoryList }
 
 
-</form>
+
+선택된 카테고리 에 대한 식당리스트 표현.
+카테고리를 가진 식당 리스트 보여주기
+	list?command=takeList&option=${requestScope.category }
+		<select name="alignment" mutiple="false">
+			<option value="nameAl" > </option>
+			<option value="indexAl" >인덱스 순으로 정렬</option>
+		
+		</select>
+	<table border="2">
+		<c:forEach var="restaurant" items="${requestScope.restaurantList}">
+			<tr>
+				<td>식당이름</td>
+      <!-- 				식당을 선택했을대 식당 메뉴값과 리뷰정보를 포함하고 있는 페이지를 가지고 올것 -->
+				<td><a href="list?command="">${restaurant.restaurantName}</a></td>
+			</tr>
+			<tr>
+				<td>식당 위치</td>
+				<td>${restaurant.restaurantLocation}</td>
+			</tr>
+			
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		</c:forEach>
+
+	</table>
+
 
 </body>
 </html>

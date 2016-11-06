@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mc.delivery.jdbcutil.DBHelper;
+import com.mc.delivery.vo.CategoryVO;
 import com.mc.delivery.vo.RestaurantVO;
 
 public class RestaurantDAO {
@@ -58,19 +59,21 @@ public class RestaurantDAO {
 	
 	}
 	/////////////////카테고리 리스트 불러오기
-	public List<String> selectCategoryList(){
-		List<String> categoryList = new ArrayList<>();
+	public List<CategoryVO> selectCategoryList(){
+		List<CategoryVO> categoryList = new ArrayList<>();
 		 Connection con = DBHelper.makeConnection();
 		 PreparedStatement pstmt =null;
 		 ResultSet rs= null;
-		 String sql= "SELECT category_name FROM category";
+		 String sql= "SELECT category_name, category_img FROM category";
 		 try {
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				String ctName= rs.getString(1);
-				categoryList.add(ctName);
+				CategoryVO vo = new CategoryVO();
+				vo.setCategoryName(rs.getString(1));
+				vo.setCategoryImg(rs.getString(2));
+				categoryList.add(vo);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

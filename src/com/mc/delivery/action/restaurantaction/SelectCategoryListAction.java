@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.mc.delivery.action.Action;
 import com.mc.delivery.action.ActionHelper;
 import com.mc.delivery.dao.RestaurantDAO;
+import com.mc.delivery.vo.CategoryVO;
 
 public class SelectCategoryListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-          List<String> categoryList=RestaurantDAO.getRestaurantDAO().selectCategoryList();
+          List<CategoryVO> categoryList=RestaurantDAO.getRestaurantDAO().selectCategoryList();
           
           request.setAttribute("categoryList", categoryList);
           String viewPath= "categoryList.jsp";

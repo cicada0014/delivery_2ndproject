@@ -9,9 +9,11 @@
 </head>
 <body>
 <c:forEach var="category" items="${requestScope.categoryList}">
-<a href="list?command=categoryOption&option=${pageScope.category}"><button>
-${pageScope.category}</button></a>
+<a href="list?command=takeList&option=${pageScope.category.categoryName}"><button>
+<img src="images/${pageScope.category.categoryImg}" alt="default">
+${pageScope.category.categoryName}</button></a>
 </c:forEach>
+
 
 </body>
 </html>
