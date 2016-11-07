@@ -2,6 +2,7 @@ package com.mc.delivery.action.restaurantaction;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,6 @@ import com.mc.delivery.vo.RestaurantVO;
 import com.oreilly.servlet.MultipartRequest;
 
 public class InsertRestaurantAction implements Action{
-
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -37,7 +37,12 @@ public class InsertRestaurantAction implements Action{
 		 vo.setRestaurantLocation(restaurantLocation);
 		 vo.setRestaurantCategory(restaurantCategory);
 		 vo.setRestaurantImg(restaurantImgFileName);
-		 RestaurantDAO dao = RestaurantDAO.getRestaurantDAO();
+		 
+		 ServletContext sc = request.getServletContext();
+		 	sc.getAttribute("restaurantDAO");
+		 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
+		 // 싱글톤으로 생성했는데 굳이 어플리케이션에 생성해주는 것도 웃기다. 오히려 코드가 더 늘어나는 기분임. 그냥 가져다 쓰면될텐데. 
+//		 RestaurantDAO dao = RestaurantDAO.getRestaurantDAO();
 		 int result= dao.insertRestaurantInfo(vo);
 		 request.setAttribute("result", result);
 		 String viewPath = "result.jsp";
