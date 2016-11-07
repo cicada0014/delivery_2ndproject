@@ -36,15 +36,17 @@ public class RestaurantDAO {
 		 PreparedStatement pstmt =null;
 		 int result =0;
 		 String sql = "INSERT INTO restaurants(restaurant_name,restaurant_location,"
-		 		+ "restaurant_category) VALUES(?,"
+		 		+ "restaurant_category,restaurant_img) VALUES(?,"
 		 		+ "(SELECT location_id FROM locations WHERE location_name=?)"
-		 		+ ",(SELECT category_id FROM category WHERE category_name=?))";
+		 		+ ",(SELECT category_id FROM category WHERE category_name=?)"
+		 		+ ",?)";
 	
 		try {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getRestaurantName());
 			pstmt.setString(2, vo.getRestaurantLocation());
 			pstmt.setString(3, vo.getRestaurantCategory());
+			pstmt.setString(4, vo.getRestaurantImg());
 			result= pstmt.executeUpdate();
 			
 			
@@ -92,7 +94,7 @@ public class RestaurantDAO {
 		 Connection con = DBHelper.makeConnection();
 		 PreparedStatement pstmt =null;
 		 ResultSet rs= null;
-		 String sql="SELECT a.restaurant_name,a.location_name FROM "
+		 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img FROM "
 				 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				 + "ON r.restaurant_location=l.location_id "
 				 +"WHERE restaurant_category= "
@@ -107,6 +109,7 @@ public class RestaurantDAO {
 				RestaurantVO vo = new RestaurantVO();
 				vo.setRestaurantName(rs.getString(1));
 				vo.setRestaurantLocation(rs.getString(2));
+				vo.setRestaurantImg(rs.getString(3));
 				voList.add(vo);
 			}
 		} catch (SQLException e) {

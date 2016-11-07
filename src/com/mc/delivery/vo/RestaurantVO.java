@@ -5,6 +5,13 @@ public class RestaurantVO {
 	private String restaurantName;
 	private String restaurantLocation;
 	private String restaurantCategory;
+	private String restaurantImg;
+	public String getRestaurantImg() {
+		return restaurantImg;
+	}
+	public void setRestaurantImg(String restaurantImg) {
+		this.restaurantImg = restaurantImg;
+	}
 	public String getRestaurantId() {
 		return restaurantId;
 	}

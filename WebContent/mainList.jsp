@@ -15,7 +15,7 @@ ${categoryList }
 
 선택된 카테고리 에 대한 식당리스트 표현.
 카테고리를 가진 식당 리스트 보여주기
-	list?command=takeList&option=${requestScope.category }
+<!-- 	list?command=takeList&option=${requestScope.category } -->
 		<select name="alignment" mutiple="false">
 			<option value="nameAl" > </option>
 			<option value="indexAl" >인덱스 순으로 정렬</option>
@@ -24,9 +24,13 @@ ${categoryList }
 	<table border="2">
 		<c:forEach var="restaurant" items="${requestScope.restaurantList}">
 			<tr>
-				<td>식당이름</td>
+				<td>식당이름
+			<img src="images/${restaurant.restaurantImg }" alt="${restaurant.restaurantImg}">
+		</td>
       <!-- 				식당을 선택했을대 식당 메뉴값과 리뷰정보를 포함하고 있는 페이지를 가지고 올것 -->
-				<td><a href="list?command="">${restaurant.restaurantName}</a></td>
+				<td><a href="list?command="">${restaurant.restaurantName}</a>
+				
+				</td>
 			</tr>
 			<tr>
 				<td>식당 위치</td>

@@ -8,10 +8,12 @@
 </head>
 <body>
 테스트중. 
-<form aciton="list" method="post">
+<form action="File" method="post" enctype="multipart/form-data">
 레스토랑 이름<input type="text" name="restaurantName"><br>
 레스토랑 위치<input type="text" name="restaurantLocation"><br>
 레스토랑 카테고리<input type="text" name="restaurantCategory"><br>
+
+<input type="file" name="restaurantImgFile" >
 <input type="hidden" name="command" value="insertRestaurantInfo">
 <input type="submit" value="레스토랑 값 입력하기">
 

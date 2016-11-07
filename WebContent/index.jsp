@@ -16,7 +16,11 @@
 <c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 ${categoryList }<br>
 
+
+
 화면 구성중 <br>
+
+<a href="list?command=insertRestaurantInfoForm"><button>식당 정보 입력하기</button></a>
 </body>
 
 </html>
