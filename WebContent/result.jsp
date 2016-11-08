@@ -11,6 +11,10 @@
 tt t
 =======
 결과 : ${result }
+<<<<<<< HEAD
 >>>>>>> 9960b1739d80be251a8691e0878804abd8ffbf51:WebContent/result.jsp
+=======
+
+>>>>>>> 3fd09a78b0965c439f7262f28b15bdaa38947596
 </body>
 </html>

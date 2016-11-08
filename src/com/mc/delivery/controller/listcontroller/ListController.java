@@ -17,6 +17,7 @@ public class ListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 	String command= req.getParameter("command");
+	System.out.println("컨트롤러에 입력된 커맨드:"+ command);
 	ActionFactory af= ActionFactory.getActionFactory();
 	Action action =  af.getAction(command);
 	if(action!=null){

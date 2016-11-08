@@ -11,15 +11,16 @@
 
 
 
-화면 구성중
-<form action="list" >
-<input type="submit" value="리스트화면으로">
+화면 구성중<br>
 
-</form>
 <c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-${categoryList }
+${categoryList }<br>
 
 
+
+화면 구성중 <br>
+
+<a href="list?command=insertRestaurantInfoForm"><button>식당 정보 입력하기</button></a>
 </body>
 
 </html>
