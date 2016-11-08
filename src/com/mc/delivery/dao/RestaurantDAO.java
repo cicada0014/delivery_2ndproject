@@ -100,7 +100,9 @@ public class RestaurantDAO {
 		 Connection con = null;
 		 PreparedStatement pstmt =null;
 		 ResultSet rs= null;
-		 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img FROM "
+		 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img,"
+		 		+ "a.restaurant_phone, a.restaurant_open_time, a.restaurant_close_time,"
+		 		+ "a.restaurant_introduce FROM "
 				 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				 + "ON r.restaurant_location=l.location_id "
 				 +"WHERE restaurant_category= "
@@ -117,6 +119,10 @@ public class RestaurantDAO {
 				vo.setRestaurantName(rs.getString(1));
 				vo.setRestaurantLocation(rs.getString(2));
 				vo.setRestaurantImg(rs.getString(3));
+				vo.setRestaurnatPhone(rs.getString(4));
+				vo.setRestaurantOpenTime(rs.getString(5));
+				vo.setRestaurantCloseTime(rs.getString(6));
+				vo.setRestaurantIntro(rs.getString(7));
 				voList.add(vo);
 			}
 		} catch (SQLException e) {

@@ -7,7 +7,8 @@
 <title>insertRestaurant.jsp</title>
 </head>
 <body>
-테스트중. 
+
+<!-- 테스트중. 관리자 아이디인지 컨트롤러에서 먼저 확인하고, 칼럼추가할것 생각하기.   -->
 <form action="File" method="post" enctype="multipart/form-data">
 레스토랑 이름<input type="text" name="restaurantName"><br>
 레스토랑 위치<input type="text" name="restaurantLocation"><br>
