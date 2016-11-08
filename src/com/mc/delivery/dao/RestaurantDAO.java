@@ -60,7 +60,7 @@ public class RestaurantDAO {
 			e.printStackTrace();
 		}finally{
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con);
+			DBHelper.close(con);
 		}return result;
 	
 	
@@ -89,7 +89,7 @@ public class RestaurantDAO {
 		}finally{
 			DBHelper.close(rs);
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con);
+			DBHelper.close(con);
 		}return categoryList;
 		 
 	}
@@ -125,7 +125,7 @@ public class RestaurantDAO {
 		}finally{
 			DBHelper.close(rs);
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
+			DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
 //			커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
 		}return voList;
 		 
