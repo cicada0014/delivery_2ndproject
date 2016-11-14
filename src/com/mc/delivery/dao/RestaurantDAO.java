@@ -46,7 +46,7 @@ public class RestaurantDAO {
 	
 		try {
 //			con= dataSource.getConnection();
-			con= new DBHelper().makeConnection();
+			con= dataSource.getConnection();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getRestaurantName());
 			pstmt.setString(2, vo.getRestaurantLocation());
