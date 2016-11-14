@@ -45,9 +45,9 @@ public class RestaurantDAO {
 		 		+ ",?)";
 	
 		try {
-//			con= dataSource.getConnection();
 			con= dataSource.getConnection();
 			pstmt=con.prepareStatement(sql);
+			System.out.println(vo.getRestaurantName()+"dao쪽");
 			pstmt.setString(1, vo.getRestaurantName());
 			pstmt.setString(2, vo.getRestaurantLocation());
 			pstmt.setString(3, vo.getRestaurantCategory());

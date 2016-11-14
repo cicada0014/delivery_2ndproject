@@ -13,8 +13,11 @@
 레스토랑 이름<input type="text" name="restaurantName"><br>
 레스토랑 위치<input type="text" name="restaurantLocation"><br>
 레스토랑 카테고리<input type="text" name="restaurantCategory"><br>
-
-<input type="file" name="restaurantImgFile" >
+레스토랑 전화번호<input type="tel" name="restaurantPhone"><br>
+레스토랑 영업시간<input type="time" name="restaurantOpenTime"><br>
+			<input type="time" name="restaurantCloseTime"><br>
+			
+<input type="file" name="restaurantImg" >
 <input type="hidden" name="command" value="insertRestaurantInfo">
 <input type="submit" value="레스토랑 값 입력하기">
 
