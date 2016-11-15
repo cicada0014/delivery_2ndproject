@@ -16,11 +16,13 @@
 레스토랑 전화번호<input type="tel" name="restaurantPhone"><br>
 레스토랑 영업시간<input type="time" name="restaurantOpenTime"><br>
 			<input type="time" name="restaurantCloseTime"><br>
-			
+<hr>
+레스토랑 소개<textarea rows="5" cols="100" name="restaurantIntro"></textarea>	<br>		
 <input type="file" name="restaurantImg" >
 <input type="hidden" name="command" value="insertRestaurantInfo">
 <input type="submit" value="레스토랑 값 입력하기">
-
+시간값은 24시간 표기법으로 입력이 된다. 프론트단에서 입력제한 걸어줘야함. 데이터베이스에 있는 정보를 가지고?
+데이터베이스에서입력제한값 들고 가도록 해야겠다/ 
 
 </form>
 
