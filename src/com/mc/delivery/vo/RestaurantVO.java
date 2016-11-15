@@ -6,6 +6,35 @@ public class RestaurantVO {
 	private String restaurantLocation;
 	private String restaurantCategory;
 	private String restaurantImg;
+	private String restaurantOpenTime;
+	private String restaurantCloseTime;
+	private String restaurantIntro;
+	private String restaurnatPhone;
+	
+	public String getRestaurantOpenTime() {
+		return restaurantOpenTime;
+	}
+	public void setRestaurantOpenTime(String restaurantOpenTime) {
+		this.restaurantOpenTime = restaurantOpenTime;
+	}
+	public String getRestaurantCloseTime() {
+		return restaurantCloseTime;
+	}
+	public void setRestaurantCloseTime(String restaurantCloseTime) {
+		this.restaurantCloseTime = restaurantCloseTime;
+	}
+	public String getRestaurantIntro() {
+		return restaurantIntro;
+	}
+	public void setRestaurantIntro(String restaurantIntro) {
+		this.restaurantIntro = restaurantIntro;
+	}
+	public String getRestaurnatPhone() {
+		return restaurnatPhone;
+	}
+	public void setRestaurnatPhone(String restaurnatPhone) {
+		this.restaurnatPhone = restaurnatPhone;
+	}
 	public String getRestaurantImg() {
 		return restaurantImg;
 	}
