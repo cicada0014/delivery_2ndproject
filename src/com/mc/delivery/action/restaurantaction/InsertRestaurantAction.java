@@ -10,23 +10,30 @@ import javax.servlet.http.HttpServletResponse;
 import com.mc.delivery.action.Action;
 import com.mc.delivery.action.ActionHelper;
 import com.mc.delivery.dao.RestaurantDAO;
+import com.mc.delivery.databinding.DataBinding;
 import com.mc.delivery.vo.RestaurantVO;
 import com.oreilly.servlet.MultipartRequest;
 
-public class InsertRestaurantAction implements Action{
+public class InsertRestaurantAction implements Action,DataBinding{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 		MultipartRequest multi = (MultipartRequest) request.getAttribute("multi");
-		
+	
 		//데이터 베이스에는 파일명만 기입하도록 한다. 이미지는 나중에 뷰에서 처리해서 보내준다. 
 		 String restaurantName = multi.getParameter("restaurantName");
 		 String restaurantLocation = multi.getParameter("restaurantLocation");
 		 String restaurantCategory = multi.getParameter("restaurantCategory");
-		 
+		 String restaurantPhone= multi.getParameter("restaurantPhone");
+		 String restaurantOpenTime= multi.getParameter("restaurantOpenTime");
+		 String restaurantCloseTime= multi.getParameter("restaurantCloseTime");
+		 System.out.println(restaurantPhone);
+		 System.out.println(restaurantCloseTime);
+		 System.out.println(restaurantOpenTime);
+		 System.out.println(restaurantName);
 		 String restaurantImgFileName = "default_img.png" ;
-			if(multi.getFilesystemName("restaurantImgFile")==null||multi.getFilesystemName("restaurantImgFile").equals("")){
+			if(multi.getFilesystemName("restaurantImg")==null||multi.getFilesystemName("restaurantImg").equals("")){
 				
 			}else{
 				restaurantImgFileName = multi.getFilesystemName("restaurantImgFile");
@@ -48,6 +55,12 @@ public class InsertRestaurantAction implements Action{
 		 String viewPath = "result.jsp";
 		 ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
 		
+	}
+
+	@Override
+	public Object[] getDataBinders() {
+		// TODO Auto-generated method stub
+		return new Object[]{"restaurantVO", com.mc.delivery.vo.RestaurantVO.class};
 	}
 
 }

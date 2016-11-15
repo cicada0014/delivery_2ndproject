@@ -15,7 +15,7 @@ public class DBHelper {
 	private final String DB_URL="jdbc:mysql://70.12.109.97:3306/delivery_2ndproject";
 	private final String DB_ID ="root";
 	private final String DB_PW = "1234";
-//	private final String DB_PW = "1q2w3e4r";
+//	private final String DB_PW = "sds902";
 	
 	private ArrayList<Connection> connList = new ArrayList<>();
 	
@@ -93,7 +93,7 @@ public class DBHelper {
 			e.printStackTrace();
 		}
 	}
-	public static  void closeAllCon(Connection con){
+	public static void close(Connection con){
 		try {
 			if(con!=null)
 				con.close();

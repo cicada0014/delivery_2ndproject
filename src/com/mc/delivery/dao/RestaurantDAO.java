@@ -45,9 +45,9 @@ public class RestaurantDAO {
 		 		+ ",?)";
 	
 		try {
-//			con= dataSource.getConnection();
-			con= new DBHelper().makeConnection();
+			con= dataSource.getConnection();
 			pstmt=con.prepareStatement(sql);
+			System.out.println(vo.getRestaurantName()+"dao쪽");
 			pstmt.setString(1, vo.getRestaurantName());
 			pstmt.setString(2, vo.getRestaurantLocation());
 			pstmt.setString(3, vo.getRestaurantCategory());
@@ -60,7 +60,7 @@ public class RestaurantDAO {
 			e.printStackTrace();
 		}finally{
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con);
+			DBHelper.close(con);
 		}return result;
 	
 	
@@ -89,7 +89,7 @@ public class RestaurantDAO {
 		}finally{
 			DBHelper.close(rs);
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con);
+			DBHelper.close(con);
 		}return categoryList;
 		 
 	}
@@ -100,7 +100,9 @@ public class RestaurantDAO {
 		 Connection con = null;
 		 PreparedStatement pstmt =null;
 		 ResultSet rs= null;
-		 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img FROM "
+		 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img,"
+		 		+ "a.restaurant_phone, a.restaurant_open_time, a.restaurant_close_time,"
+		 		+ "a.restaurant_introduce FROM "
 				 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				 + "ON r.restaurant_location=l.location_id "
 				 +"WHERE restaurant_category= "
@@ -117,6 +119,10 @@ public class RestaurantDAO {
 				vo.setRestaurantName(rs.getString(1));
 				vo.setRestaurantLocation(rs.getString(2));
 				vo.setRestaurantImg(rs.getString(3));
+				vo.setRestaurnatPhone(rs.getString(4));
+				vo.setRestaurantOpenTime(rs.getString(5));
+				vo.setRestaurantCloseTime(rs.getString(6));
+				vo.setRestaurantIntro(rs.getString(7));
 				voList.add(vo);
 			}
 		} catch (SQLException e) {
@@ -125,7 +131,7 @@ public class RestaurantDAO {
 		}finally{
 			DBHelper.close(rs);
 			DBHelper.close(pstmt);
-			DBHelper.closeAllCon(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
+			DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
 //			커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
 		}return voList;
 		 
