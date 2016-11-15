@@ -33,7 +33,7 @@ public class MenuDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "INSERT INTO RESTAURANTS_MENU(restaurant_id,menu_category,menu_name,menu_info,menu_price,menu_score,menu_imagePath) "
+		String sql = "INSERT INTO RESTAURANTS_MENU(restaurant_id,menu_category,menu_name,menu_info,menu_price,menu_imagePath) "
 				+ "VALUES(?,?,?,?,?,?,?)";
 		
 		try {
@@ -45,8 +45,7 @@ public class MenuDAO {
 			pstmt.setString(3, vo.getMenuName());
 			pstmt.setString(4, vo.getMenuInfo());
 			pstmt.setInt(5, vo.getMenuPrice());
-			pstmt.setInt(6, vo.getMenuScore());
-			pstmt.setString(7, vo.getMenuImagePath());
+			pstmt.setString(6, vo.getMenuImagePath());
 			
 			result = pstmt.executeUpdate(); 
 			
@@ -61,6 +60,58 @@ public class MenuDAO {
 		return result;
 	}
 	
+	//메뉴 정보 수정
+	public int updateMenuInfo(MenuVO vo)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "UPDATE RESTAURANTS_MENU set menu_name=? menu_info=? menu_price=? menu_imagePath=? where restaurant_id=?";
+		
+		try {
+			conn = new DBHelper().makeConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getMenuName());
+			pstmt.setString(2, vo.getMenuInfo());
+			pstmt.setInt(3, vo.getMenuPrice());
+			pstmt.setString(4, vo.getMenuImagePath());
+			pstmt.setInt(5, vo.getRestaurantId());
+			result = pstmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("메뉴 정보 수정 오류");
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(pstmt);
+			DBHelper.close(conn);
+		}
+		
+		return result;
+	}
+	
+	//메뉴 삭제
+	public int deleteMenuInfo(int menuId)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "DELETE FROM RESTAURANTS_MENU WHERE MENU_ID=?";
+		
+		try {
+			conn = new DBHelper().makeConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, menuId);
+			
+			result = pstmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("메뉴 정보 삭제 오류");
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(pstmt);
+			DBHelper.close(conn);
+		}
+		return result;
+	}
+	
 	//메뉴 리스트 가져오기
 	public List<MenuVO> selectMenuList(String restaurantId)
 	{
@@ -68,7 +119,7 @@ public class MenuDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT menu_name,menu_info,menu_price,menu_score,menu_imagePath FROM restaurants_menu WHERE restaurant_id=?";
+		String sql = "SELECT menu_name,menu_info,menu_price,menu_imagePath FROM restaurants_menu WHERE restaurant_id=?";
 		
 		try {
 			conn = dataSource.getConnection();
@@ -82,8 +133,7 @@ public class MenuDAO {
 				vo.setMenuName(rs.getString(1));
 				vo.setMenuInfo(rs.getString(2));
 				vo.setMenuPrice(rs.getInt(3));
-				vo.setMenuScore(rs.getInt(4));
-				vo.setMenuImagePath(rs.getString(5));
+				vo.setMenuImagePath(rs.getString(4));
 				
 				menuList.add(vo);
 			}
