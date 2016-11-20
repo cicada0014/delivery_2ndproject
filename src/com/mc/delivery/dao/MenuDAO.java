@@ -66,16 +66,18 @@ public class MenuDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "UPDATE RESTAURANTS_MENU set menu_name=? menu_info=? menu_price=? menu_imagePath=? where restaurant_id=?";
+		String sql = "UPDATE RESTAURANTS_MENU set menu_name=?, menu_info=?, menu_price=?, menu_imagePath=? where restaurant_id=? AND menu_id=?";
 		
 		try {
-			conn = new DBHelper().makeConnection();
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMenuName());
 			pstmt.setString(2, vo.getMenuInfo());
 			pstmt.setInt(3, vo.getMenuPrice());
 			pstmt.setString(4, vo.getMenuImagePath());
 			pstmt.setInt(5, vo.getRestaurantId());
+			pstmt.setInt(6, vo.getMenuId());
+			
 			result = pstmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("메뉴 정보 수정 오류");
@@ -97,7 +99,7 @@ public class MenuDAO {
 		String sql = "DELETE FROM RESTAURANTS_MENU WHERE MENU_ID=?";
 		
 		try {
-			conn = new DBHelper().makeConnection();
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuId);
 			
@@ -111,9 +113,9 @@ public class MenuDAO {
 		}
 		return result;
 	}
-	
+		
 	//메뉴 리스트 가져오기
-	public List<MenuVO> selectMenuList(String restaurantId)
+	public List<MenuVO> selectMenuList(int restaurantId)
 	{
 		List<MenuVO> menuList = new ArrayList<>();
 		Connection conn = null;
@@ -124,7 +126,7 @@ public class MenuDAO {
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, restaurantId);
+			pstmt.setInt(1, restaurantId);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next())

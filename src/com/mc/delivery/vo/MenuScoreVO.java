@@ -7,6 +7,9 @@ public class MenuScoreVO {
 	private String menuComment;
 	private String commentImgPath;
 	
+	public MenuScoreVO() {
+	}
+
 	public MenuScoreVO(int menuId, String userName, String menuComment, String commentImgPath) {
 		this.menuId = menuId;
 		this.userName = userName;
