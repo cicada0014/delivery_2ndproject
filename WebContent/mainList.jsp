@@ -1,12 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mainList.jsp</title>
+<c:import url="bootstrapCDN.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap") %>
 </head>
+<script type="text/javascript">
+	$(function(){
+		$('#moreSearchBtn').on("click",function(){
+			$.ajax({
+				url:"list",
+				type:"post",
+				data:"command=listAjax&option="+$(".more").attr("id"),
+				dataType:"json",
+				success:function(restaurantList){
+						$(restaurantList).each(function(index, rsVO){
+									var rsName = rsVO.restaurantName;
+									var rsLocation = rsVO.restaurantLocation;
+									var rsCategory = rsVO.restaurantCategory;
+									var rsImg = rsVO.restaurantImg;
+									var rsOpenTime = rsVO.restaurantOpenTime;
+									var rsCloseTime = rsVO.restaurantCloseTime;
+									var rsIntro =rsVO.restaurantIntro;
+									var rsPhone = rsVO.restaurnatPhone;
+// 									private String restaurantId;
+// 									private String restaurantName;
+// 									private String restaurantLocation;
+// 									private String restaurantCategory;
+// 									private String restaurantImg;
+// 									private String restaurantOpenTime;
+// 									private String restaurantCloseTime;
+// 									private String restaurantIntro;
+// 									private String restaurnatPhone;
+					
+									var result = "<tr>";
+									result +="<td>";
+// 									result +="<img src='images/"+rsImg+"' alt='"+rsImg+"'>";
+									result +=rsName;
+									result +="</td>";
+									$('table').append(result);
+							})
+							},
+				error:function(exception){
+					alert(exception.message);
+						}
+				})
+			})
+		})
+
+</script>
 <body>
 <c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 ${categoryList }
@@ -36,17 +82,10 @@ ${categoryList }
 				<td>식당 위치</td>
 				<td>${restaurant.restaurantLocation}</td>
 			</tr>
-			
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
 		</c:forEach>
-
 	</table>
-
+	
+	<button id="moreSearchBtn"><span class="more" id="${requestScope.category}"></span>더 많은 식당정보 불러오기</button>
 
 </body>
 </html>

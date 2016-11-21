@@ -32,6 +32,8 @@ public class ActionFactory {
 			commandAction = new SelectCategoryListAction();
 		}else if(command.equals("insertRestaurantInfoForm")){
 			commandAction= new InsertRestaurantInfoFormAction();
+		}else if(command.equals("listAjax")){
+			commandAction = new AjaxAction();
 		}
 		
 		
