@@ -11,9 +11,14 @@
 </head>
 <body>
 
-
-
-화면 구성중<br>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+		<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
+			<img src="images/indexImg.png" alt="indexImage" height="100px">
+		</div>
+		<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+	</div>
 
 <c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 ${categoryList }<br>
@@ -39,7 +44,7 @@ ${categoryList }<br>
 </c:if>	
 	
 
-
+</div>
 </body>
 
 </html>
