@@ -7,21 +7,18 @@ public class MenuVO {
 	private String menuName;
 	private String menuInfo;
 	private int menuPrice;
-	private int menuScore;
 	private String menuImagePath;
 	
 	public MenuVO() {
 	}
 
-	public MenuVO(int restaurantId, int menuId, String menuCategory, String menuName, String menuInfo, int menuPrice,
-			int menuScore, String menuImagePath) {
+	public MenuVO(int restaurantId, int menuId, String menuCategory, String menuName, String menuInfo, int menuPrice, String menuImagePath) {
 		this.restaurantId = restaurantId;
 		this.menuId = menuId;
 		this.menuCategory = menuCategory;
 		this.menuName = menuName;
 		this.menuInfo = menuInfo;
 		this.menuPrice = menuPrice;
-		this.menuScore = menuScore;
 		this.menuImagePath = menuImagePath;
 	}
 
@@ -73,14 +70,6 @@ public class MenuVO {
 		this.menuPrice = menuPrice;
 	}
 
-	public int getMenuScore() {
-		return menuScore;
-	}
-
-	public void setMenuScore(int menuScore) {
-		this.menuScore = menuScore;
-	}
-
 	public String getMenuImagePath() {
 		return menuImagePath;
 	}
@@ -92,7 +81,7 @@ public class MenuVO {
 	@Override
 	public String toString() {
 		return "MenuVO [restaurantId=" + restaurantId + ", menuId=" + menuId + ", menuCategory=" + menuCategory
-				+ ", menuName=" + menuName + ", menuInfo=" + menuInfo + ", menuPrice=" + menuPrice + ", menuScore="
-				+ menuScore + ", menuImagePath=" + menuImagePath + "]";
+				+ ", menuName=" + menuName + ", menuInfo=" + menuInfo + ", menuPrice=" + menuPrice + ", menuImagePath="
+				+ menuImagePath + "]";
 	}
 }
