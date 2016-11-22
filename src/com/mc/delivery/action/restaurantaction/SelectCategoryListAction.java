@@ -18,12 +18,13 @@ public class SelectCategoryListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
           List<CategoryVO> categoryList=RestaurantDAO.getRestaurantDAO().selectCategoryList();
-          
+          String categoryListLength = categoryList.size()+"";
           request.setAttribute("categoryList", categoryList);
+          request.setAttribute("categoryListSize", categoryListLength);
           String viewPath= "categoryList.jsp";
           ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
           
-		
+		//fdsfdf
 	}
 
 }

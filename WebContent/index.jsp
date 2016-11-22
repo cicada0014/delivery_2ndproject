@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:import url="bootstrapCDN.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap") %>
 <title>index.jsp</title>
 </head>
 <body>
 
-
-
-화면 구성중<br>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+		<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
+			<img src="images/indexImg.png" alt="indexImage" height="100px">
+		</div>
+		<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+	</div>
 
 <c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 ${categoryList }<br>
@@ -38,7 +45,7 @@ ${categoryList }<br>
 </c:if>	
 	
 
-
+</div>
 </body>
 
 </html>

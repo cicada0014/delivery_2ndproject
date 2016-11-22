@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import com.mc.delivery.jdbcutil.DBHelper;
 import com.mc.delivery.vo.MemberVO;
 
@@ -160,6 +158,7 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(pstmt);
 				DBHelper.close(con);
+
 			}
 		
 			System.out.println(result);
@@ -195,6 +194,8 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(con);
 				DBHelper.close(pstmt);
+
+
 			}
 			System.out.println(result);
 			return result;	
