@@ -56,9 +56,9 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
-			System.out.println("비밀번호 체크 잘됨");
+			
 			System.out.println(result);
 			return result;
 		}
@@ -92,9 +92,9 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
-			System.out.println("회원정보불러오그 잘됨");
+		
 			System.out.println(mvo);
 			return mvo ;
 		}
@@ -125,9 +125,9 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
-			System.out.println("중복체크 잘됨");
+		
 			System.out.println(result);
 
 			return result ;
@@ -159,11 +159,46 @@ public class MemberDAO {
 				e.printStackTrace();
 			} finally {
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
-			System.out.println("인서트 잘됨");
+		
 			System.out.println(result);
 			return result;	
+		}
+		
+		//정보수정
+		public int updateMember(MemberVO mvo){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			int result = -1;
+			
+			try {
+			con = new DBHelper().makeConnection();
+			String sql = "UPDATE MEMBER SET"
+					+ " EMAIL=? , NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=?"
+					+ " WHERE USERID=?";
+					
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, mvo.getEmail());
+				pstmt.setString(2, mvo.getName());
+				pstmt.setString(3, mvo.getPwd());
+				pstmt.setString(4, mvo.getPhone());
+				pstmt.setString(5, mvo.getBrithday());
+				pstmt.setString(6, mvo.getUserid());
+				result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				System.out.println("업데이트 커넥션 에러");
+				e.printStackTrace();
+			} finally {
+				DBHelper.close(con);
+				DBHelper.close(pstmt);
+			}
+			System.out.println(result);
+			return result;	
+
 		}
 
 } 

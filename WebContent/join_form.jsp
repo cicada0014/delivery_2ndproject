@@ -58,15 +58,7 @@
 			placeholder="8자리 입력(19900314)" size="30"></td>
 		</tr>
 		
-		
-<!-- 		<tr> -->
-<!-- 			<td>등급       </td> -->
-<!-- 			<td> -->
-<!-- 				<input type="radio" name="admin" value="0" checked="checked" >일반회원 -->
-<!-- 				<input type="radio" name="admin" value="1" >관리자 -->
-<!-- 			</td> -->
-<!-- 		</tr> -->
-		
+	
 		<tr>
 			<td colspan="2" align="center">
 			<input type="submit" value="가입" onclick="return joinCheck()">

@@ -104,8 +104,46 @@ public class memberController extends HttpServlet  {
 			} else {
 				request.setAttribute("result", result);
 				viewPath = "login_result.jsp";
-						
 			}
+						
+		} else if (action.equals("update")){
+			String userid = request.getParameter("userid");
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+			MemberVO mvo  = dao.getMember(userid);
+			
+			request.setAttribute("mvo", mvo);
+					
+			viewPath = "update_form.jsp";
+			
+		} else if(action.equals("update_get")){
+			
+			String name = request.getParameter("name");
+			String userid = request.getParameter("userid");
+			String pwd = request.getParameter("pwd");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String brithday = request.getParameter("brithday");
+			
+			MemberVO mvo = new MemberVO();
+			mvo.setName(name);
+			mvo.setUserid(userid);
+			mvo.setPwd(pwd);
+			mvo.setEmail(email);
+			mvo.setPhone(phone);
+			mvo.setBrithday(brithday);
+			
+		//	System.out.println(mvo);
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+			int result = dao.updateMember(mvo);
+			
+			if(result == 1){
+				request.setAttribute("mvo", mvo);
+				viewPath="update_result.jsp";
+			}
+			
+						
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
