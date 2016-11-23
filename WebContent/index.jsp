@@ -10,6 +10,14 @@
 <title>index.jsp</title>
 </head>
 <body>
+<c:if test="${not empty sessionScope.userid}">
+	  ${sessionScope.userid}님  
+	  <a href="member.do?action=update&userid=${sessionScope.userid}"><button>정보수정</button></a>
+	  <a href="member.do?action=logout"><button>로그아웃</button></a> 
+
+</c:if>	
+
+
 
 <div class="container">
 	<div class="row">
@@ -37,12 +45,6 @@ ${categoryList }<br>
 </c:if>	
 
 
-<c:if test="${not empty sessionScope.userid}">
-	  ${sessionScope.userid}님 어서오십시오. 
-	  <a href="member.do?action=update&userid=${sessionScope.userid}"><button>정보수정</button></a>
-	  <a href="member.do?action=logout"><button>로그아웃</button></a> 
-
-</c:if>	
 	
 
 </div>
