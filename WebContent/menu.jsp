@@ -38,7 +38,6 @@
 <script type="text/javascript">
 	$(function(){
 		$(document).ready(function(){
-// 			$('ul.tabs').tabs('select_tab','tab_id');
 			$('ul.tabs').tabs();
 		});
 	})
