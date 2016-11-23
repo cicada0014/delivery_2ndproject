@@ -11,6 +11,7 @@
 
 <form action="member.do" method="post" name="frm" >
 	<input type="hidden" name="action" value="join_get" >	
+	<input type="hidden" name="admin" value="1" >
 	<table>
 		
 		<tr>

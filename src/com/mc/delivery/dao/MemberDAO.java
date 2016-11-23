@@ -141,7 +141,7 @@ public class MemberDAO {
 			try {
 			con = new DBHelper().makeConnection();
 			String sql =  
-					"INSERT INTO MEMBER (USERID,EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?,?)";
+					"INSERT INTO MEMBER (USERID,EMAIL,NAME,PASSWORD,PHONE,BRITHDAY,ADMIN) VALUES(?,?,?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, mvo.getUserid());
 				pstmt.setString(2, mvo.getEmail());
@@ -149,6 +149,7 @@ public class MemberDAO {
 				pstmt.setString(4, mvo.getPwd());
 				pstmt.setString(5, mvo.getPhone());
 				pstmt.setString(6, mvo.getBrithday());
+				pstmt.setInt(7, mvo.getAdmin());
 				
 				result = pstmt.executeUpdate();
 				

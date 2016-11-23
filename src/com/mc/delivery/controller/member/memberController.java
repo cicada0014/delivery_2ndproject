@@ -42,6 +42,11 @@ public class memberController extends HttpServlet  {
 			String pwd = request.getParameter("pwd");
 			String phone = request.getParameter("phone");
 			String brithday = request.getParameter("brithday");
+			String adminStr = request.getParameter("admin");
+			int admin = 0;
+			if(adminStr != null && adminStr.length() > 0 ){
+				admin = Integer.parseInt(adminStr);
+			}
 			
 			MemberVO mvo = new MemberVO();
 			mvo.setUserid(userid);
@@ -50,6 +55,7 @@ public class memberController extends HttpServlet  {
 			mvo.setPwd(pwd);
 			mvo.setPhone(phone);
 			mvo.setBrithday(brithday);
+			mvo.setAdmin(admin);
 		
 			MemberDAO dao = MemberDAO.getMemberDAO();
 			
