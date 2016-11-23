@@ -43,10 +43,16 @@
 </script>
 </head>
 <body>
+	<!-- 	header section -->
 	<c:import url="projectHeader.html" var="header"></c:import>
-		<%=pageContext.getAttribute("header")%>
-	<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-	${categoryList } 선택된 카테고리 에 대한 식당리스트 표현. 카테고리를 가진 식당 리스트 보여주기
+	<%=pageContext.getAttribute("header")%>
+<!-- 	category section -->
+	<div class="container">
+		<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
+		${categoryList } 선택된 카테고리 에 대한 식당리스트 표현. 카테고리를 가진 식당 리스트 보여주기
+	</div>
+	
+<!-- 	list section -->
 	<div class="container">
 		<select name="alignment" mutiple="false">
 			<option value="nameAl"></option>
@@ -63,11 +69,15 @@
 				</div>
 			</c:forEach>
 		</div>
-		<button type="button" class="btn btn-primary" id="moreSearchBtn">
-			<span class="more" id="${requestScope.category}"></span> 더 많은 식당정보
-			불러오기
-		</button>
+		
+		<a href="#!" id="moreSearchBtn" class="btn" onclick="Materialize.showStaggeredList('#staggered-test')">더 많은 식당정보
+			불러오기 <span class="more" id="${requestScope.category}"></span></a>
+<!-- 		<button type="button" class="btn btn-primary" > -->
+<!-- 		</button> -->
+		
 	</div>
+	
+<!-- 	footer section -->
 <c:import url="projectFooter.html" var="footer"></c:import>
 <%=pageContext.getAttribute("footer")%>
 </body>
