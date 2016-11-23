@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import com.mc.delivery.jdbcutil.DBHelper;
 import com.mc.delivery.vo.MemberVO;
 
@@ -56,7 +54,7 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
 			System.out.println("비밀번호 체크 잘됨");
 			System.out.println(result);
@@ -92,7 +90,7 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
 			System.out.println("회원정보불러오그 잘됨");
 			System.out.println(mvo);
@@ -125,7 +123,7 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(rs);
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
 			System.out.println("중복체크 잘됨");
 			System.out.println(result);
@@ -159,7 +157,7 @@ public class MemberDAO {
 				e.printStackTrace();
 			} finally {
 				DBHelper.close(pstmt);
-				DBHelper.closeAllCon(con);
+				DBHelper.close(con);
 			}
 			System.out.println("인서트 잘됨");
 			System.out.println(result);
