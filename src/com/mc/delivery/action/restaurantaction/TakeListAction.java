@@ -28,7 +28,7 @@ public class TakeListAction implements Action{
 				if(option.equals("pizza")){
 					voList = dao.selectOption(option);
 					request.setAttribute("restaurantList", voList);
-					request.setAttribute("category", voList.get(0).getRestaurantCategory()); 
+					request.setAttribute("category", option); 
 				}else if(option.equals("chicken")){
 					voList = dao.selectOption(option);
 					request.setAttribute("restaurantList", voList);

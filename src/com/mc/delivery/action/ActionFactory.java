@@ -1,6 +1,5 @@
 package com.mc.delivery.action;
 
-import com.mc.delivery.action.restaurantaction.InsertMenuInfoFormAction;
 import com.mc.delivery.action.restaurantaction.InsertRestaurantAction;
 import com.mc.delivery.action.restaurantaction.InsertRestaurantInfoFormAction;
 import com.mc.delivery.action.restaurantaction.SelectCategoryListAction;
@@ -33,8 +32,8 @@ public class ActionFactory {
 			commandAction = new SelectCategoryListAction();
 		}else if(command.equals("insertRestaurantInfoForm")){
 			commandAction= new InsertRestaurantInfoFormAction();
-		}else if(command.equals("insertMenuInfoForm")){
-			commandAction = new InsertMenuInfoFormAction();
+		}else if(command.equals("listAjax")){
+			commandAction = new AjaxAction();
 		}
 		
 		
