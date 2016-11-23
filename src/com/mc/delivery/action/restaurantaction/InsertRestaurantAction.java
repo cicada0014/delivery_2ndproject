@@ -28,6 +28,7 @@ public class InsertRestaurantAction implements Action,DataBinding{
 		 String restaurantPhone= multi.getParameter("restaurantPhone");
 		 String restaurantOpenTime= multi.getParameter("restaurantOpenTime");
 		 String restaurantCloseTime= multi.getParameter("restaurantCloseTime");
+		 String restaurantIntroduce=multi.getParameter("restaurantIntroduce");
 		 System.out.println(restaurantPhone);
 		 System.out.println(restaurantCloseTime);
 		 System.out.println(restaurantOpenTime);
@@ -44,10 +45,10 @@ public class InsertRestaurantAction implements Action,DataBinding{
 		 vo.setRestaurantLocation(restaurantLocation);
 		 vo.setRestaurantCategory(restaurantCategory);
 		 vo.setRestaurantImg(restaurantImgFileName);
-		 
+		 vo.setRestaurantIntro(restaurantIntroduce);
+		
 		 ServletContext sc = request.getServletContext();
-		 	sc.getAttribute("restaurantDAO");
-		 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
+		 RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		 // 싱글톤으로 생성했는데 굳이 어플리케이션에 생성해주는 것도 웃기다. 오히려 코드가 더 늘어나는 기분임. 그냥 가져다 쓰면될텐데. 
 //		 RestaurantDAO dao = RestaurantDAO.getRestaurantDAO();
 		 int result= dao.insertRestaurantInfo(vo);
