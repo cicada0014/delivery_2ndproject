@@ -71,6 +71,8 @@
 				입력이 된다. 프론트단에서 입력제한 걸어줘야함. 데이터베이스에 있는 정보를 가지고? 데이터베이스에서입력제한값 들고 가도록
 				해야겠다/
 			</form>
+			
+<!-- 			여기부터는 페이지의 두번째 칼럼,확인작업을 위한 컴포넌트들이 들어있다.  -->
 			<div class="col s2 m2 l2" id="checkdiv">
 				<br>
 				<a class="waves-effect waves-light btn col s8 m8 8">중복확인</a>
@@ -80,8 +82,14 @@
 	</div>
 	
 	
+<!-- 	time 설정을 위한 자바스크립트  -->
+	
 	<script type="text/javascript">
-			$('#restaurant_opentime').timepicker();
+			$('#restaurant_opentime').timepicker({
+                template: false,
+                showInputs: false,
+                minuteStep: 5
+            });
   </script>
 
 
