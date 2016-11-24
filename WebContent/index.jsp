@@ -48,18 +48,10 @@
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br>
-			<h1 class="header center orange-text">화면 구성중입니다. </h1>
 			<div class="row center">
 				<h5 class="header col s12 light">배달 프로 젝트 구성
 					</h5>
 			</div>
-			<div class="row center">
-				<a href="./index.jsp"
-					id="download-button"
-					class="btn-large waves-effect waves-light orange">인덱스 화면 </a>
-			</div>
-			<br>
-			<br>
 		</div>
 	</div>
 

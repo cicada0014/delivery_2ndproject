@@ -11,7 +11,7 @@
 <nav  class="nav-extended white">
 	<div class="nav-wrapper container">
 		<a id="logo-container" href="./index.jsp" class="brand-logo center">
-		<img src="images/indexImg.png" alt="indexImage" height="60px"> 
+		<img src="images/indexImg.png" alt="indexImage" height="80px"> 
 		</a>
 		<ul class="right hide-on-med-and-down">
 			<c:if test="${empty sessionScope.userid}">
