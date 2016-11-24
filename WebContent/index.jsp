@@ -44,15 +44,14 @@
 				입력하기</button></a>
 
 		<!-- 	현성이형이 작업하신 부분입니다.  -->
-		<c:if test="${empty sessionScope.userid}">
+		<c:if test="${empty sessionScope.email}">
 			<a href="member.do?action=login"><button>로그인</button></a>
 			<a href="member.do?action=join"><button>회원가입</button></a>
 		</c:if>
-		<c:if test="${not empty sessionScope.userid}">
-	    ${sessionScope.userid}님 어서오십시오. 
+		<c:if test="${not empty sessionScope.email}">
+	    ${sessionScope.email}님 어서오십시오. 
 	    <a href="member.do?action=logout"><button>로그아웃</button></a>
 		</c:if>
-
 
 	</div>
 <!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
