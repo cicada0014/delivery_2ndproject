@@ -72,7 +72,7 @@
 
 </head>
 <body>
-<c:import url="projectHeader.html" var="header"></c:import>
+<c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
 
 <!-- 테스트중. 관리자 아이디인지 컨트롤러에서 먼저 확인하고, 칼럼추가할것 생각하기.   -->
@@ -180,7 +180,7 @@
 	
 	
 
-	<c:import url="projectFooter.html" var="footer"></c:import>
+	<c:import url="projectFooter.jsp" var="footer"></c:import>
 <%=pageContext.getAttribute("footer")%>
 </body>
 </html>

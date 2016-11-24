@@ -32,10 +32,25 @@
 									var rsCloseTime = rsVO.restaurantCloseTime;
 									var rsIntro =rsVO.restaurantIntro;
 									var rsPhone = rsVO.restaurnatPhone;
-									var result = "<tr>";
-									result +="<td>";
-									result +=rsName;
-									result +="</td>";
+									var result = '<div class="col s12 m6 l4">';
+									result +=      '<a href="list?command=">';
+									result +=        '<div class="card horizontal">';
+									result +=		'	<div class="card-image">';
+									result +=			'	<img src="images/'+rsImg+'">';
+									result +=			'</div>';
+									result +=			'<div class="card-stacked">';
+									result +=			'<div class="card-content">';
+									result +=			'	<p>식당에 대한 정보가 들어간다.</p>';
+									result +=			'</div>';
+									result +=			'<div class="card-action">'+rsLocation+rsName+'식당위치';
+									result +=			'</div>';
+									result +=			'</div>';
+									result +=			'</div>';
+									result +=			'</a>';
+									result +=			'</div>';
+									
+
+									
 									$('#firstLoadData').append(result);
 							})
 							},
@@ -55,7 +70,7 @@
 	<div class="row">
 
 	<!-- 	header section -->
-	<c:import url="projectHeader.html" var="header"></c:import>
+	<c:import url="projectHeader.jsp" var="header"></c:import>
 	<%=pageContext.getAttribute("header")%>
 	
 	</div>
@@ -91,9 +106,6 @@
 								</div>
 							</div>
 						</a>
-						<!-- 				<a -->
-						<%-- 					href="list?command=takeList&option=${pageScope.category.categoryName}"> --%>
-						<%-- 					${pageScope.category.categoryName} </a> --%>
 					</div>
 				</c:forEach>
 			</div>
@@ -116,8 +128,10 @@
 		
 	</div>
 	
+</div>
+	
 <!-- 	footer section -->
-<c:import url="projectFooter.html" var="footer"></c:import>
+<c:import url="projectFooter.jsp" var="footer"></c:import>
 <%=pageContext.getAttribute("footer")%>
 </body>
 </html>
