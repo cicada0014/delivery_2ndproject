@@ -38,10 +38,10 @@ public class RestaurantDAO {
 		 PreparedStatement pstmt =null;
 		 int result =0;
 		 String sql = "INSERT INTO restaurants(restaurant_name,restaurant_location,"
-		 		+ "restaurant_category,restaurant_img) VALUES(?,"
+		 		+ "restaurant_category,restaurant_img,restaurant_introduce) VALUES(?,"
 		 		+ "(SELECT location_id FROM locations WHERE location_name=?)"
 		 		+ ",(SELECT category_id FROM category WHERE category_name=?)"
-		 		+ ",?)";
+		 		+ ",?,?)";
 	
 		try {
 			con= dataSource.getConnection();
@@ -51,11 +51,12 @@ public class RestaurantDAO {
 			pstmt.setString(2, vo.getRestaurantLocation());
 			pstmt.setString(3, vo.getRestaurantCategory());
 			pstmt.setString(4, vo.getRestaurantImg());
+			pstmt.setString(5, vo.getRestaurantIntro());
 			result= pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
-			System.out.println("�떇�떦 �젙蹂닿컪 �엯�젰�떆 �삤瑜�");
+			System.out.println("식당정보값 입력 ㅇ류");
 			e.printStackTrace();
 		}finally{
 			DBHelper.close(pstmt);
@@ -64,6 +65,35 @@ public class RestaurantDAO {
 	
 	
 	}
+	public List<String> selectLocationList(){
+		List<String> locationList = new ArrayList<>();
+		Connection con = null;
+		 PreparedStatement pstmt =null;
+		 ResultSet rs= null;
+		 String sql= "SELECT location_name FROM locations";
+		 try {
+			con= dataSource.getConnection();
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				 
+				String location= rs.getString(1);
+				
+				locationList.add(location);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBHelper.close(rs);
+			DBHelper.close(pstmt);
+			DBHelper.close(con);
+		}return locationList;
+		 
+	}
+	
+	
 	/////////////////移댄뀒怨좊━ 由ъ뒪�듃 遺덈윭�삤湲�
 	public List<CategoryVO> selectCategoryList(){
 		List<CategoryVO> categoryList = new ArrayList<>();
