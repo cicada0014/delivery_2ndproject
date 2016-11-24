@@ -30,7 +30,7 @@
 <body>
 	
 		<div class="row" id="categoryCarousel">
-			<div id="categoryCarousel" class="carousel">
+			<div  class="carousel">
 				<!-- 				<ol class="carousel-indicators"> -->
 				<%-- 					<c:forEach var="i" begin="1" end="${requestScope.categoryListSize}" --%>
 				<%-- 						step="1"> --%>
@@ -51,31 +51,26 @@
 			</div>
 		</div>
 
-
-
+	<c:set value="${requestScope.categoryList}" var="categoryListData" scope="session"/>
 	<div class="row" id="inlineCategory">
 		<c:forEach var="category" items="${requestScope.categoryList}"
 			varStatus="status">
-			<div class="col s6 m4 l2 eachCategoryImg">
-				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="images/${pageScope.category.categoryImg}" alt="${pageScope.category.categoryName}">
+			<div class="col s6 m4 l2 ">
+			<a href="list?command=takeList&option=${pageScope.category.categoryName}">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img src="images/${pageScope.category.categoryImg}">
 					</div>
-					<div class="card-content">
-						<span class="card-title activator grey-text text-darken-4">${pageScope.category.categoryName}
-							<i class="material-icons right">more_vert</i>
-						</span>
-						<p>
-							<a href="list?command=takeList&option=${pageScope.category.categoryName}">${pageScope.category.categoryName}</a>
-						</p>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title grey-text text-darken-4">Card Title<i
-							class="material-icons right">close</i></span>
-						<p>Here is some more information about this product that is
-							only revealed once clicked on.</p>
+					<div class="card-stacked">
+						<div class="card-content">
+							<p>
+								${pageScope.category.categoryName}
+							</p>
+						</div>
+						
 					</div>
 				</div>
+				</a>
 <!-- 				<a -->
 <%-- 					href="list?command=takeList&option=${pageScope.category.categoryName}"> --%>
 <%-- 					${pageScope.category.categoryName} </a> --%>
@@ -85,7 +80,7 @@
 
 
 	<!-- 	///// category 이미지에 대한 버튼 클릭 자바스크립트 -->
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$(function() {
 			$("#inlineCategory > .eachCategoryImg > img").on(
 					"click",
@@ -96,6 +91,7 @@
 					})
 		})
 	</script>
+	
 
 </body>
 </html>

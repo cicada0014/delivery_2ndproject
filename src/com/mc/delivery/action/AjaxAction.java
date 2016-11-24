@@ -24,12 +24,12 @@ public class AjaxAction implements Action {
 	 	sc.getAttribute("restaurantDAO");
 	 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 	 	String option= request.getParameter("option");
-		
+		int count= Integer.parseInt(request.getParameter("count"));
 	 	
 		List<RestaurantVO> voList= null;
 		String restaurantList = null;
 		if(option.equals("pizza")){
-			voList = dao.selectOption(option);
+			voList = dao.selectAjaxOption(option, count);
 			restaurantList = gson.toJson(voList);
 		}
 		System.out.println(restaurantList);

@@ -10,13 +10,19 @@
 <%=pageContext.getAttribute("bootstrap") %>
 <script type="text/javascript">
 	$(function(){
+		var count=1;
+
+
+
+		
 		$('#moreSearchBtn').on("click",function(){
 			$.ajax({
 				url:"list",
 				type:"post",
-				data:"command=listAjax&option="+$(".more").attr("id"),
+				data:"command=listAjax&option="+$(".more").attr("id")+"&&count="+count,
 				dataType:"json",
 				success:function(restaurantList){
+						count++;
 						$(restaurantList).each(function(index, rsVO){
 									var rsName = rsVO.restaurantName;
 									var rsLocation = rsVO.restaurantLocation;
@@ -26,10 +32,25 @@
 									var rsCloseTime = rsVO.restaurantCloseTime;
 									var rsIntro =rsVO.restaurantIntro;
 									var rsPhone = rsVO.restaurnatPhone;
-									var result = "<tr>";
-									result +="<td>";
-									result +=rsName;
-									result +="</td>";
+									var result = '<div class="col s12 m6 l4">';
+									result +=      '<a href="list?command=">';
+									result +=        '<div class="card horizontal">';
+									result +=		'	<div class="card-image">';
+									result +=			'	<img src="images/'+rsImg+'">';
+									result +=			'</div>';
+									result +=			'<div class="card-stacked">';
+									result +=			'<div class="card-content">';
+									result +=			'	<p>식당에 대한 정보가 들어간다.</p>';
+									result +=			'</div>';
+									result +=			'<div class="card-action">'+rsLocation+rsName+'식당위치';
+									result +=			'</div>';
+									result +=			'</div>';
+									result +=			'</div>';
+									result +=			'</a>';
+									result +=			'</div>';
+									
+
+									
 									$('#firstLoadData').append(result);
 							})
 							},
@@ -41,44 +62,76 @@
 		})
 
 </script>
+
+
 </head>
 <body>
+<div class="container-fluid">
+	<div class="row">
+
 	<!-- 	header section -->
-	<c:import url="projectHeader.html" var="header"></c:import>
+	<c:import url="projectHeader.jsp" var="header"></c:import>
 	<%=pageContext.getAttribute("header")%>
-<!-- 	category section -->
-	<div class="container">
-		<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-		${categoryList } 선택된 카테고리 에 대한 식당리스트 표현. 카테고리를 가진 식당 리스트 보여주기
-	</div>
 	
+	</div>
+<!-- 	category section -->
+	<div class="row">
+		<div id="categorySection" class="grey darken-3">
+			<br>
+			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
+			<span id="categorySpan">${categoryList }</span> 선택된 카테고리 에 대한 식당리스트
+			표현. 카테고리를 가진 식당 리스트 보여주기
+			<script type="text/javascript">
+				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel만 지움
+			</script>
+		</div>
+	</div>
 <!-- 	list section -->
+<div class="container">
+			<div class="row" id="firstLoadData">
+				<c:forEach var="restaurant" items="${requestScope.restaurantList}">
+					<div class="col s12 m6 l4">	
+						<a href="list?command="">
+							<div class="card horizontal">
+								<div class="card-image">
+									<img src="images/${restaurant.restaurantImg }">
+								</div>
+								<div class="card-stacked">
+									<div class="card-content">
+										<p>식당에 대한 정보가 들어간다.</p>
+									</div>
+
+									<div class="card-action">${restaurant.restaurantName} 식당
+										위치</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+			</div>
+
+		</div>
+
+
+
 	<div class="container">
 		<select name="alignment" mutiple="false">
 			<option value="nameAl"></option>
 			<option value="indexAl">인덱스 순으로 정렬</option>
 		</select>
-		<div class="row" id="firstLoadData">
-			<c:forEach var="restaurant" items="${requestScope.restaurantList}">
-				<div class="col s12 m6 l4">
-					식당이름 <img src="images/${restaurant.restaurantImg }"
-						alt="${restaurant.restaurantImg}">
-					<!-- 				식당을 선택했을대 식당 메뉴값과 리뷰정보를 포함하고 있는 페이지를 가지고 올것 -->
-					<a href="list?command="">${restaurant.restaurantName}</a> 식당 위치
-					${restaurant.restaurantLocation}
-				</div>
-			</c:forEach>
-		</div>
 		
-		<a href="#!" id="moreSearchBtn" class="btn" onclick="Materialize.showStaggeredList('#staggered-test')">더 많은 식당정보
+		
+		<a href="#!" id="moreSearchBtn" class="btn">더 많은 식당정보
 			불러오기 <span class="more" id="${requestScope.category}"></span></a>
 <!-- 		<button type="button" class="btn btn-primary" > -->
 <!-- 		</button> -->
 		
 	</div>
 	
+</div>
+	
 <!-- 	footer section -->
-<c:import url="projectFooter.html" var="footer"></c:import>
+<c:import url="projectFooter.jsp" var="footer"></c:import>
 <%=pageContext.getAttribute("footer")%>
 </body>
 </html>
