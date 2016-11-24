@@ -25,6 +25,15 @@ public class MenuDAO {
 		return instance;
 	}
 	
+	public static MenuDAO getMenuDAO()
+	{
+		if(instance == null)
+		{
+			instance = new MenuDAO();
+		}
+		return instance;
+	}
+	
 	public MenuDAO(){}
 	
 	//메뉴 입력

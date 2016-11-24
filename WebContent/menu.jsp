@@ -120,7 +120,7 @@
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<div id="mainMenu" class="card-panel teal lighten-2 col s8"><c:out value="${restaurantMenu} }" /></div>
+			<div id="mainMenu" class="card-panel teal lighten-2 col s8">메인메뉴</div>
 			<div id="sideMenu" class="card-panel teal lighten-2 col s8">사이드메뉴</div>
 			<div id="drinkMenu" class="card-panel teal lighten-2 col s8">음료</div>
 			<div id="etcMenu" class="card-panel teal lighten-2 col s8">기타</div>

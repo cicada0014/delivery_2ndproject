@@ -25,6 +25,15 @@ public class MenuScoreDAO {
 		return instance;
 	}
 	
+	public static MenuScoreDAO getMenuScoreDAO()
+	{
+		if(instance == null)
+		{
+			instance = new MenuScoreDAO();
+		}
+		return instance;
+	}
+	
 	public MenuScoreDAO(){}
 	
 	public int insertMenuScore(MenuScoreVO vo)
