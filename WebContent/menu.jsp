@@ -41,14 +41,13 @@
 	$(function(){
 		$(document).ready(function(){
 			$('ul.tabs').tabs();
-		}),
-		
+		});
+
 		$.ajax({
-			url:"list",
+			url:"menuList",
 			type:"post",
-// 			data:"command=listAjax&option=" + $(),
+			data:"restaurantMenu=listAjax&option=",
 			dataType:"json",
-			
 			success:function(restaurantMenu){
 				$(restaurantMenu).each(function(index, rmVO){
 					var rsId = rmVO.restaurantId;
@@ -62,10 +61,19 @@
 					result += "<td>";
 					result += menuName;
 					result += "</td>";
-//	 				$('').append(result);
+//		 				$('').append(result);
 				})
 			},
-			
+			error:function(exception){
+				alert(exception.message);
+			}
+		});
+		
+		$.ajax({
+			url:"menuList",
+			type:"post",
+			data:"menuScore=listAjax&option=",
+			dataType:"json",
 			success:function(menuScore){
 				$(menuScore).each(function(index, msVO){
 					var menuId = msVO.menuId;
@@ -77,13 +85,15 @@
 					result += "<td>";
 					result += userName;
 					result += "</td>";
-//	 				$('').append(result);
+		 				$('').append(result);
 				})
 			},
 			error:function(exception){
 				alert(exception.message);
 			}
-		})
+		});
+			
+		
 	})
 </script>
 </head>
@@ -110,9 +120,7 @@
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<c:forEach var="menu" items="${request.restaurantMenu }">
-			<div id="mainMenu" class="card-panel teal lighten-2 col s8"><c:out value="${restaurantMenu.menuCategory} }" /></div>
-			</c:forEach>
+			<div id="mainMenu" class="card-panel teal lighten-2 col s8"><c:out value="${restaurantMenu} }" /></div>
 			<div id="sideMenu" class="card-panel teal lighten-2 col s8">사이드메뉴</div>
 			<div id="drinkMenu" class="card-panel teal lighten-2 col s8">음료</div>
 			<div id="etcMenu" class="card-panel teal lighten-2 col s8">기타</div>
