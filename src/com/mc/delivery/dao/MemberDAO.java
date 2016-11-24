@@ -21,7 +21,7 @@ public class MemberDAO {
 	}
 
 	//사용자 인증 패스워드 일치확인
-		public int userCheck(String userid, String pwd) {
+		public int userCheck(String email, String pwd) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -29,11 +29,11 @@ public class MemberDAO {
 
 			try {
 				con = new DBHelper().makeConnection();
-				String sql ="SELECT PASSWORD FROM MEMBER WHERE USERID=?"; 
+				String sql ="SELECT PASSWORD FROM MEMBER WHERE EMAIL=?"; 
 				
 
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, userid);
+				pstmt.setString(1, email);
 				rs = pstmt.executeQuery();
 			
 				if(rs.next()){
@@ -61,7 +61,7 @@ public class MemberDAO {
 			return result;
 		}
 		//회원한명 정보보기
-		public MemberVO getMember(String userid){
+		public MemberVO getMember(String email){
 			MemberVO mvo = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -69,19 +69,18 @@ public class MemberDAO {
 			
 			try {
 			con = new DBHelper().makeConnection();
-			String sql ="select * from member where userid=?"; 
+			String sql ="select * from member where email=?"; 
 			
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,userid);
+				pstmt.setString(1,email);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
 					mvo = new MemberVO();
-					mvo.setUserid(rs.getString(1));
-					mvo.setEmail(rs.getString(2));
-					mvo.setName(rs.getString(3));
-					mvo.setPwd(rs.getString(4));
-					mvo.setPhone(rs.getString(5));
-					mvo.setBrithday(rs.getString(6));
+					mvo.setEmail(rs.getString(1));
+					mvo.setName(rs.getString(2));
+					mvo.setPwd(rs.getString(3));
+					mvo.setPhone(rs.getString(4));
+					mvo.setBrithday(rs.getString(5));
 				}
 
 			} catch (SQLException e) {
@@ -98,7 +97,7 @@ public class MemberDAO {
 		}
 		
 		//아이디중복체크 메소드
-		public int confirmID(String userid){
+		public int confirmEmail(String email){
 			MemberVO mvo = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -107,10 +106,10 @@ public class MemberDAO {
 			
 			try {
 			con = new DBHelper().makeConnection();
-			String sql ="SELECT USERID FROM MEMBER WHERE USERID=?"; 
+			String sql ="SELECT EMAIL FROM MEMBER WHERE EMAIL=?"; 
 					
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, userid);
+				pstmt.setString(1, email);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
 					result = 1;
@@ -118,7 +117,7 @@ public class MemberDAO {
 					result = -1;	
 				} 
 			} catch (SQLException e) {
-				System.out.println("아이디체크 커넥션 오류");
+				System.out.println("이메일체크 커넥션 오류");
 				e.printStackTrace();
 			} finally {
 				DBHelper.close(rs);
@@ -141,14 +140,14 @@ public class MemberDAO {
 			try {
 			con = new DBHelper().makeConnection();
 			String sql =  
-					"INSERT INTO MEMBER (USERID,EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?,?)";
+					"INSERT INTO MEMBER (EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?)";
+					//"INSERT INTO MEMBER (USERID,EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, mvo.getUserid());
-				pstmt.setString(2, mvo.getEmail());
-				pstmt.setString(3, mvo.getName());
-				pstmt.setString(4, mvo.getPwd());
-				pstmt.setString(5, mvo.getPhone());
-				pstmt.setString(6, mvo.getBrithday());
+				pstmt.setString(1, mvo.getEmail());
+				pstmt.setString(2, mvo.getName());
+				pstmt.setString(3, mvo.getPwd());
+				pstmt.setString(4, mvo.getPhone());
+				pstmt.setString(5, mvo.getBrithday());
 				
 				result = pstmt.executeUpdate();
 				

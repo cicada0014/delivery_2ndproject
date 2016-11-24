@@ -8,26 +8,26 @@
 <script type="text/javascript" src="script/member.js"></script>
 </head>
 <body>
-	<h2>아이디 중복확인</h2>
+	<h2>이메일 중복확인</h2>
 	<form action="member.do" method="get" name="frm" >
-		아이디 <input type="text" name="userid" >
-				<input type="hidden" name="action" value="idcheck" >
+		이메일 <input type="text" name="email" >
+				<input type="hidden" name="action" value="emailcheck" >
 				<input type="submit" value="중복 체크" >
 			<br>
 			 <c:if test="${result == 1}">
 				<script type="text/javascript">
-					opener.document.frm.userid.value="";
+					opener.document.frm.email.value="${email}";
 				</script>
-				${userid}는 이미 사용 중인 아이디입니다.	
+				${email}는 이미 사용 중인 이메일입니다.	
 			 </c:if>
 		 	
 		  <c:if test="${result == -1}">
-				${userid}는 사용 가능한 아이디입니다.	
+				${email}는 사용 가능한 이메일입니다.	
 				<input type="button" value="사용"  onclick="use()" > 				
 		<script type="text/javascript">		
 		function use(){
-		opener.frm.userid.value="${userid}";
-		opener.frm.Repetitious.value="${userid}";
+		opener.frm.email.value="${email}";
+		opener.frm.Repetitious.value="${email}";
 		self.close();
 		}
 		</script>
