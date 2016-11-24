@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,29 +10,12 @@
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript" src="template/js/materialize.min.js"></script>
 <title>menu.jsp</title>
+<c:import url="design_reference.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap") %>
 <style type="text/css">
 	table
 	{
  		margin:auto;
-	}
-	#panel
-	{
-		margin:auto;
-	}
-	html
-	{
-		height:100%;
-	}
-	body
-	{
-		height:100%;
-	}
-	
-	.row
-	{
-		height:100%;
-		position: relative;
-		top:20px;
 	}
 	#restaurants
 	{
@@ -41,18 +25,72 @@
 	{
 		font-style: italic;
 	}
+	#menuReply
+	{
+		font-size: 20px;
+	}
 	
+	.row
+	{
+/* 		height:100%; */
+		position: relative;
+		top:20px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
 		$(document).ready(function(){
 			$('ul.tabs').tabs();
-		});
+		}),
+		
+		$.ajax({
+			url:"list",
+			type:"post",
+// 			data:"command=listAjax&option=" + $(),
+			dataType:"json",
+			
+			success:function(restaurantMenu){
+				$(restaurantMenu).each(function(index, rmVO){
+					var rsId = rmVO.restaurantId;
+					var menuId = rmVO.menuId;
+					var menuCategory = rmVO.menuCategory;
+					var menuName = rmVO.menuName;
+					var menuInfo = rmVO.menuInfo;
+					var menuPrice = rmVO.menuPrice;
+					var menuImgPath = rmVO.menuImgPath;
+					var result = "<tr>";
+					result += "<td>";
+					result += menuName;
+					result += "</td>";
+//	 				$('').append(result);
+				})
+			},
+			
+			success:function(menuScore){
+				$(menuScore).each(function(index, msVO){
+					var menuId = msVO.menuId;
+					var commentId = msVO.commentId;
+					var userName = msVO.userName;
+					var menuComment = msVO.menuComment;
+					var commentImgPath = msVO.commentImgPath;
+					var result = "<tr>";
+					result += "<td>";
+					result += userName;
+					result += "</td>";
+//	 				$('').append(result);
+				})
+			},
+			error:function(exception){
+				alert(exception.message);
+			}
+		})
 	})
 </script>
 </head>
 <body>
-<div class="card-panel teal lighten-2" id="panel" style="text-align:center">메뉴</div>
+<!-- 	header section -->
+<c:import url="projectHeader.html" var="header"></c:import>
+<%=pageContext.getAttribute("header")%>
 	<div class="container">
 		<div class="row">
 			<div class="col s12" id="restaurants">
@@ -63,6 +101,7 @@
 				식당주소
 				</div>
 			</div>
+			
 			<div class="col s9">
 				<ul class="tabs">
 					<li class="tab col s2"><a href="#mainMenu">메인메뉴</a></li>
@@ -71,16 +110,28 @@
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<div id="mainMenu" class="col s8">메인메뉴</div>
-			<div id="sideMenu" class="col s8">사이드메뉴</div>
-			<div id="drinkMenu" class="col s8">음료</div>
-			<div id="etcMenu" class="col s8">기타</div>
+			<c:forEach var="menu" items="${request.restaurantMenu }">
+			<div id="mainMenu" class="card-panel teal lighten-2 col s8"><c:out value="${restaurantMenu.menuCategory} }" /></div>
+			</c:forEach>
+			<div id="sideMenu" class="card-panel teal lighten-2 col s8">사이드메뉴</div>
+			<div id="drinkMenu" class="card-panel teal lighten-2 col s8">음료</div>
+			<div id="etcMenu" class="card-panel teal lighten-2 col s8">기타</div>
 			
-			<div class="col s3">
+			<div class="col s3 offset-s9">
 				<div style="text-align:justify">매장정보</div>
 				<br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col s12" id="menuReply">
+				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
+			</div>
+			<div class="col s12">
+				<div class="card-panel teal lighten-2 col s2">작성자 이름&점수</div>
+				<div class="card-panel teal lighten-2 col s10">평가 내용&사진</div>
 			</div>
 		</div>
 	</div>
