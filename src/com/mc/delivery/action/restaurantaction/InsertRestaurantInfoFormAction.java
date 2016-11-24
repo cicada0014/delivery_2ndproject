@@ -1,6 +1,7 @@
 package com.mc.delivery.action.restaurantaction;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -21,11 +22,15 @@ public class InsertRestaurantInfoFormAction implements Action {
 		ServletContext sc = request.getServletContext();
 		RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		
-		List<CategoryVO>  categoryList = dao.selectCategoryList();
-		List<String> locationList = dao.selectLocationList();
+		ArrayList<CategoryVO>  categoryList = (ArrayList<CategoryVO>) dao.selectCategoryList();
+		ArrayList<String> locationList = (ArrayList<String>) dao.selectLocationList();
 		request.setAttribute("categoryList", categoryList);
 		request.setAttribute("locationList", locationList);
 		
+		for(String location : locationList){
+			System.out.println(location);
+			
+		}
 		
 		String viewPath="insertRestaurant.jsp";
 		ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
