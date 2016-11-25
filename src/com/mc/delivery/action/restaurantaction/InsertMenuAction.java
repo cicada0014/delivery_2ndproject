@@ -46,7 +46,7 @@ public class InsertMenuAction implements Action,DataBinding {
 		
 		MenuVO vo = new MenuVO();
 		vo.setMenuName(menuName);
-		vo.setMenuCategory(menuCategory);
+		vo.setMenuCategory(Integer.parseInt(menuCategory));
 		vo.setMenuInfo(menuInfo);
 		vo.setMenuPrice(Integer.parseInt(menuPrice));
 		vo.setMenuImagePath(menuImageFileName);

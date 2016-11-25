@@ -3,6 +3,7 @@ package com.mc.delivery.controller.menucontroller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,64 +14,61 @@ import com.mc.delivery.action.Action;
 import com.mc.delivery.action.ActionFactory;
 import com.mc.delivery.databinding.DataBinding;
 import com.mc.delivery.databinding.ServletRequestDataBinder;
+import com.mc.delivery.service.MenuService;
+import com.mc.delivery.vo.MenuVO;
 
-@WebServlet(urlPatterns="/menuList")
+@WebServlet(urlPatterns="/menuList.do")
 public class MenuListController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HashMap<String, Object> model = new HashMap<>();
-		
-		String restaurantMenu = req.getParameter("restaurantMenu");
-		String menuScore = req.getParameter("menuScore");
-		System.out.println("컨트롤러에 입력된 메뉴 커맨드 : " + restaurantMenu);
-		System.out.println("컨트롤러에 입력된 평가 커맨드 : " + menuScore);
-		ActionFactory af = ActionFactory.getActionFactory();
-		Action menuAction = af.getAction(restaurantMenu);
-		Action scoreAction = af.getAction(menuScore);
-		
-		if(menuAction instanceof DataBinding)
-		{
-			prepareRequestData(req, model, (DataBinding) menuAction);
-			if(scoreAction instanceof DataBinding)
-			{
-				prepareRequestData(req, model, (DataBinding) scoreAction);
-			}
-		}
-		
-		if(menuAction != null)
-		{
-			menuAction.execute(req, resp);
-			if(scoreAction != null)
-			{
-				scoreAction.execute(req, resp);
-			}
-		}
+		// TODO Auto-generated method stub
+		super.doGet(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		this.doGet(req, resp);
+		super.doPost(req, resp);
 	}
 	
-	//데이터 바인딩
-	public void prepareRequestData(HttpServletRequest req, HashMap<String, Object> model, DataBinding databinding)
-	{
-		Object[] databind = databinding.getDataBinders();
-		String dataName = null;
-		Class<?> dataType = null;
-		Object dataObj = null;
-		for(int i=0; i<databind.length; i+=2)
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String viewPath = "";
+		String action = req.getParameter("action");
+		
+		MenuService service = MenuService.getInstance();
+		
+		if(action == null || action.equals("menuList"))
 		{
-			dataName = (String) databind[i];
-			dataType = (Class<?>) databind[i+1];
+			String restaurantIdStr = req.getParameter("restaurantId");
+			int restaurantId = Integer.parseInt(restaurantIdStr);
 			
-			try {
-				dataObj = ServletRequestDataBinder.bind(req, dataType, dataName);
-				model.put(dataName, dataObj);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			viewPath = "menu.jsp";
 		}
+		else if(action.equals("insert"))
+		{
+			String restaurantIdStr = req.getParameter("restaurantId");
+			int restaurantId = Integer.parseInt(restaurantIdStr);
+			
+			String menuCategory = req.getParameter("menuCategory");
+			String menuName = req.getParameter("menuName");
+			String menuInfo = req.getParameter("menuInfo");
+			String menuPrice = req.getParameter("menuPrice");
+			String menuImgPath = req.getParameter("menuImgPath");
+			
+			MenuVO vo = new MenuVO();
+			vo.setRestaurantId(restaurantId);
+			vo.setMenuCategory(Integer.parseInt(menuCategory));
+			vo.setMenuName(menuName);
+			vo.setMenuInfo(menuInfo);
+			vo.setMenuPrice(Integer.parseInt(menuPrice));
+			vo.setMenuImagePath(menuImgPath);
+			
+			int result = service.insert(vo);
+			req.setAttribute("insertResult", result);
+			viewPath = "menu.jsp";
+		}
+		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
+		dispatcher.forward(req, resp);
 	}
 }

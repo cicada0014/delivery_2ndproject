@@ -50,7 +50,7 @@ public class MenuDAO {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getRestaurantId());
-			pstmt.setString(2, vo.getMenuCategory());
+			pstmt.setInt(2, vo.getMenuCategory());
 			pstmt.setString(3, vo.getMenuName());
 			pstmt.setString(4, vo.getMenuInfo());
 			pstmt.setInt(5, vo.getMenuPrice());

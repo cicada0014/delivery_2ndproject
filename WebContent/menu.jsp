@@ -1,3 +1,4 @@
+<%@page import="com.mc.delivery.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +13,7 @@
 <title>menu.jsp</title>
 <c:import url="design_reference.html" var="bootstrap"></c:import>
 <%=pageContext.getAttribute("bootstrap") %>
+<%MenuVO vo = new MenuVO(); %>
 <style type="text/css">
 	table
 	{
@@ -42,58 +44,6 @@
 		$(document).ready(function(){
 			$('ul.tabs').tabs();
 		});
-
-		$.ajax({
-			url:"menuList",
-			type:"post",
-			data:"restaurantMenu=listAjax&option=",
-			dataType:"json",
-			success:function(restaurantMenu){
-				$(restaurantMenu).each(function(index, rmVO){
-					var rsId = rmVO.restaurantId;
-					var menuId = rmVO.menuId;
-					var menuCategory = rmVO.menuCategory;
-					var menuName = rmVO.menuName;
-					var menuInfo = rmVO.menuInfo;
-					var menuPrice = rmVO.menuPrice;
-					var menuImgPath = rmVO.menuImgPath;
-					var result = "<tr>";
-					result += "<td>";
-					result += menuName;
-					result += "</td>";
-//		 				$('').append(result);
-				})
-			},
-			error:function(exception){
-				alert(exception.message);
-			}
-		});
-		
-		$.ajax({
-			url:"menuList",
-			type:"post",
-			data:"menuScore=listAjax&option=",
-			dataType:"json",
-			success:function(menuScore){
-				$(menuScore).each(function(index, msVO){
-					var menuId = msVO.menuId;
-					var commentId = msVO.commentId;
-					var userName = msVO.userName;
-					var menuComment = msVO.menuComment;
-					var commentImgPath = msVO.commentImgPath;
-					var result = "<tr>";
-					result += "<td>";
-					result += userName;
-					result += "</td>";
-		 				$('').append(result);
-				})
-			},
-			error:function(exception){
-				alert(exception.message);
-			}
-		});
-			
-		
 	})
 </script>
 </head>
@@ -111,7 +61,6 @@
 				식당주소
 				</div>
 			</div>
-			
 			<div class="col s9">
 				<ul class="tabs">
 					<li class="tab col s2"><a href="#mainMenu">메인메뉴</a></li>
