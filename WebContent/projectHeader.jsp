@@ -14,15 +14,15 @@
 		<img src="images/indexImg.png" alt="indexImage" height="60px"> 
 		</a>
 		<ul class="right hide-on-med-and-down">
-			<c:if test="${empty sessionScope.email}">
+			<c:if test="${empty sessionScope.nick}">
 			<li ><a class="grey-text" href="member.do?action=login">로그인</a></li>
 			<li ><a class="grey-text" href="member.do?action=join">회원가입</a></li>
 			</c:if>
 			
 			
-			<c:if test="${not empty sessionScope.email}">
+			<c:if test="${not empty sessionScope.nick}">
 			<li class="grey-text">
-	   		 ${sessionScope.email}님 어서오십시오.
+	   		 ${sessionScope.nick}님 어서오십시오.
 	   		 </li> 
 	   		 <li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
 			</c:if>

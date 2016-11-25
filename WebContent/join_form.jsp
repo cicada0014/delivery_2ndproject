@@ -14,12 +14,6 @@
 		<table>
 
 			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="userid"
-					placeholder="4글자 이상의 아이디를 입력해 주세요." size="30"></td>
-			</tr>
-
-			<tr>
 				<td>이메일</td>
 				<td><input type="email" name="email"
 					placeholder="hongildong@exeample.com" size="30"> <input

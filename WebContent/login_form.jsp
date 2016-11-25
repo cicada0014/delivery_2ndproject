@@ -28,8 +28,17 @@
 			 							
 				</td>		
 			</tr>
+			
+			<tr>
+				<td colspan="2" align="center">
+					<a href="NaverRequest"><input type="button" name="n_loginCheck" value="네이버로 로그인"></a>
+				</td>
+			</tr>
 				
 		</table>
 	</form>
+	
+	<!-- <button>네이버로 로그인</button> <br> -->
+	
 </body>
 </html>
