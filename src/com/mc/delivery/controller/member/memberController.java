@@ -147,7 +147,7 @@ public class memberController extends HttpServlet  {
 			if(result == 1){
 				request.setAttribute("mvo", mvo);
 				viewPath="update_result.jsp";
-			}
+			} 
 			
 						
 		}
