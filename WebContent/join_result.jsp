@@ -7,14 +7,14 @@
 <title>join_result.jsp</title>
 </head>
 <body>
- <c:if test="${not empty userid}">
+ <c:if test="${not empty email}">
  <script type="text/javascript">
  	alert("회원가입 성공");
  	location.href="member.do?action=main";
  </script>
 </c:if>
  
-<c:if test="${empty userid}"> 
+<c:if test="${empty email}"> 
  <script type="text/javascript">
  	alert("회원가입 실패");
  	location.href="member.do?action=join";

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mc.delivery.action.Action;
 import com.mc.delivery.action.ActionHelper;
 import com.mc.delivery.dao.RestaurantDAO;
+import com.mc.delivery.vo.CategoryVO;
 import com.mc.delivery.vo.RestaurantVO;
 
 public class TakeListAction implements Action{
@@ -25,15 +26,23 @@ public class TakeListAction implements Action{
 				String viewPath="mainList.jsp";
 				String option= request.getParameter("option");
 				List<RestaurantVO> voList= null;
-				if(option.equals("pizza")){
-					voList = dao.selectOption(option);
-					request.setAttribute("restaurantList", voList);
-					request.setAttribute("category", option); 
-				}else if(option.equals("chicken")){
-					voList = dao.selectOption(option);
-					request.setAttribute("restaurantList", voList);
-					request.setAttribute("category", voList.get(0).getRestaurantCategory());
+				
+				if(option==null){
+					System.out.println("옵션값 안들어옴");
 				}
+				
+				List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
+				System.out.println(categoryList.size());
+				
+				for(CategoryVO ct : categoryList){
+					if(option.equals(ct.getCategoryName())){
+						voList = dao.selectOption(option);
+						request.setAttribute("restaurantList", voList);
+						request.setAttribute("category", option);
+						break;
+					}
+				}
+				
 			ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
 		
 	}

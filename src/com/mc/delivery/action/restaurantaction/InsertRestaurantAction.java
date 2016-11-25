@@ -29,16 +29,15 @@ public class InsertRestaurantAction implements Action,DataBinding{
 		 String restaurantOpenTime= multi.getParameter("restaurantOpenTime");
 		 String restaurantCloseTime= multi.getParameter("restaurantCloseTime");
 		 String restaurantIntroduce=multi.getParameter("restaurantIntroduce");
-		 System.out.println(restaurantPhone);
-		 System.out.println(restaurantCloseTime);
-		 System.out.println(restaurantOpenTime);
-		 System.out.println(restaurantName);
+		 System.out.println(restaurantCategory);
 		 String restaurantImgFileName = "default_img.png" ;
-			if(multi.getFilesystemName("restaurantImg")==null||multi.getFilesystemName("restaurantImg").equals("")){
+			if(multi.getFilesystemName("restaurantImgFile")==null||multi.getFilesystemName("restaurantImgFile").equals("")){
 				
 			}else{
 				restaurantImgFileName = multi.getFilesystemName("restaurantImgFile");
 			}
+			
+			System.out.println(restaurantImgFileName);
 		// 객체에 정보 담기.  
 		 RestaurantVO vo = new RestaurantVO();
 		 vo.setRestaurantName(restaurantName);
@@ -46,14 +45,16 @@ public class InsertRestaurantAction implements Action,DataBinding{
 		 vo.setRestaurantCategory(restaurantCategory);
 		 vo.setRestaurantImg(restaurantImgFileName);
 		 vo.setRestaurantIntro(restaurantIntroduce);
-		
+		 vo.setRestaurantCloseTime(restaurantCloseTime);
+		 vo.setRestaurantOpenTime(restaurantOpenTime);
+		 vo.setRestaurnatPhone(restaurantPhone);
 		 ServletContext sc = request.getServletContext();
 		 RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		 // 싱글톤으로 생성했는데 굳이 어플리케이션에 생성해주는 것도 웃기다. 오히려 코드가 더 늘어나는 기분임. 그냥 가져다 쓰면될텐데. 
 //		 RestaurantDAO dao = RestaurantDAO.getRestaurantDAO();
 		 int result= dao.insertRestaurantInfo(vo);
 		 request.setAttribute("result", result);
-		 String viewPath = "result.jsp";
+		 String viewPath = "list?command=insertRestaurantInfoForm";
 		 ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
 		
 	}

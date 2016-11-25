@@ -36,7 +36,7 @@ public class memberController extends HttpServlet  {
 		if(  action.equals("join")){
 			viewPath = "join_form.jsp";
 		} else if (action.equals("join_get")){
-			String userid = request.getParameter("userid");
+			// String userid = request.getParameter("userid");
 			String email = request.getParameter("email");
 			String name = request.getParameter("name");
 			String pwd = request.getParameter("pwd");
@@ -49,7 +49,7 @@ public class memberController extends HttpServlet  {
 			}
 			
 			MemberVO mvo = new MemberVO();
-			mvo.setUserid(userid);
+			// mvo.setUserid(userid);
 			mvo.setEmail(email);
 			mvo.setName(name);
 			mvo.setPwd(pwd);
@@ -71,15 +71,15 @@ public class memberController extends HttpServlet  {
 			} 
 			viewPath = "join_result.jsp";
 			
-		} else if (action.equals("idcheck")){	
+		} else if (action.equals("emailcheck")){	
 		
-		String userid = request.getParameter("userid");
+		String email = request.getParameter("email");
 		viewPath = "idcheck.jsp";
 		MemberDAO dao = MemberDAO.getMemberDAO();
 		
-		int result = dao.confirmID(userid);
+		int result = dao.confirmEmail(email);
 		
-		request.setAttribute("userid", userid);
+		request.setAttribute("email", email);
 		request.setAttribute("result", result);
 		
 		
@@ -93,17 +93,17 @@ public class memberController extends HttpServlet  {
 			viewPath="login_form.jsp";
 		} else if(action.equals("login_check")){
 			
-			String userid = request.getParameter("userid");
+			String email = request.getParameter("email");
 			String pwd = request.getParameter("pwd");
 			
 			MemberDAO dao = MemberDAO.getMemberDAO();
-			int result= dao.userCheck(userid, pwd);
+			int result= dao.userCheck(email, pwd);
 			
 			if(result == 1){
-				MemberVO mvo = dao.getMember(userid);
+				MemberVO mvo = dao.getMember(email);
 				HttpSession session = request.getSession();
 				
-				session.setAttribute("userid", mvo.getUserid());
+				session.setAttribute("email", mvo.getEmail());
 				session.setAttribute("admin", mvo.getAdmin());
 				
 				viewPath = "index.jsp";
