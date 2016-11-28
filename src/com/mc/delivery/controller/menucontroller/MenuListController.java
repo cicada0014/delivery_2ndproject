@@ -16,20 +16,20 @@ import com.mc.delivery.databinding.DataBinding;
 import com.mc.delivery.databinding.ServletRequestDataBinder;
 import com.mc.delivery.service.MenuService;
 import com.mc.delivery.vo.MenuVO;
+import com.mc.delivery.vo.RestaurantVO;
 
 @WebServlet(urlPatterns="/menuList.do")
 public class MenuListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		execute(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		super.doPost(req, resp);
+		execute(req, resp);
 	}
 	
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +42,10 @@ public class MenuListController extends HttpServlet {
 		{
 			String restaurantIdStr = req.getParameter("restaurantId");
 			int restaurantId = Integer.parseInt(restaurantIdStr);
+			
+			MenuVO vo = service.read(restaurantId);
+			RestaurantVO rVO = null;
+			req.setAttribute("menuVO", vo);
 			
 			viewPath = "menu.jsp";
 		}

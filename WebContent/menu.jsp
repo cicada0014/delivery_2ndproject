@@ -1,3 +1,4 @@
+<%@page import="com.mc.delivery.service.MenuService"%>
 <%@page import="com.mc.delivery.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -12,8 +13,7 @@
 <script type="text/javascript" src="template/js/materialize.min.js"></script>
 <title>menu.jsp</title>
 <c:import url="design_reference.html" var="bootstrap"></c:import>
-<%=pageContext.getAttribute("bootstrap") %>
-<%MenuVO vo = new MenuVO(); %>
+<%=pageContext.getAttribute("bootstrap")%>
 <style type="text/css">
 	table
 	{
@@ -69,10 +69,46 @@
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<div id="mainMenu" class="card-panel teal lighten-2 col s8">메인메뉴</div>
-			<div id="sideMenu" class="card-panel teal lighten-2 col s8">사이드메뉴</div>
-			<div id="drinkMenu" class="card-panel teal lighten-2 col s8">음료</div>
-			<div id="etcMenu" class="card-panel teal lighten-2 col s8">기타</div>
+			<div id="mainMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">메인메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="sideMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">사이드메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="drinkMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">음료이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="etcMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">기타메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
 			
 			<div class="col s3 offset-s9">
 				<div style="text-align:justify">매장정보</div>

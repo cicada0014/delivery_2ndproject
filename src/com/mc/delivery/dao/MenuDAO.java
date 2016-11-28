@@ -158,4 +158,37 @@ public class MenuDAO {
 		}
 		return menuList;
 	}
+	
+	public MenuVO selectMenu(int restaurantId)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MenuVO vo = null;
+		String sql = "SELECT * FROM RESTAURANTS_MENU WHERE RESTAURANT_ID=?";
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, restaurantId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				vo = new MenuVO();
+				vo.setRestaurantId(rs.getInt(1));
+				vo.setMenuId(rs.getInt(2));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(rs);
+			DBHelper.close(pstmt);
+			DBHelper.close(conn);
+		}
+		return vo;
+	}
 }
