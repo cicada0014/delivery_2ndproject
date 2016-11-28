@@ -25,6 +25,15 @@ public class MenuDAO {
 		return instance;
 	}
 	
+	public static MenuDAO getMenuDAO()
+	{
+		if(instance == null)
+		{
+			instance = new MenuDAO();
+		}
+		return instance;
+	}
+	
 	public MenuDAO(){}
 	
 	//메뉴 입력
@@ -41,7 +50,7 @@ public class MenuDAO {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getRestaurantId());
-			pstmt.setString(2, vo.getMenuCategory());
+			pstmt.setInt(2, vo.getMenuCategory());
 			pstmt.setString(3, vo.getMenuName());
 			pstmt.setString(4, vo.getMenuInfo());
 			pstmt.setInt(5, vo.getMenuPrice());
@@ -148,5 +157,38 @@ public class MenuDAO {
 			DBHelper.close(conn);
 		}
 		return menuList;
+	}
+	
+	public MenuVO selectMenu(int restaurantId)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MenuVO vo = null;
+		String sql = "SELECT * FROM RESTAURANTS_MENU WHERE RESTAURANT_ID=?";
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, restaurantId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				vo = new MenuVO();
+				vo.setRestaurantId(rs.getInt(1));
+				vo.setMenuId(rs.getInt(2));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(rs);
+			DBHelper.close(pstmt);
+			DBHelper.close(conn);
+		}
+		return vo;
 	}
 }
