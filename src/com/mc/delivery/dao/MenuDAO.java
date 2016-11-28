@@ -179,7 +179,11 @@ public class MenuDAO {
 				vo = new MenuVO();
 				vo.setRestaurantId(rs.getInt(1));
 				vo.setMenuId(rs.getInt(2));
-				
+				vo.setMenuCategory(rs.getInt(3));
+				vo.setMenuName(rs.getString(4));
+				vo.setMenuInfo(rs.getString(5));
+				vo.setMenuPrice(rs.getInt(6));
+				vo.setMenuImagePath(rs.getString(7));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
