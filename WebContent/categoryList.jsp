@@ -41,9 +41,9 @@
 
 				<c:forEach var="category" items="${requestScope.categoryList}"
 					varStatus="status">
-					<a class="carousel-item" href="#one"><img
+					<a class="carousel-item" href="list?command=takeList&option=${pageScope.category.categoryName}"><img
 						src="images/${pageScope.category.categoryImg}"
-						alt="${pageScope.category.categoryName}"> test</a>
+						alt="${pageScope.category.categoryName}"> ${pageScope.category.categoryName}</a>
 					<!-- 						 <a -->
 					<%-- 							href="list?command=takeList&option=${pageScope.category.categoryName}"> --%>
 					<%-- 							${pageScope.category.categoryName} </a> --%>
@@ -57,18 +57,18 @@
 			varStatus="status">
 			<div class="col s6 m4 l2 ">
 			<a href="list?command=takeList&option=${pageScope.category.categoryName}">
-				<div class="card horizontal">
+				<div class="card horizontal"> <!--  굳이 카드값이 아닌 바로 이미지 값으로도 줄 수 있을 것 같다.  -->
 					<div class="card-image">
 						<img src="images/${pageScope.category.categoryImg}">
 					</div>
-					<div class="card-stacked">
-						<div class="card-content">
-							<p>
-								${pageScope.category.categoryName}
-							</p>
-						</div>
+<!-- 					<div class="card-stacked"> -->
+<!-- 						<div class="card-content"> -->
+<!-- 							<p> -->
+<%-- 								${pageScope.category.categoryName} --%>
+<!-- 							</p> -->
+<!-- 						</div> -->
 						
-					</div>
+<!-- 					</div> -->
 				</div>
 				</a>
 <!-- 				<a -->

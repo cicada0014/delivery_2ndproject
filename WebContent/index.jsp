@@ -12,21 +12,93 @@
 
 <title>index.jsp</title>
 
+<!--  네이버 지도 에이피아이 테스트중. 사용자의 정보값을 불러와서 지도에 표시해준다! -->
+<script type="text/javascript"
+src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JKvjluyyeKcMUDL2j_l6"></script>
+<script type="text/javascript">
 
-<!-- 네이버 지도 에이피아이 테스트 -->
-<!-- <script type="text/javascript" -->
-<!-- src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JKvjluyyeKcMUDL2j_l6"></script> -->
-<!-- <script type="text/javascript"> -->
-<!-- // 	$(function() { -->
-<!-- // 		var mapOptions = { -->
-<!-- // 			center : new naver.maps.LatLng(37.3595704, 127.105399), -->
-<!-- // 			zoom : 10 -->
-<!-- // 		} -->
-<!-- // 		var mapdiv = document.getElementById("map"); -->
-<!-- // 		var map = new naver.maps.Map(mapdiv, mapOptions); -->
-<!-- // 	}) -->
-<!-- </script> -->
-<!-- 네이버 지도 에이피아이 테스트 끝  -->
+
+
+
+
+$(function() { 
+		var mapDiv = document.getElementById('map');
+		var mapOptions = { 
+		center : new naver.maps.LatLng(37.3595704, 127.105399), 
+		zoom : 10 ,
+		mapTypeId:naver.maps.MapTypeId.NORMAL
+		}
+		var map = new naver.maps.Map(mapDiv, mapOptions); 
+		var infowindow = new naver.maps.InfoWindow();
+		
+ function onSuccessGeolocation(position) {
+    var location = new naver.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+	
+    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+    map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+
+    infowindow.setContent('<div style="padding:20px;">' +
+        'latitude: '+ location.lat() +'<br />' +
+        'longitude: '+ location.lng() +'</div>');
+
+    infowindow.open(map, location);
+}
+
+
+function onErrorGeolocation() {
+    var center = map.getCenter();
+
+    infowindow.setContent('<div style="padding:100px;">' +
+        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+
+    infowindow.open(map, center);
+}
+
+
+
+
+if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+    } else {
+        var center = map.getCenter();
+
+        infowindow.setContent('<div style="padding:100px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+        infowindow.open(map, center);
+    }
+
+naver.maps.Event.addListener(map, 'click', function(e) {
+    var marker = new naver.maps.Marker({
+        position: e.coord,
+        map: map
+    });
+	$.ajax({
+		url:"list",
+		type:"post",
+		data:"command=mapAjax&lat="+e.coord.lat()+"&lng="+e.coord.lng(),
+		dataType:"json",
+		success:function(data){
+   			    $('#testMap').text(data.result.items[0].address);
+				
+			},
+		error:function(exception){
+				alert(exception.message)
+			}	
+		})
+
+	
+
+//     markerList.push(marker);
+});
+
+
+
+
+
+	}) 
+</script> 
+
+
 </head>
 
 
@@ -49,8 +121,9 @@
 		<div class="container">
 			<br>
 			<div class="row center">
-				<h5 class="header col s12 light">배달 프로 젝트 구성
-					</h5>
+				<h5 class="header col s12 light">배달 프로 젝트 구성</h5>
+				<div id="map" style="width:50%;height:300px;"></div>
+				<div id="testMap"> 지도 내용이 나올 곳 </div>
 			</div>
 		</div>
 	</div>

@@ -76,11 +76,10 @@
 	</div>
 <!-- 	category section -->
 	<div class="row">
-		<div id="categorySection" class="grey darken-3">
+		<div id="categorySection" class="grey darken-4">
 			<br>
 			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-			<span id="categorySpan">${categoryList }</span> 선택된 카테고리 에 대한 식당리스트
-			표현. 카테고리를 가진 식당 리스트 보여주기
+			<span id="categorySpan">${categoryList }</span> 
 			<script type="text/javascript">
 				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel만 지움
 			</script>

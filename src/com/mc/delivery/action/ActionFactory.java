@@ -34,6 +34,8 @@ public class ActionFactory {
 			commandAction= new InsertRestaurantInfoFormAction();
 		}else if(command.equals("listAjax")){
 			commandAction = new AjaxAction();
+		}else if(command.equals("mapAjax")){
+			commandAction = new MapAction();
 		}
 		
 		
