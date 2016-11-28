@@ -51,11 +51,28 @@
 <!-- 	header section -->
 <c:import url="projectHeader.html" var="header"></c:import>
 <%=pageContext.getAttribute("header")%>
+<%
+	String idStr = request.getParameter("restaurantId");
+	int id = 0;
+	String mainMenu = null;
+	String sideMenu = null;
+	String drinkMenu = null;
+	String etcMenu= null;
+	
+	if(idStr != null && idStr.length() > 0)
+	{
+		id = Integer.parseInt(idStr);
+	}
+	
+	MenuService service = MenuService.getInstance();
+	MenuVO vo = service.read(id);
+	
+	
+%>
 	<div class="container">
 		<div class="row">
 			<div class="col s12" id="restaurants">
 				<div class="card-panel teal lighten-2 col s6" id="restaurantsName">
-				식당이름
 				</div>
 				<div class="card-panel teal lighten-2 col s6" id="restaurantsAddress">
 				식당주소
@@ -73,7 +90,12 @@
 				<ul class="collection">
 					<li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">메인메뉴이름</span>
+						<span class="title">
+						<% if(vo.getMenuCategory() == 1)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
 						<p>가격</p>
 						<p>설명</p>
 					</li>
@@ -83,7 +105,12 @@
 				<ul class="collection">
 					<li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">사이드메뉴이름</span>
+						<span class="title">
+						<% if(vo.getMenuCategory() == 2)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
 						<p>가격</p>
 						<p>설명</p>
 					</li>
@@ -93,7 +120,12 @@
 				<ul class="collection">
 					<li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">음료이름</span>
+						<span class="title">
+						<% if(vo.getMenuCategory() == 3)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
 						<p>가격</p>
 						<p>설명</p>
 					</li>
@@ -103,7 +135,12 @@
 				<ul class="collection">
 					<li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">기타메뉴이름</span>
+						<span class="title">
+						<% if(vo.getMenuCategory() == 4)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
 						<p>가격</p>
 						<p>설명</p>
 					</li>

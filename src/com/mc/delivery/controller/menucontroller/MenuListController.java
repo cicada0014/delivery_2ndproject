@@ -44,7 +44,6 @@ public class MenuListController extends HttpServlet {
 			int restaurantId = Integer.parseInt(restaurantIdStr);
 			
 			MenuVO vo = service.read(restaurantId);
-			RestaurantVO rVO = null;
 			req.setAttribute("menuVO", vo);
 			
 			viewPath = "menu.jsp";
