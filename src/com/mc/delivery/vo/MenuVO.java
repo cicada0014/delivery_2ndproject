@@ -3,16 +3,16 @@ package com.mc.delivery.vo;
 public class MenuVO {
 	private int restaurantId;
 	private int menuId;
-	private String menuCategory;
+	private int menuCategory;
 	private String menuName;
 	private String menuInfo;
 	private int menuPrice;
 	private String menuImagePath;
-	
+		
 	public MenuVO() {
 	}
 
-	public MenuVO(int restaurantId, int menuId, String menuCategory, String menuName, String menuInfo, int menuPrice, String menuImagePath) {
+	public MenuVO(int restaurantId, int menuId, int menuCategory, String menuName, String menuInfo, int menuPrice, String menuImagePath) {
 		this.restaurantId = restaurantId;
 		this.menuId = menuId;
 		this.menuCategory = menuCategory;
@@ -38,11 +38,11 @@ public class MenuVO {
 		this.menuId = menuId;
 	}
 
-	public String getMenuCategory() {
+	public int getMenuCategory() {
 		return menuCategory;
 	}
 
-	public void setMenuCategory(String menuCategory) {
+	public void setMenuCategory(int menuCategory) {
 		this.menuCategory = menuCategory;
 	}
 

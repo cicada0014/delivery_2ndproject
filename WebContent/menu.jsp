@@ -1,5 +1,8 @@
+<%@page import="com.mc.delivery.service.MenuService"%>
+<%@page import="com.mc.delivery.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,65 +12,119 @@
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript" src="template/js/materialize.min.js"></script>
 <title>menu.jsp</title>
+<c:import url="design_reference.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap")%>
 <style type="text/css">
 	table
 	{
  		margin:auto;
 	}
-	#panel
+	#restaurants
 	{
-		margin:auto;
+		font-size: 20px;
 	}
-	html
+	#restaurantsAddress
 	{
-		height:100%;
+		font-style: italic;
 	}
-	body
+	#menuReply
 	{
-		height:100%;
+		font-size: 20px;
 	}
 	
 	.row
 	{
-		height:100%;
+/* 		height:100%; */
 		position: relative;
 		top:20px;
 	}
-	
 </style>
 <script type="text/javascript">
 	$(function(){
 		$(document).ready(function(){
-// 			$('ul.tabs').tabs('select_tab','tab_id');
 			$('ul.tabs').tabs();
 		});
 	})
 </script>
 </head>
 <body>
-<div class="card-panel teal lighten-2" id="panel">menu</div>
+<!-- 	header section -->
+<c:import url="projectHeader.html" var="header"></c:import>
+<%=pageContext.getAttribute("header")%>
 	<div class="container">
-		<div class="row">	
+		<div class="row">
+			<div class="col s12" id="restaurants">
+				<div class="card-panel teal lighten-2 col s6" id="restaurantsName">
+				식당이름
+				</div>
+				<div class="card-panel teal lighten-2 col s6" id="restaurantsAddress">
+				식당주소
+				</div>
+			</div>
 			<div class="col s9">
 				<ul class="tabs">
 					<li class="tab col s2"><a href="#mainMenu">메인메뉴</a></li>
-					<li class="tab col s2"><a href="#sideMenu">사이드메뉴</a></li>
+					<li class="tab col s3"><a href="#sideMenu">사이드메뉴</a></li>
 					<li class="tab col s2"><a href="#drinkMenu">음료</a></li>
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<div id="mainMenu" class="col s9">메인메뉴</div>
-			<div id="sideMenu" class="col s9">사이드메뉴</div>
-			<div id="drinkMenu" class="col s9">음료</div>
-			<div id="etcMenu" class="col s9">기타</div>
+			<div id="mainMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">메인메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="sideMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">사이드메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="drinkMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">음료이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="etcMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">기타메뉴이름</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
 			
-			<div class="col s3">
-				<div>매장정보</div>
-				<hr/>
-				<div>장바구니</div>
-				<hr/>
-				<div>결제하기</div>
-				<hr/>
+			<div class="col s3 offset-s9">
+				<div style="text-align:justify">매장정보</div>
+				<br>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col s12" id="menuReply">
+				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
+			</div>
+			<div class="col s12">
+				<div class="card-panel teal lighten-2 col s2">작성자 이름&점수</div>
+				<div class="card-panel teal lighten-2 col s10">평가 내용&사진</div>
 			</div>
 		</div>
 	</div>

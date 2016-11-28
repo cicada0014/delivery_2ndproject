@@ -21,13 +21,18 @@ public class InsertMenuAction implements Action,DataBinding {
 		
 		MultipartRequest multi = (MultipartRequest) request.getAttribute("multi");
 		
+		String restaurantId = multi.getParameter("restaurantId");
+		String menuId = multi.getParameter("menuId");
 		String menuName = multi.getParameter("menuName");
 		String menuCategory = multi.getParameter("menuCategory");
 		String menuInfo= multi.getParameter("menuInfo");
+		String menuPrice = multi.getParameter("menuPrice");
+		String menuImgPath = multi.getParameter("menuImgPath");
 		
 		System.out.println(menuName);
 		System.out.println(menuCategory);
 		System.out.println(menuInfo);
+		System.out.println(menuPrice);
 		
 		String menuImageFileName = "default_img.png";
 		
@@ -41,8 +46,10 @@ public class InsertMenuAction implements Action,DataBinding {
 		
 		MenuVO vo = new MenuVO();
 		vo.setMenuName(menuName);
-		vo.setMenuCategory(menuCategory);
+		vo.setMenuCategory(Integer.parseInt(menuCategory));
 		vo.setMenuInfo(menuInfo);
+		vo.setMenuPrice(Integer.parseInt(menuPrice));
+		vo.setMenuImagePath(menuImageFileName);
 		
 		ServletContext sc = request.getServletContext();
 		sc.getAttribute("menuDAO");

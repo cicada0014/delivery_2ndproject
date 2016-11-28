@@ -181,7 +181,7 @@ public class RestaurantDAO {
 		ResultSet rs= null;
 		String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img,"
 				+ "a.restaurant_phone, a.restaurant_open_time, a.restaurant_close_time,"
-				+ "a.restaurant_introduce FROM "
+				+ "a.restaurant_introduce, a.restaurant_id FROM "
 				+"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				+ "ON r.restaurant_location=l.location_id "
 				+"WHERE restaurant_category= "
@@ -203,6 +203,7 @@ public class RestaurantDAO {
 				vo.setRestaurantOpenTime(rs.getString(5));
 				vo.setRestaurantCloseTime(rs.getString(6));
 				vo.setRestaurantIntro(rs.getString(7));
+				vo.setRestaurantId(rs.getInt(8));
 				
 				voList.add(vo);
 			}
