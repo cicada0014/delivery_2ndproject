@@ -20,7 +20,8 @@
 			</c:if>
 			
 			<c:if test="${not empty sessionScope.email}">
-	   		 ${sessionScope.email}님 어서오십시오. 
+	   		 <li class="grey-text"  >
+	   		 ${sessionScope.email}님 어서오십시오. </li>
 	   		 <li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
 			</c:if>
 			

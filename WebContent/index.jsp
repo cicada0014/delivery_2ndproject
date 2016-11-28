@@ -35,6 +35,7 @@
 
 <body>
 <!-- 이 부분은 로고가 들어간 가장 상단부분입니다. 여러군데서 사용될가능성이 있기에 페이지를 따로 두었습니다. -->
+
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
 
@@ -43,7 +44,7 @@
 
 	<div class="container">
 		<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-
+		${categoryList}
 	</div>
 
 <!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->

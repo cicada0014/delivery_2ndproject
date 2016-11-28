@@ -3,7 +3,7 @@
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<script type="text/javascript" src="script/member.js" ></script>
+<script type="text/javascript" src="js/member.js" ></script>
 <title>update_from.jsp</title>
 </head>
 <body>

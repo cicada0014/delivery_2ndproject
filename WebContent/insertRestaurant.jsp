@@ -11,12 +11,12 @@
 <link type="text/css" href="bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
 <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 
-<script type="text/javascript">
+		<script type="text/javascript">
 	if(<%=request.getAttribute("result")%>>0){
-			alert("식당정보 입력성공!")
+			alert("식당정보 입력성공!");
 		}
-	else if(<%=request.getAttribute("result")%>==0){
-		alert("식당정보 입력실패!")
+		else if(<%=request.getAttribute("result")%>==0){
+		alert("식당정보 입력실패!");
 		}
 	
 
