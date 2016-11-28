@@ -24,7 +24,7 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JKvjluyyeKcMUDL2j
 $(function() { 
 		var mapDiv = document.getElementById('map');
 		var mapOptions = { 
-		center : new naver.maps.LatLng(37.3595704, 127.105399), 
+		center : new naver.maps.LatLng(37.501644, 127.03969009999997), //멀티캠퍼스 위치가 센터값.
 		zoom : 10 ,
 		mapTypeId:naver.maps.MapTypeId.NORMAL
 		}
@@ -37,7 +37,22 @@ $(function() {
 	
     map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
     map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
-
+    
+    $.ajax({
+		url:"list",
+		type:"post",
+		data:"command=mapAjax&lat="+location.lat()+"&lng="+location.lng(),
+		dataType:"json",
+		success:function(data){
+   			    $('#currentUserLocation').text(data.result.items[0].address);
+				
+			},
+		error:function(exception){
+				alert(exception.message)
+			}	
+		})
+// 		위 위치정보를 세션에 넣어두고 다니면 로딩시간이 줄어들것이야. 
+    
     infowindow.setContent('<div style="padding:20px;">' +
         'latitude: '+ location.lat() +'<br />' +
         'longitude: '+ location.lng() +'</div>');
@@ -48,7 +63,7 @@ $(function() {
 
 function onErrorGeolocation() {
     var center = map.getCenter();
-
+	
     infowindow.setContent('<div style="padding:100px;">' +
         '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
 
@@ -66,6 +81,8 @@ if (navigator.geolocation) {
         infowindow.setContent('<div style="padding:100px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
         infowindow.open(map, center);
     }
+
+
 
 naver.maps.Event.addListener(map, 'click', function(e) {
     var marker = new naver.maps.Marker({
@@ -107,6 +124,8 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 <!-- 이 부분은 로고가 들어간 가장 상단부분입니다. 여러군데서 사용될가능성이 있기에 페이지를 따로 두었습니다. -->
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
+
+
 
 <!-- 이 부분은 카테고리관련한 페이지 입니다. 크롬개발자 도구를 통해 어떤 부분을 차지하고 있는지 쉽게볼수 있습니다.  -->
 	<div class="container">
