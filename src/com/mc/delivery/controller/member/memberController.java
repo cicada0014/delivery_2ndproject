@@ -113,10 +113,10 @@ public class memberController extends HttpServlet  {
 			}
 						
 		} else if (action.equals("update")){
-			String userid = request.getParameter("userid");
+			String email = request.getParameter("email");
 			MemberDAO dao = MemberDAO.getMemberDAO();
 			
-			MemberVO mvo  = dao.getMember(userid);
+			MemberVO mvo  = dao.getMember(email);
 			
 			request.setAttribute("mvo", mvo);
 					
@@ -125,7 +125,6 @@ public class memberController extends HttpServlet  {
 		} else if(action.equals("update_get")){
 			
 			String name = request.getParameter("name");
-			String userid = request.getParameter("userid");
 			String pwd = request.getParameter("pwd");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
@@ -133,7 +132,6 @@ public class memberController extends HttpServlet  {
 			
 			MemberVO mvo = new MemberVO();
 			mvo.setName(name);
-			mvo.setUserid(userid);
 			mvo.setPwd(pwd);
 			mvo.setEmail(email);
 			mvo.setPhone(phone);

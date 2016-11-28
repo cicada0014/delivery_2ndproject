@@ -11,14 +11,10 @@
 	<form action="member.do" method="post" name="frm" >
 		<input type="hidden" name="action" value="update_get" >
 		<table>
-			<tr>
-				<td>아이디 </td>
-				<td><input type="text" name="userid" size="20" value="${mvo.userid}" readonly></td>
-			</tr>
-			
+						
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" name="email" size="20" value="${mvo.email}"></td>
+				<td><input type="text" name="email" size="20" value="${mvo.email}" readonly></td>
 			</tr>
 			
 			<tr>

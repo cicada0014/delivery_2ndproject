@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<c:if test="${not empty sessionScope.userid}">
+<c:if test="${not empty sessionScope.email}">
  <script type="text/javascript">
  	alert("수정되었습니다.");
  	location.href="member.do?action=main";

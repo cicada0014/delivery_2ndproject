@@ -20,9 +20,10 @@
 			</c:if>
 			
 			<c:if test="${not empty sessionScope.email}">
-	   		 <li class="grey-text"  >
+	   		 <li class="grey-text">
 	   		 ${sessionScope.email}님 어서오십시오. </li>
 	   		 <li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
+			<li><a class="grey-text" href="member.do?action=update&email=${sessionScope.email}">정부수정</a></li>	
 			</c:if>
 			
 <!-- 			jstl 써서 관리자 입장시에만 보이도록 할 -->

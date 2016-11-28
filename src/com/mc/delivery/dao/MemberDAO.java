@@ -174,18 +174,19 @@ public class MemberDAO {
 			
 			try {
 			con = new DBHelper().makeConnection();
-			String sql = "UPDATE MEMBER SET"
-					+ " EMAIL=? , NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=?"
-					+ " WHERE USERID=?";
+			String sql = "UPDATE MEMBER SET "
+					+ "NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=? WHERE EMAIL=?";
+					
+					//"UPDATE MEMBER SET EMAIL=? , NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=? WHERE USERID=?";
 					
 				pstmt = con.prepareStatement(sql);
 				
-				pstmt.setString(1, mvo.getEmail());
-				pstmt.setString(2, mvo.getName());
-				pstmt.setString(3, mvo.getPwd());
-				pstmt.setString(4, mvo.getPhone());
-				pstmt.setString(5, mvo.getBrithday());
-				pstmt.setString(6, mvo.getUserid());
+				pstmt.setString(1, mvo.getName());
+				pstmt.setString(2, mvo.getPwd());
+				pstmt.setString(3, mvo.getPhone());
+				pstmt.setString(4, mvo.getBrithday());
+				pstmt.setString(5, mvo.getEmail());
+				
 				result = pstmt.executeUpdate();
 				
 				
