@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 import com.mc.delivery.dao.RestaurantDAO;
-import com.mc.delivery.jdbcutil.DBHelper;
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
 

@@ -42,7 +42,7 @@
 	
 	</nav>
 	
-
+<div class='row' id="currentUserLocation" > </div>
 
 </body>
 </html>
