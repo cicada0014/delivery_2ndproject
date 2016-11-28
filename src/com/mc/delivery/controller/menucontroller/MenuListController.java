@@ -38,7 +38,7 @@ public class MenuListController extends HttpServlet {
 		
 		MenuService service = MenuService.getInstance();
 		
-		if(action == null || action.equals("menuList"))
+		if( action.equals("menuList")|| action == null )
 		{
 			String restaurantIdStr = req.getParameter("restaurantId");
 			int restaurantId = Integer.parseInt(restaurantIdStr);

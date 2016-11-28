@@ -25,6 +25,7 @@
 						count++;
 						$(restaurantList).each(function(index, rsVO){
 									var rsName = rsVO.restaurantName;
+									var rsId=rsVO.restaurantId;
 									var rsLocation = rsVO.restaurantLocation;
 									var rsCategory = rsVO.restaurantCategory;
 									var rsImg = rsVO.restaurantImg;
@@ -33,7 +34,7 @@
 									var rsIntro =rsVO.restaurantIntro;
 									var rsPhone = rsVO.restaurnatPhone;
 									var result = '<div class="col s12 m6 l4">';
-									result +=      '<a href="list?command=">';
+									result +=      '<a href="menuList.do?action=menuList&restaurantId='+rsId+'">';
 									result +=        '<div class="card horizontal">';
 									result +=		'	<div class="card-image">';
 									result +=			'	<img src="images/'+rsImg+'">';
@@ -90,7 +91,7 @@
 			<div class="row" id="firstLoadData">
 				<c:forEach var="restaurant" items="${requestScope.restaurantList}">
 					<div class="col s12 m6 l4">	
-						<a href="list?command="">
+						<a href="menuList.do?action=menuList&restaurantId=${restaurant.restaurantId}">
 							<div class="card horizontal">
 								<div class="card-image">
 									<img src="images/${restaurant.restaurantImg }">
