@@ -28,6 +28,7 @@ $(function() {
 		zoom : 10 ,
 		mapTypeId:naver.maps.MapTypeId.NORMAL
 		}
+		
 		var map = new naver.maps.Map(mapDiv, mapOptions); 
 		var infowindow = new naver.maps.InfoWindow();
 		
@@ -131,6 +132,9 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 	<div class="container">
 		<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 		${categoryList } 
+		<script type="text/javascript">
+				$('#uselessIndex').remove(); // categoryCarousel만 지움
+			</script>
 		<!-- 	현성이형이 작업하신 부분입니다.  --> 
 <!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  -->
 

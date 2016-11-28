@@ -1,7 +1,7 @@
 package com.mc.delivery.vo;
 
 public class RestaurantVO {
-	private String restaurantId;
+	private int restaurantId;
 	private String restaurantName;
 	private String restaurantLocation;
 	private String restaurantCategory;
@@ -41,10 +41,10 @@ public class RestaurantVO {
 	public void setRestaurantImg(String restaurantImg) {
 		this.restaurantImg = restaurantImg;
 	}
-	public String getRestaurantId() {
+	public int getRestaurantId() {
 		return restaurantId;
 	}
-	public void setRestaurantId(String restaurantId) {
+	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 	public String getRestaurantName() {

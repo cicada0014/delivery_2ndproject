@@ -47,7 +47,7 @@
 <body>
 <div class="card-panel teal lighten-2" id="panel">menu</div>
 	<div class="container">
-		<div class="row">
+		<div class="row">	
 			<div class="col s9">
 				<ul class="tabs">
 					<li class="tab col s2"><a href="#mainMenu">메인메뉴</a></li>

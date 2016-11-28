@@ -43,6 +43,7 @@
 
 	<c:set value="${requestScope.categoryList}" var="categoryListData" scope="session"/>
 	<div class="row" id="inlineCategory">
+		<div class="container" id="uselessIndex">
 		<c:forEach var="category" items="${requestScope.categoryList}"
 			varStatus="status">
 			<div class="col s6 m4 l2 ">
@@ -55,7 +56,7 @@
 			</div>
 		</c:forEach>
 	</div>
-
+	</div>
 
 	<!-- 	///// category 이미지에 대한 버튼 클릭 자바스크립트 -->
 		<script type="text/javascript">
