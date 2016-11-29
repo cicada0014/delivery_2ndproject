@@ -6,7 +6,7 @@
 <head>
 
 
-<!-- 아래 임포트되는 html 문서는 디자인 및 자바스크립트에 대한 여러 헤드태그를 모아두었습니다.  -->
+<!-- 아래 임포트되는 html 문서는 디자인 및 자바스크립트에 대한 여러 헤드태그를 모아두었습니d다.  -->
 <c:import url="design_reference.html" var="bootstrap"></c:import>
 <%=pageContext.getAttribute("bootstrap")%>
 
@@ -18,7 +18,7 @@
 <script type="text/javascript"
 src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JKvjluyyeKcMUDL2j_l6"></script>
 <script type="text/javascript">
-
+// fdsfsdfsd
 
 
 
@@ -92,6 +92,8 @@ naver.maps.Event.addListener(map, 'click', function(e) {
         position: e.coord,
         map: map
     });
+
+    
 	$.ajax({
 		url:"list",
 		type:"post",
@@ -128,6 +130,18 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
+		
+		<nav>
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
 
 
 

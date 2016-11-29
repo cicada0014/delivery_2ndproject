@@ -48,6 +48,7 @@ public class MapAction implements Action {
 			br.close();
 			
 			System.out.println(result.toString());
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(result.toString());
 		} catch (Exception e) {
 			System.out.println(e);
