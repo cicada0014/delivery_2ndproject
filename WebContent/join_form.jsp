@@ -40,9 +40,10 @@ $(document).ready(function() {
       			</div>
       				
       			<div class="input-field col s0">	
-      				<a class="waves-effect waves-light btn">
-      				<input type="button" value="중복체크" onclick="idCheck()">
-      				</a>
+      				 				
+      				 <button class="btn waves-effect waves-light" type="button" onclick="idCheck()">중복체크
+  					</button>
+      				
       			</div>
       			
  	 		</div>
@@ -120,9 +121,10 @@ $(document).ready(function() {
       					id="brithday" type="text" class="validate">
     			</div>
  	 		</div>	
- 		 	
- 		 	<input type="submit" value="가입"
-					onclick="return joinCheck()" class="waves-effect waves-light btn">
+ 		 	 		 	     			
+      		 <button class="btn waves-effect waves-light" type="submit" onclick="return joinCheck()">가입
+  			</button>
+    		
       				
 		</form>
 	</div>     

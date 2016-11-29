@@ -109,7 +109,7 @@ public class memberController extends HttpServlet  {
 			if(result == 1){
 				MemberVO mvo = dao.getMember(email);
 				HttpSession session = request.getSession();
-				
+				session.setAttribute("email", mvo.getEmail());
 				session.setAttribute("nick", mvo.getName());
 				session.setAttribute("admin", mvo.getAdmin());
 				
