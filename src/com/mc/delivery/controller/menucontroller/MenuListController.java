@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mc.delivery.dao.MenuDAO;
 import com.mc.delivery.dao.RestaurantDAO;
 import com.mc.delivery.service.MenuService;
 import com.mc.delivery.vo.MenuVO;
@@ -70,7 +71,7 @@ public class MenuListController extends HttpServlet {
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);
-			viewPath = "menu.jsp";
+			viewPath = "insertMenu.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
 		dispatcher.forward(req, resp);
