@@ -200,7 +200,7 @@
 				<div class="card-panel teal lighten-2 col s10">
 				<%=scoreList.get(i).getRestaurantComment() %>
 				<%if(scoreList.get(i).getCommentImgPath() != null) { %>
-					<img src="<%=scoreList.get(i).getCommentImgPath() %>">
+					<img src="<%=scoreList.get(i).getCommentImgPath()%>">
 				<%} %>
 				</div>
 			</div>
