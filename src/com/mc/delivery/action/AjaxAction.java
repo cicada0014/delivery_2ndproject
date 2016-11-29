@@ -1,7 +1,6 @@
 package com.mc.delivery.action;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.mc.delivery.dao.RestaurantDAO;
+import com.mc.delivery.vo.CategoryVO;
 import com.mc.delivery.vo.RestaurantVO;
 
 public class AjaxAction implements Action {
@@ -28,9 +28,14 @@ public class AjaxAction implements Action {
 	 	
 		List<RestaurantVO> voList= null;
 		String restaurantList = null;
-		if(option.equals("pizza")){
-			voList = dao.selectAjaxOption(option, count);
-			restaurantList = gson.toJson(voList);
+		List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
+		for(CategoryVO ct : categoryList){
+			if(option.equals(ct.getCategoryName())){
+				voList = dao.selectAjaxOption(option, count);
+				restaurantList = gson.toJson(voList);
+				break;
+			}
+			
 		}
 		System.out.println(restaurantList);
 		response.getWriter().write(restaurantList);

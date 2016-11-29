@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
+<hr>
 	<div class="container">
 		<!--Footer-->
 		<footer class="page-footer blue center-on-small-only white">
@@ -28,10 +28,8 @@
 					<div class="col-md-6">
 						<h5 class="title">Links</h5>
 						<ul>
-							<li><a href="#!"> character </a></li>
-							<li><a href="#!">character </a></li>
-							<li><a href="#!">character</a></li>
-							<li><a href="#!">character</a></li>
+							<li class="grey-text"><a class="grey-text" href="#!">character </a></li>
+							<li class="grey-text"><a class="grey-text" href="#!">character</a></li>
 						</ul>
 					</div>
 					<!--/.Second column-->
@@ -41,9 +39,9 @@
 
 			<!--Copyright-->
 			<div class="footer-copyright">
-				<div class="container-fluid">
+				<div class="container-fluid" class="black-text">
 					© 2015 Copyright: <a href="http://www.MDBootstrap.com">
-						MDBootstrap.com </a> we refer Google materialize to use with templet
+						MDBootstrap.com </a> 
 				</div>
 			</div>
 			<!--/.Copyright-->

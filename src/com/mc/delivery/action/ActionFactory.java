@@ -1,3 +1,4 @@
+
 package com.mc.delivery.action;
 
 import com.mc.delivery.action.restaurantaction.InsertRestaurantAction;
@@ -34,6 +35,8 @@ public class ActionFactory {
 			commandAction= new InsertRestaurantInfoFormAction();
 		}else if(command.equals("listAjax")){
 			commandAction = new AjaxAction();
+		}else if(command.equals("mapAjax")){
+			commandAction = new MapAction();
 		}
 		
 		

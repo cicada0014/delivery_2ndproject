@@ -25,6 +25,7 @@
 						count++;
 						$(restaurantList).each(function(index, rsVO){
 									var rsName = rsVO.restaurantName;
+									var rsId=rsVO.restaurantId;
 									var rsLocation = rsVO.restaurantLocation;
 									var rsCategory = rsVO.restaurantCategory;
 									var rsImg = rsVO.restaurantImg;
@@ -33,7 +34,7 @@
 									var rsIntro =rsVO.restaurantIntro;
 									var rsPhone = rsVO.restaurnatPhone;
 									var result = '<div class="col s12 m6 l4">';
-									result +=      '<a href="list?command=">';
+									result +=      '<a href="menuList.do?action=menuList&restaurantId='+rsId+'">';
 									result +=        '<div class="card horizontal">';
 									result +=		'	<div class="card-image">';
 									result +=			'	<img src="images/'+rsImg+'">';
@@ -42,7 +43,7 @@
 									result +=			'<div class="card-content">';
 									result +=			'	<p>식당에 대한 정보가 들어간다.</p>';
 									result +=			'</div>';
-									result +=			'<div class="card-action">'+rsLocation+rsName+'식당위치';
+									result +=			'<div class="card-action">'+rsLocation+rsName;
 									result +=			'</div>';
 									result +=			'</div>';
 									result +=			'</div>';
@@ -76,11 +77,10 @@
 	</div>
 <!-- 	category section -->
 	<div class="row">
-		<div id="categorySection" class="grey darken-3">
+		<div id="categorySection" class="grey darken-4">
 			<br>
 			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
-			<span id="categorySpan">${categoryList }</span> 선택된 카테고리 에 대한 식당리스트
-			표현. 카테고리를 가진 식당 리스트 보여주기
+			<span id="categorySpan">${categoryList }</span> 
 			<script type="text/javascript">
 				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel만 지움
 			</script>
@@ -91,7 +91,7 @@
 			<div class="row" id="firstLoadData">
 				<c:forEach var="restaurant" items="${requestScope.restaurantList}">
 					<div class="col s12 m6 l4">	
-						<a href="list?command="">
+						<a href="menuList.do?action=menuList&restaurantId=${restaurant.restaurantId}">
 							<div class="card horizontal">
 								<div class="card-image">
 									<img src="images/${restaurant.restaurantImg }">
@@ -101,8 +101,7 @@
 										<p>식당에 대한 정보가 들어간다.</p>
 									</div>
 
-									<div class="card-action">${restaurant.restaurantName} 식당
-										위치</div>
+									<div class="card-action">${restaurant.restaurantName} ${restaurant.restaurantLocation }</div>
 								</div>
 							</div>
 						</a>
@@ -114,20 +113,25 @@
 
 
 
+<!-- 	<div class="container"> -->
+<!-- 		<select name="alignment" mutiple="false"> -->
+<!-- 			<option value="nameAl"></option> -->
+<!-- 			<option value="indexAl">인덱스 순으로 정렬</option> -->
+<!-- 		</select> -->
 	<div class="container">
-		<select name="alignment" mutiple="false">
-			<option value="nameAl"></option>
-			<option value="indexAl">인덱스 순으로 정렬</option>
-		</select>
+		<div class="row">
 		
-		
+	<div class="col s4 m4 l4"> </div>
+	<div class="col s4 m4 l4">
 		<a href="#!" id="moreSearchBtn" class="btn">더 많은 식당정보
+		${requestScope.category}
 			불러오기 <span class="more" id="${requestScope.category}"></span></a>
-<!-- 		<button type="button" class="btn btn-primary" > -->
-<!-- 		</button> -->
+	</div>		
+	<div class="col s4 m4 l4"> </div>		
 		
 	</div>
 	
+	</div> 
 </div>
 	
 <!-- 	footer section -->

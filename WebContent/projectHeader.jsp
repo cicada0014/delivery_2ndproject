@@ -24,7 +24,9 @@
 			<li class="grey-text">
 	   		 ${sessionScope.nick}님 어서오십시오.
 	   		 </li> 
+	   		 
 	   		 <li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
+			<li><a class="grey-text" href="member.do?action=update&email=${sessionScope.email}">정부수정</a></li>	
 			</c:if>
 			
 			
@@ -45,7 +47,7 @@
 	
 	</nav>
 	
-
+<div class='row' id="currentUserLocation" > </div>
 
 </body>
 </html>

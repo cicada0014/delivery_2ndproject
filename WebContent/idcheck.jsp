@@ -5,7 +5,7 @@
 <head>
 
 <title>idcheck.jsp</title>
-<script type="text/javascript" src="script/member.js"></script>
+<script type="text/javascript" src="js/member.js"></script>
 </head>
 <body>
 	<h2>이메일 중복확인</h2>

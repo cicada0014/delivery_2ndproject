@@ -1,5 +1,8 @@
+<%@page import="com.mc.delivery.service.MenuService"%>
+<%@page import="com.mc.delivery.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,67 +12,211 @@
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript" src="template/js/materialize.min.js"></script>
 <title>menu.jsp</title>
+<c:import url="design_reference.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap")%>
 <style type="text/css">
 	table
 	{
  		margin:auto;
 	}
-	#panel
+	#restaurants
 	{
-		margin:auto;
+		font-size: 20px;
 	}
-	html
+	#restaurantsAddress
 	{
-		height:100%;
+		font-style: italic;
 	}
-	body
+	#menuReply
 	{
-		height:100%;
+		font-size: 20px;
 	}
-	
-	.row
+/* 	로우클래스 건드리면 전체적 유아이 뒤틀립니다. */
+	.menuScreen     
 	{
-		height:100%;
+/* 		height:100%; */
 		position: relative;
 		top:20px;
 	}
-	
 </style>
 <script type="text/javascript">
 	$(function(){
 		$(document).ready(function(){
-// 			$('ul.tabs').tabs('select_tab','tab_id');
 			$('ul.tabs').tabs();
 		});
 	})
 </script>
 </head>
 <body>
-<div class="card-panel teal lighten-2" id="panel">menu</div>
+<div class="container-fluid">
+<!-- 	header section -->
+<div class="row">
+<c:import url="projectHeader.jsp" var="header"></c:import>
+	<%=pageContext.getAttribute("header")%>
+</div>
+<!-- 	category section -->
+	<div class="row">
+		<div id="categorySection" class="grey darken-4">
+			<br>
+			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
+			<span id="categorySpan">${categoryList }</span> 
+			<script type="text/javascript">
+				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel만 지움
+			</script>
+		</div>
+	</div>
+
+</div>
+
+<%
+	String idStr = request.getParameter("restaurantId");
+	int id = 0;
+	String mainMenu = null;
+	String sideMenu = null;
+	String drinkMenu = null;
+	String etcMenu= null;
+	
+	if(idStr != null && idStr.length() > 0)
+	{
+		id = Integer.parseInt(idStr);
+		System.out.println(id);
+	}else{
+		System.out.println("에러");
+		
+	}
+	
+	MenuService service = MenuService.getInstance();
+	MenuVO vo = service.read(id);
+	
+	
+%>
 	<div class="container">
-		<div class="row">
+		<div class="row menuScreen">
+			<div class="col s12" id="restaurants">
+				<div class="card-panel teal lighten-2 col s6" id="restaurantsName">
+					${restaurant.restaurantName}
+				</div>
+				<div class="card-panel teal lighten-2 col s6" id="restaurantsAddress">
+					${restaurant.restaurantLocation}
+				</div>
+			</div>
 			<div class="col s9">
 				<ul class="tabs">
 					<li class="tab col s2"><a href="#mainMenu">메인메뉴</a></li>
-					<li class="tab col s2"><a href="#sideMenu">사이드메뉴</a></li>
+					<li class="tab col s3"><a href="#sideMenu">사이드메뉴</a></li>
 					<li class="tab col s2"><a href="#drinkMenu">음료</a></li>
 					<li class="tab col s2"><a href="#etcMenu">기타</a></li>
 				</ul>
 			</div>
-			<div id="mainMenu" class="col s9">메인메뉴</div>
-			<div id="sideMenu" class="col s9">사이드메뉴</div>
-			<div id="drinkMenu" class="col s9">음료</div>
-			<div id="etcMenu" class="col s9">기타</div>
-			
-			<div class="col s3">
-				<div>매장정보</div>
-				<hr/>
-				<div>장바구니</div>
-				<hr/>
-				<div>결제하기</div>
-				<hr/>
+			<div id="mainMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">
+						<% if(vo.getMenuCategory() == id )
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="sideMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">
+						<% if(vo.getMenuCategory() == 2)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="drinkMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">
+						<% if(vo.getMenuCategory() == 3)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+			<div id="etcMenu" class="card-panel col s8">
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title">
+						<% if(vo.getMenuCategory() == 4)
+						{%>
+							<%=vo.getMenuName() %>
+						<%} %>
+						</span>
+						<p>가격</p>
+						<p>설명</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="col s4 ">
+				<div class="card white">
+					<div class="card-content black-text">
+						<span class="card-title">매장상세정보</span>
+						<p>
+						영업시간:	 ${restaurant.restaurantOpenTime} ~ ${restaurant.restaurantCloseTime}<br>
+						매장정보: ${restaurant.restaurantPhone}
+						
+ 						</p>
+					</div>
+					<div class="card-action">
+<!-- 						<a href="#">This is a link</a> <a href="#">This is a link</a> -->
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="col s3 offset-s9">
+<!-- 			매장 세부정보  -->
+				<div style="text-align: justify">
+				매장정보?
+
+				</div>
+				<br>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
+			</div>
+		</div>
+		
+		<div class="row menuScreen">
+			<div class="col s12" id="menuReply">
+				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
+			</div>
+			<div class="col s12">
+				<div class="card-panel teal lighten-2 col s2">작성자 이름&점수</div>
+				<div class="card-panel teal lighten-2 col s10">평가 내용&사진</div>
 			</div>
 		</div>
 	</div>
+	
+	
+<!-- 이부분은 프로젝트에서 쓰이는 푸터부분입니다. 배달의 민족 하단에 나와있는 여러 약관이나 회사정보등의 정보를 나타낼수 있는 곳입니다. 역시 한페이지로 분리하였습니다.  -->
+<c:import url="projectFooter.jsp" var="footer"></c:import>
+<%=pageContext.getAttribute("footer")%>
+
 </body>
+
+
 </html>

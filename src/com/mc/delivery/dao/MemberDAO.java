@@ -56,7 +56,7 @@ public class MemberDAO {
 				DBHelper.close(pstmt);
 				DBHelper.close(con);
 			}
-			System.out.println("비밀번호 체크 잘됨");
+			
 			System.out.println(result);
 			//
 			System.out.println("pwd : " + pwd);
@@ -94,7 +94,7 @@ public class MemberDAO {
 				DBHelper.close(pstmt);
 				DBHelper.close(con);
 			}
-			System.out.println("회원정보불러오그 잘됨");
+		
 			System.out.println(mvo);
 			return mvo ;
 		}
@@ -127,7 +127,7 @@ public class MemberDAO {
 				DBHelper.close(pstmt);
 				DBHelper.close(con);
 			}
-			System.out.println("중복체크 잘됨");
+		
 			System.out.println(result);
 
 			return result ;
@@ -143,6 +143,7 @@ public class MemberDAO {
 			try {
 			con = new DBHelper().makeConnection();
 			String sql =  
+
 					"INSERT INTO MEMBER (EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?)";
 					//"INSERT INTO MEMBER (USERID,EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
@@ -151,6 +152,7 @@ public class MemberDAO {
 				pstmt.setString(3, mvo.getPwd());
 				pstmt.setString(4, mvo.getPhone());
 				pstmt.setString(5, mvo.getBrithday());
+
 				
 				result = pstmt.executeUpdate();
 				
@@ -160,10 +162,49 @@ public class MemberDAO {
 			} finally {
 				DBHelper.close(pstmt);
 				DBHelper.close(con);
+
 			}
-			System.out.println("인서트 잘됨");
+		
 			System.out.println(result);
 			return result;	
+		}
+		
+		//정보수정
+		public int updateMember(MemberVO mvo){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			int result = -1;
+			
+			try {
+			con = new DBHelper().makeConnection();
+			String sql = "UPDATE MEMBER SET "
+					+ "NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=? WHERE EMAIL=?";
+					
+					//"UPDATE MEMBER SET EMAIL=? , NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=? WHERE USERID=?";
+					
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, mvo.getName());
+				pstmt.setString(2, mvo.getPwd());
+				pstmt.setString(3, mvo.getPhone());
+				pstmt.setString(4, mvo.getBrithday());
+				pstmt.setString(5, mvo.getEmail());
+				
+				result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				System.out.println("업데이트 커넥션 에러");
+				e.printStackTrace();
+			} finally {
+				DBHelper.close(con);
+				DBHelper.close(pstmt);
+
+
+			}
+			System.out.println(result);
+			return result;	
+
 		}
 		
 		//사용자 인증 패스워드 일치확인

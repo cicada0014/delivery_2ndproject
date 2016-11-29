@@ -11,12 +11,12 @@
 <link type="text/css" href="bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
 <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 
-<script type="text/javascript">
+		<script type="text/javascript">
 	if(<%=request.getAttribute("result")%>>0){
-			alert("식당정보 입력성공!")
+			alert("식당정보 입력성공!");
 		}
-	else if(<%=request.getAttribute("result")%>==0){
-		alert("식당정보 입력실패!")
+		else if(<%=request.getAttribute("result")%>==0){
+		alert("식당정보 입력실패!");
 		}
 	
 
@@ -139,11 +139,10 @@
 					식당정보 입력하기 <i class="material-icons right">tt</i>
 				</button>
 
-				입력이 된다. 프론트단에서 입력제한 걸어줘야함. 데이터베이스에 있는 정보를 가지고? 데이터베이스에서입력제한값 들고 가도록
-				해야겠다/
 			</form>
 			
 <!-- 			여기부터는 페이지의 두번째 칼럼,확인작업을 위한 컴포넌트들이 들어있다.  -->
+<!-- 				이럴거면 하나의 로우로 관리했으면더 깔 끔했을 것같다.  -->
 			<div class="col s4 m4 4" id="checkdiv">
 				<br>
 				<a class="waves-effect waves-light btn col s6 m6 l6">중복확인</a>

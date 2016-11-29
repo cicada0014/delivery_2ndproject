@@ -49,6 +49,11 @@ public class memberController extends HttpServlet  {
 			String pwd = request.getParameter("pwd");
 			String phone = request.getParameter("phone");
 			String brithday = request.getParameter("brithday");
+			String adminStr = request.getParameter("admin");
+			int admin = 0;
+			if(adminStr != null && adminStr.length() > 0 ){
+				admin = Integer.parseInt(adminStr);
+			}
 			
 			MemberVO mvo = new MemberVO();
 			// mvo.setUserid(userid);
@@ -57,6 +62,7 @@ public class memberController extends HttpServlet  {
 			mvo.setPwd(pwd);
 			mvo.setPhone(phone);
 			mvo.setBrithday(brithday);
+			mvo.setAdmin(admin);
 		
 			MemberDAO dao = MemberDAO.getMemberDAO();
 			
@@ -111,8 +117,44 @@ public class memberController extends HttpServlet  {
 			} else {
 				request.setAttribute("result", result);
 				viewPath = "login_result.jsp";
-						
 			}
+						
+		} else if (action.equals("update")){
+			String email = request.getParameter("email");
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+			MemberVO mvo  = dao.getMember(email);
+			
+			request.setAttribute("mvo", mvo);
+					
+			viewPath = "update_form.jsp";
+			
+		} else if(action.equals("update_get")){
+			
+			String name = request.getParameter("name");
+			String pwd = request.getParameter("pwd");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String brithday = request.getParameter("brithday");
+			
+			MemberVO mvo = new MemberVO();
+			mvo.setName(name);
+			mvo.setPwd(pwd);
+			mvo.setEmail(email);
+			mvo.setPhone(phone);
+			mvo.setBrithday(brithday);
+			
+		//	System.out.println(mvo);
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+			int result = dao.updateMember(mvo);
+			
+			if(result == 1){
+				request.setAttribute("mvo", mvo);
+				viewPath="update_result.jsp";
+			} 
+			
+						
 		}
 		// 네이버 로그인 부분
 		else if(action.equals("naverlogin")){

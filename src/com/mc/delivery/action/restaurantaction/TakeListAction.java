@@ -18,9 +18,8 @@ public class TakeListAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			request.setCharacterEncoding("EUC-KR");
 			ServletContext sc = request.getServletContext();
-		 	sc.getAttribute("restaurantDAO");
 		 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		//리퀘스트객체에서 추가 파라미터를 가져와서 어떤 카테고로인지 판단한다.
 				String viewPath="mainList.jsp";
@@ -30,9 +29,8 @@ public class TakeListAction implements Action{
 				if(option==null){
 					System.out.println("옵션값 안들어옴");
 				}
-				
+				System.out.println(option);
 				List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
-				System.out.println(categoryList.size());
 				
 				for(CategoryVO ct : categoryList){
 					if(option.equals(ct.getCategoryName())){
