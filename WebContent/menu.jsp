@@ -31,8 +31,8 @@
 	{
 		font-size: 20px;
 	}
-	
-	.row
+/* 	로우클래스 건드리면 전체적 유아이 뒤틀립니다. */
+	.menuScreen     
 	{
 /* 		height:100%; */
 		position: relative;
@@ -48,9 +48,26 @@
 </script>
 </head>
 <body>
+<div class="container-fluid">
 <!-- 	header section -->
-<c:import url="projectHeader.html" var="header"></c:import>
-<%=pageContext.getAttribute("header")%>
+<div class="row">
+<c:import url="projectHeader.jsp" var="header"></c:import>
+	<%=pageContext.getAttribute("header")%>
+</div>
+<!-- 	category section -->
+	<div class="row">
+		<div id="categorySection" class="grey darken-4">
+			<br>
+			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
+			<span id="categorySpan">${categoryList }</span> 
+			<script type="text/javascript">
+				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel만 지움
+			</script>
+		</div>
+	</div>
+
+</div>
+
 <%
 	String idStr = request.getParameter("restaurantId");
 	int id = 0;
@@ -62,6 +79,10 @@
 	if(idStr != null && idStr.length() > 0)
 	{
 		id = Integer.parseInt(idStr);
+		System.out.println(id);
+	}else{
+		System.out.println("에러");
+		
 	}
 	
 	MenuService service = MenuService.getInstance();
@@ -70,12 +91,13 @@
 	
 %>
 	<div class="container">
-		<div class="row">
+		<div class="row menuScreen">
 			<div class="col s12" id="restaurants">
 				<div class="card-panel teal lighten-2 col s6" id="restaurantsName">
+					${restaurant.restaurantName}
 				</div>
 				<div class="card-panel teal lighten-2 col s6" id="restaurantsAddress">
-				식당주소
+					${restaurant.restaurantLocation}
 				</div>
 			</div>
 			<div class="col s9">
@@ -91,7 +113,7 @@
 					<li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title">
-						<% if(vo.getMenuCategory() == 1)
+						<% if(vo.getMenuCategory() == id )
 						{%>
 							<%=vo.getMenuName() %>
 						<%} %>
@@ -146,16 +168,39 @@
 					</li>
 				</ul>
 			</div>
-			
+
+			<div class="col s4 ">
+				<div class="card white">
+					<div class="card-content black-text">
+						<span class="card-title">매장상세정보</span>
+						<p>
+						영업시간:	 ${restaurant.restaurantOpenTime} ~ ${restaurant.restaurantCloseTime}<br>
+						매장정보: ${restaurant.restaurantPhone}
+						
+ 						</p>
+					</div>
+					<div class="card-action">
+<!-- 						<a href="#">This is a link</a> <a href="#">This is a link</a> -->
+					</div>
+				</div>
+			</div>
+
+
+
+
 			<div class="col s3 offset-s9">
-				<div style="text-align:justify">매장정보</div>
+<!-- 			매장 세부정보  -->
+				<div style="text-align: justify">
+				매장정보?
+
+				</div>
 				<br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row menuScreen">
 			<div class="col s12" id="menuReply">
 				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
 			</div>
@@ -165,5 +210,13 @@
 			</div>
 		</div>
 	</div>
+	
+	
+<!-- 이부분은 프로젝트에서 쓰이는 푸터부분입니다. 배달의 민족 하단에 나와있는 여러 약관이나 회사정보등의 정보를 나타낼수 있는 곳입니다. 역시 한페이지로 분리하였습니다.  -->
+<c:import url="projectFooter.jsp" var="footer"></c:import>
+<%=pageContext.getAttribute("footer")%>
+
 </body>
+
+
 </html>

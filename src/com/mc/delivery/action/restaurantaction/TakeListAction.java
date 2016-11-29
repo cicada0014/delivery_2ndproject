@@ -20,7 +20,6 @@ public class TakeListAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			ServletContext sc = request.getServletContext();
-		 	sc.getAttribute("restaurantDAO");
 		 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		//리퀘스트객체에서 추가 파라미터를 가져와서 어떤 카테고로인지 판단한다.
 				String viewPath="mainList.jsp";
