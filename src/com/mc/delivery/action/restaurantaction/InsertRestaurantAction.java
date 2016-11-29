@@ -47,7 +47,7 @@ public class InsertRestaurantAction implements Action,DataBinding{
 		 vo.setRestaurantIntro(restaurantIntroduce);
 		 vo.setRestaurantCloseTime(restaurantCloseTime);
 		 vo.setRestaurantOpenTime(restaurantOpenTime);
-		 vo.setRestaurnatPhone(restaurantPhone);
+		 vo.setRestaurantPhone(restaurantPhone);
 		 ServletContext sc = request.getServletContext();
 		 RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 		 // 싱글톤으로 생성했는데 굳이 어플리케이션에 생성해주는 것도 웃기다. 오히려 코드가 더 늘어나는 기분임. 그냥 가져다 쓰면될텐데. 
