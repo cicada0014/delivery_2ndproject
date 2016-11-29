@@ -37,6 +37,7 @@ public class NaverRequest extends HttpServlet {
 	    request.getSession().setAttribute("state", state);
 	    
 	    response.sendRedirect(apiURL);
+	    //test
 	}
 
 }
