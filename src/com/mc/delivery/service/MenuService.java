@@ -1,9 +1,9 @@
 package com.mc.delivery.service;
 
+import java.util.List;
+
 import com.mc.delivery.dao.MenuDAO;
-import com.mc.delivery.dao.RestaurantDAO;
 import com.mc.delivery.vo.MenuVO;
-import com.mc.delivery.vo.RestaurantVO;
 
 public class MenuService {
 	private static MenuService instance;
@@ -24,8 +24,18 @@ public class MenuService {
 	public MenuVO read(int restaurantId)
 	{
 		MenuDAO dao = MenuDAO.getInstance();
-		MenuVO result = dao.selectMenu(restaurantId);
+		MenuVO result = dao.selectMenu(restaurantId); 
 		
 		return result;
+	}
+	
+	public List<MenuVO> readList(int restaurantId)
+	{
+		MenuDAO dao = MenuDAO.getInstance();
+		List<MenuVO> menuList = dao.selectMenuList(restaurantId);
+		
+//		return menuList;
+		System.out.println(menuList);
+		return menuList;
 	}
 }

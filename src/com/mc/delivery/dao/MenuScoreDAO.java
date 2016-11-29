@@ -109,7 +109,7 @@ public class MenuScoreDAO {
 		return result;
 	}
 	
-	public List<MenuScoreVO> selectMenuScoreList(int menuId)
+	public List<MenuScoreVO> selectMenuScoreList(int restaurantId)
 	{
 		List<MenuScoreVO> menuScoreList = new ArrayList<>();
 		Connection conn = null;
@@ -120,7 +120,7 @@ public class MenuScoreDAO {
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, menuId);
+			pstmt.setInt(1, restaurantId);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next())

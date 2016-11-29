@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.mc.delivery.service.MenuService"%>
 <%@page import="com.mc.delivery.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -71,10 +72,6 @@
 <%
 	String idStr = request.getParameter("restaurantId");
 	int id = 0;
-	String mainMenu = null;
-	String sideMenu = null;
-	String drinkMenu = null;
-	String etcMenu= null;
 	
 	if(idStr != null && idStr.length() > 0)
 	{
@@ -86,9 +83,8 @@
 	}
 	
 	MenuService service = MenuService.getInstance();
-	MenuVO vo = service.read(id);
-	
-	
+	List<MenuVO> list = service.readList(id);
+	System.out.println(service.readList(id));
 %>
 	<div class="container">
 		<div class="row menuScreen">
@@ -110,62 +106,66 @@
 			</div>
 			<div id="mainMenu" class="card-panel col s8">
 				<ul class="collection">
-					<li class="collection-item avatar">
+				<%for(int i=0; i<list.size(); i++) {
+					if(list.get(i).getMenuCategory() == 1)
+							{%>
+						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">
-						<% if(vo.getMenuCategory() == id )
-						{%>
-							<%=vo.getMenuName() %>
+						<span class="title"><%=list.get(i).getMenuName() %></span>
+						<p><%=list.get(i).getMenuPrice() %>원</p>
+						<p><%=list.get(i).getMenuInfo() %></p>
 						<%} %>
-						</span>
-						<p>가격</p>
-						<p>설명</p>
 					</li>
+					</a>
+				<%} %>
 				</ul>
 			</div>
 			<div id="sideMenu" class="card-panel col s8">
 				<ul class="collection">
-					<li class="collection-item avatar">
+				<%for(int i=0; i<list.size(); i++) {
+					if(list.get(i).getMenuCategory() == 2)
+							{%>
+						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">
-						<% if(vo.getMenuCategory() == 2)
-						{%>
-							<%=vo.getMenuName() %>
+						<span class="title"><%=list.get(i).getMenuName() %></span>
+						<p><%=list.get(i).getMenuPrice() %>원</p>
+						<p><%=list.get(i).getMenuInfo() %></p>
 						<%} %>
-						</span>
-						<p>가격</p>
-						<p>설명</p>
 					</li>
+					</a>
+				<%} %>
 				</ul>
 			</div>
 			<div id="drinkMenu" class="card-panel col s8">
 				<ul class="collection">
-					<li class="collection-item avatar">
+				<%for(int i=0; i<list.size(); i++) {
+					if(list.get(i).getMenuCategory() == 3)
+							{%>
+						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">
-						<% if(vo.getMenuCategory() == 3)
-						{%>
-							<%=vo.getMenuName() %>
+						<span class="title"><%=list.get(i).getMenuName() %></span>
+						<p><%=list.get(i).getMenuPrice() %>원</p>
+						<p><%=list.get(i).getMenuInfo() %></p>
 						<%} %>
-						</span>
-						<p>가격</p>
-						<p>설명</p>
 					</li>
+					</a>
+				<%} %>
 				</ul>
 			</div>
 			<div id="etcMenu" class="card-panel col s8">
 				<ul class="collection">
-					<li class="collection-item avatar">
-						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title">
-						<% if(vo.getMenuCategory() == 4)
+				<%for(int i=0; i<list.size(); i++) {
+					if(list.get(i).getMenuCategory() == 4)
 						{%>
-							<%=vo.getMenuName() %>
+						<a href="#"><li class="collection-item avatar">
+						<img src="images/default_img.png" alt="" class="circle">
+						<span class="title"><%=list.get(i).getMenuName() %></span>
+						<p><%=list.get(i).getMenuPrice() %>원</p>
+						<p><%=list.get(i).getMenuInfo() %></p>
 						<%} %>
-						</span>
-						<p>가격</p>
-						<p>설명</p>
 					</li>
+					</a>
+				<%} %>
 				</ul>
 			</div>
 
@@ -183,18 +183,6 @@
 <!-- 						<a href="#">This is a link</a> <a href="#">This is a link</a> -->
 					</div>
 				</div>
-			</div>
-
-
-
-
-			<div class="col s3 offset-s9">
-<!-- 			매장 세부정보  -->
-				<div style="text-align: justify">
-				매장정보?
-
-				</div>
-				<br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
 				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
 			</div>

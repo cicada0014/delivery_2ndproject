@@ -130,7 +130,7 @@ public class MenuDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT menu_name,menu_info,menu_price,menu_imagePath FROM restaurants_menu WHERE restaurant_id=?";
+		String sql = "SELECT * FROM restaurants_menu WHERE restaurant_id=?";
 		
 		try {
 			conn = dataSource.getConnection();
@@ -141,10 +141,13 @@ public class MenuDAO {
 			while(rs.next())
 			{
 				MenuVO vo = new MenuVO();
-				vo.setMenuName(rs.getString(1));
-				vo.setMenuInfo(rs.getString(2));
-				vo.setMenuPrice(rs.getInt(3));
-				vo.setMenuImagePath(rs.getString(4));
+				vo.setRestaurantId(rs.getInt(1));
+				vo.setMenuId(rs.getInt(2));
+				vo.setMenuCategory(rs.getInt(3));
+				vo.setMenuName(rs.getString(4));
+				vo.setMenuInfo(rs.getString(5));
+				vo.setMenuPrice(rs.getInt(6));
+				vo.setMenuImagePath(rs.getString(7));
 				
 				menuList.add(vo);
 			}
