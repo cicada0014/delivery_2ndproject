@@ -10,45 +10,45 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.mc.delivery.jdbcutil.DBHelper;
-import com.mc.delivery.vo.MenuScoreVO;
+import com.mc.delivery.vo.RestaurantsScoreVO;
 
-public class MenuScoreDAO {
+public class RestaurantsScoreDAO {
 	private DataSource dataSource;
 	public void setDataSource(DataSource dataSource)
 	{
 		this.dataSource = dataSource;
 	}
 	
-	private static MenuScoreDAO instance;
-	public static MenuScoreDAO getInstance()
+	private static RestaurantsScoreDAO instance;
+	public static RestaurantsScoreDAO getInstance()
 	{
 		return instance;
 	}
 	
-	public static MenuScoreDAO getMenuScoreDAO()
+	public static RestaurantsScoreDAO getMenuScoreDAO()
 	{
 		if(instance == null)
 		{
-			instance = new MenuScoreDAO();
+			instance = new RestaurantsScoreDAO();
 		}
 		return instance;
 	}
 	
-	public MenuScoreDAO(){}
+	public RestaurantsScoreDAO(){}
 	
-	public int insertMenuScore(MenuScoreVO vo)
+	public int insertRestaurantScore(RestaurantsScoreVO vo)
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "INSERT INTO MENU_SCORE(menu_id,user_name,menu_comment,comment_imgPath) " + "VALUES(?,?,?,?)";
+		String sql = "INSERT INTO RESTAURANTS_SCORE(restaurant_id,user_name,restaurant_comment,comment_imgPath) " + "VALUES(?,?,?,?)";
 		
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getMenuId());
+			pstmt.setInt(1, vo.getRestaurantId());
 			pstmt.setString(2, vo.getUserName());
-			pstmt.setString(3, vo.getMenuComment());
+			pstmt.setString(3, vo.getRestaurantComment());
 			pstmt.setString(4, vo.getCommentImgPath());
 			
 			result = pstmt.executeUpdate();
@@ -62,19 +62,19 @@ public class MenuScoreDAO {
 		return result;
 	}
 	
-	public int updateMenuScore(MenuScoreVO vo)
+	public int updateRestaurantScore(RestaurantsScoreVO vo)
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "UPDATE MENU_SCORE set menu_comment=?, comment_imgPath=? WHERE menu_id=? AND comment_id=?";
+		String sql = "UPDATE RESTAURANTS_SCORE set restaurant_comment=?, comment_imgPath=? WHERE restaurant_id=? AND comment_id=?";
 		
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getMenuComment());
+			pstmt.setString(1, vo.getRestaurantComment());
 			pstmt.setString(2, vo.getCommentImgPath());
-			pstmt.setInt(3, vo.getMenuId());
+			pstmt.setInt(3, vo.getRestaurantId());
 			pstmt.setInt(4, vo.getCommentId());
 			
 			result = pstmt.executeUpdate();
@@ -86,12 +86,12 @@ public class MenuScoreDAO {
 		return result;
 	}
 	
-	public int deleteMenuScore(int commentId)
+	public int deleteRestaurantScore(int commentId)
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "DELETE FROM MENU_SCORE WHERE COMMENT_ID=?";
+		String sql = "DELETE FROM RESTAURANTS_SCORE WHERE COMMENT_ID=?";
 		
 		try {
 			conn = dataSource.getConnection();
@@ -109,13 +109,13 @@ public class MenuScoreDAO {
 		return result;
 	}
 	
-	public List<MenuScoreVO> selectMenuScoreList(int restaurantId)
+	public List<RestaurantsScoreVO> selectRestaurantScoreList(int restaurantId)
 	{
-		List<MenuScoreVO> menuScoreList = new ArrayList<>();
+		List<RestaurantsScoreVO> menuScoreList = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT user_name,menu_comment,comment_imgPath FROM menu_score WHERE menu_id=?";
+		String sql = "SELECT * FROM RESTAURANTS_SCORE WHERE restaurant_id=?";
 		
 		try {
 			conn = dataSource.getConnection();
@@ -125,11 +125,11 @@ public class MenuScoreDAO {
 			
 			while(rs.next())
 			{
-				MenuScoreVO vo = new MenuScoreVO();
-				vo.setMenuId(rs.getInt(1));
+				RestaurantsScoreVO vo = new RestaurantsScoreVO();
+				vo.setRestaurantId(rs.getInt(1));
 				vo.setCommentId(rs.getInt(2));
 				vo.setUserName(rs.getString(3));
-				vo.setMenuComment(rs.getString(4));
+				vo.setRestaurantComment(rs.getString(4));
 				vo.setCommentImgPath(rs.getString(5));
 				
 				menuScoreList.add(vo);

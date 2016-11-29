@@ -1,3 +1,4 @@
+<%@page import="com.mc.delivery.vo.RestaurantsScoreVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mc.delivery.service.MenuService"%>
 <%@page import="com.mc.delivery.vo.MenuVO"%>
@@ -83,8 +84,9 @@
 	}
 	
 	MenuService service = MenuService.getInstance();
-	List<MenuVO> list = service.readList(id);
-	System.out.println(service.readList(id));
+	List<MenuVO> menuList = service.readList(id);
+	List<RestaurantsScoreVO> scoreList = service.readReply(id);
+	System.out.println(scoreList);
 %>
 	<div class="container">
 		<div class="row menuScreen">
@@ -106,14 +108,14 @@
 			</div>
 			<div id="mainMenu" class="card-panel col s8">
 				<ul class="collection">
-				<%for(int i=0; i<list.size(); i++) {
-					if(list.get(i).getMenuCategory() == 1)
+				<%for(int i=0; i<menuList.size(); i++) {
+					if(menuList.get(i).getMenuCategory() == 1)
 							{%>
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title"><%=list.get(i).getMenuName() %></span>
-						<p><%=list.get(i).getMenuPrice() %>원</p>
-						<p><%=list.get(i).getMenuInfo() %></p>
+						<span class="title"><%=menuList.get(i).getMenuName() %></span>
+						<p><%=menuList.get(i).getMenuPrice() %>원</p>
+						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
 					</a>
@@ -122,14 +124,14 @@
 			</div>
 			<div id="sideMenu" class="card-panel col s8">
 				<ul class="collection">
-				<%for(int i=0; i<list.size(); i++) {
-					if(list.get(i).getMenuCategory() == 2)
+				<%for(int i=0; i<menuList.size(); i++) {
+					if(menuList.get(i).getMenuCategory() == 2)
 							{%>
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title"><%=list.get(i).getMenuName() %></span>
-						<p><%=list.get(i).getMenuPrice() %>원</p>
-						<p><%=list.get(i).getMenuInfo() %></p>
+						<span class="title"><%=menuList.get(i).getMenuName() %></span>
+						<p><%=menuList.get(i).getMenuPrice() %>원</p>
+						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
 					</a>
@@ -138,14 +140,14 @@
 			</div>
 			<div id="drinkMenu" class="card-panel col s8">
 				<ul class="collection">
-				<%for(int i=0; i<list.size(); i++) {
-					if(list.get(i).getMenuCategory() == 3)
+				<%for(int i=0; i<menuList.size(); i++) {
+					if(menuList.get(i).getMenuCategory() == 3)
 							{%>
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title"><%=list.get(i).getMenuName() %></span>
-						<p><%=list.get(i).getMenuPrice() %>원</p>
-						<p><%=list.get(i).getMenuInfo() %></p>
+						<span class="title"><%=menuList.get(i).getMenuName() %></span>
+						<p><%=menuList.get(i).getMenuPrice() %>원</p>
+						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
 					</a>
@@ -154,14 +156,14 @@
 			</div>
 			<div id="etcMenu" class="card-panel col s8">
 				<ul class="collection">
-				<%for(int i=0; i<list.size(); i++) {
-					if(list.get(i).getMenuCategory() == 4)
+				<%for(int i=0; i<menuList.size(); i++) {
+					if(menuList.get(i).getMenuCategory() == 4)
 						{%>
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
-						<span class="title"><%=list.get(i).getMenuName() %></span>
-						<p><%=list.get(i).getMenuPrice() %>원</p>
-						<p><%=list.get(i).getMenuInfo() %></p>
+						<span class="title"><%=menuList.get(i).getMenuName() %></span>
+						<p><%=menuList.get(i).getMenuPrice() %>원</p>
+						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
 					</a>
@@ -192,10 +194,17 @@
 			<div class="col s12" id="menuReply">
 				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
 			</div>
+			<%for(int i=0; i<scoreList.size(); i++) { %>
 			<div class="col s12">
-				<div class="card-panel teal lighten-2 col s2">작성자 이름&점수</div>
-				<div class="card-panel teal lighten-2 col s10">평가 내용&사진</div>
+				<div class="card-panel teal lighten-2 col s2"><%=scoreList.get(i).getUserName() %></div>
+				<div class="card-panel teal lighten-2 col s10">
+				<%=scoreList.get(i).getRestaurantComment() %>
+				<%if(scoreList.get(i).getCommentImgPath() != null) { %>
+					<img src="<%=scoreList.get(i).getCommentImgPath() %>">
+				<%} %>
+				</div>
 			</div>
+			<%} %>
 		</div>
 	</div>
 	

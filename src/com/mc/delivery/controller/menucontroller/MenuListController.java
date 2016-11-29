@@ -71,7 +71,7 @@ public class MenuListController extends HttpServlet {
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);
-			viewPath = "menu.jsp";
+			viewPath = "insertMenu.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
 		dispatcher.forward(req, resp);
