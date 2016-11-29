@@ -124,6 +124,7 @@
 	<div class="col s4 m4 l4"> </div>
 	<div class="col s4 m4 l4">
 		<a href="#!" id="moreSearchBtn" class="btn">더 많은 식당정보
+		${requestScope.category}
 			불러오기 <span class="more" id="${requestScope.category}"></span></a>
 	</div>		
 	<div class="col s4 m4 l4"> </div>		

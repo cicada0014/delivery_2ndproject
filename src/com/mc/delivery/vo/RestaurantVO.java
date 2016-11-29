@@ -9,7 +9,7 @@ public class RestaurantVO {
 	private String restaurantOpenTime;
 	private String restaurantCloseTime;
 	private String restaurantIntro;
-	private String restaurnatPhone;
+	private String restaurantPhone;
 	
 	public String getRestaurantOpenTime() {
 		return restaurantOpenTime;
@@ -29,11 +29,11 @@ public class RestaurantVO {
 	public void setRestaurantIntro(String restaurantIntro) {
 		this.restaurantIntro = restaurantIntro;
 	}
-	public String getRestaurnatPhone() {
-		return restaurnatPhone;
+	public String getRestaurantPhone() {
+		return restaurantPhone;
 	}
-	public void setRestaurnatPhone(String restaurnatPhone) {
-		this.restaurnatPhone = restaurnatPhone;
+	public void setRestaurantPhone(String restaurnatPhone) {
+		this.restaurantPhone = restaurnatPhone;
 	}
 	public String getRestaurantImg() {
 		return restaurantImg;

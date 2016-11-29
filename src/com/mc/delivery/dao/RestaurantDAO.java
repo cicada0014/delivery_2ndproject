@@ -56,7 +56,7 @@ public class RestaurantDAO {
 			pstmt.setString(5, vo.getRestaurantIntro());
 			pstmt.setString(6, vo.getRestaurantOpenTime());
 			pstmt.setString(7, vo.getRestaurantCloseTime());
-			pstmt.setString(8, vo.getRestaurnatPhone());
+			pstmt.setString(8, vo.getRestaurantPhone());
 			result= pstmt.executeUpdate();
 			
 			
@@ -153,7 +153,7 @@ public class RestaurantDAO {
 				vo.setRestaurantName(rs.getString(1));
 				vo.setRestaurantLocation(rs.getString(2));
 				vo.setRestaurantImg(rs.getString(3));
-				vo.setRestaurnatPhone(rs.getString(4));
+				vo.setRestaurantPhone(rs.getString(4));
 				vo.setRestaurantOpenTime(rs.getString(5));
 				vo.setRestaurantCloseTime(rs.getString(6));
 				vo.setRestaurantIntro(rs.getString(7));
@@ -199,7 +199,7 @@ public class RestaurantDAO {
 				vo.setRestaurantName(rs.getString(1));
 				vo.setRestaurantLocation(rs.getString(2));
 				vo.setRestaurantImg(rs.getString(3));
-				vo.setRestaurnatPhone(rs.getString(4));
+				vo.setRestaurantPhone(rs.getString(4));
 				vo.setRestaurantOpenTime(rs.getString(5));
 				vo.setRestaurantCloseTime(rs.getString(6));
 				vo.setRestaurantIntro(rs.getString(7));
@@ -218,6 +218,50 @@ public class RestaurantDAO {
 //			커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
 			
 		}return voList;
+		
+	}
+	public RestaurantVO selectByRestaurantId(int restaurantId){
+		RestaurantVO vo = new RestaurantVO() ;
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs= null;
+		String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img,"
+				+ "a.restaurant_phone, a.restaurant_open_time, a.restaurant_close_time,"
+				+ "a.restaurant_introduce, a.restaurant_id FROM "
+				+"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
+				+ "ON r.restaurant_location=l.location_id "
+				+"WHERE restaurant_id=? "
+				+ ")AS a;";
+		
+		
+		try {
+			con= dataSource.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, restaurantId);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				
+				vo.setRestaurantName(rs.getString(1));
+				vo.setRestaurantLocation(rs.getString(2));
+				vo.setRestaurantImg(rs.getString(3));
+				vo.setRestaurantPhone(rs.getString(4));
+				vo.setRestaurantOpenTime(rs.getString(5));
+				vo.setRestaurantCloseTime(rs.getString(6));
+				vo.setRestaurantIntro(rs.getString(7));
+				vo.setRestaurantId(rs.getInt(8));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBHelper.close(rs);
+			DBHelper.close(pstmt);
+			
+			DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
+//			커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
+			
+		}return vo;
 		
 	}
 	

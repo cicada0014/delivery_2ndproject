@@ -18,7 +18,7 @@ $(document).ready(function() {
 </head>
 <body>
 <div class="container">
-	<h2>회원정보수정</h2>
+	<h1>회원정보수정</h1>
 	<form class="col s6 m12 l12" action="member.do" method="post" name="frm" >
 		<input type="hidden" name="action" value="update_get" >
 		

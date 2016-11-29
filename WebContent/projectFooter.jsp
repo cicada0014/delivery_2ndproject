@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
+<hr>
 	<div class="container">
 		<!--Footer-->
 		<footer class="page-footer blue center-on-small-only white">
