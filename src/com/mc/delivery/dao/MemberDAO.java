@@ -58,6 +58,9 @@ public class MemberDAO {
 			}
 			
 			System.out.println(result);
+			//
+			System.out.println("pwd : " + pwd);
+			//
 			return result;
 		}
 		//회원한명 정보보기
@@ -203,5 +206,45 @@ public class MemberDAO {
 			return result;	
 
 		}
+		
+		//사용자 인증 패스워드 일치확인
+				public int n_userCheck(String email) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					int result = 0;
 
+					try {
+						con = new DBHelper().makeConnection();
+						String sql ="SELECT EMAIL FROM MEMBER WHERE EMAIL=?"; 
+						
+
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, email);
+						rs = pstmt.executeQuery();
+					
+						if(rs.next()){
+							if(rs.getString(1) != null && rs.getString(1).equals(email)){
+								result = 1;
+							} else {
+								result = 0;
+							}
+							
+						} else {
+							result = -1;
+						}
+								
+						
+					} catch (SQLException e) {
+						System.out.println("네이버 유저쳌커넥션 에러");
+						e.printStackTrace();
+					} finally {
+						DBHelper.close(rs);
+						DBHelper.close(pstmt);
+						DBHelper.close(con);
+					}
+					System.out.println("비밀번호 체크 잘됨");
+					System.out.println(result);
+					return result;
+				}
 } 

@@ -57,10 +57,17 @@ $(document).ready(function() {
 				<a class="waves-effect waves-light btn">				
 				 <input type="reset" value="취소">
 				</a>				
+
+			
 			
 		</form>
 	</div>
+				<a href="NaverRequest" class="waves-effect waves-light btn"><input type="button" name="n_loginCheck" value="네이버로 로그인"></a>
 </div>	
+
+				
+				
+	
 </body>
 </html>
 

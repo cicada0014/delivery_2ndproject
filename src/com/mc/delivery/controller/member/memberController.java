@@ -1,6 +1,9 @@
 package com.mc.delivery.controller.member;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,6 +35,10 @@ public class memberController extends HttpServlet  {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		String viewPath = "";
+		
+		//
+		System.out.println("memberController action : " + action);
+		//
 		
 		if(  action.equals("join")){
 			viewPath = "join_form.jsp";
@@ -66,7 +73,7 @@ public class memberController extends HttpServlet  {
 			if(result == 1){
 //				session.setAttribute("userid", mvo.getUserid());
 //				session.setAttribute("admin", mvo.getAdmin());
-				request.setAttribute("userid", mvo.getUserid());
+				request.setAttribute("email", mvo.getEmail());
 				
 			} 
 			viewPath = "join_result.jsp";
@@ -103,7 +110,7 @@ public class memberController extends HttpServlet  {
 				MemberVO mvo = dao.getMember(email);
 				HttpSession session = request.getSession();
 				
-				session.setAttribute("email", mvo.getEmail());
+				session.setAttribute("nick", mvo.getName());
 				session.setAttribute("admin", mvo.getAdmin());
 				
 				viewPath = "index.jsp";
@@ -149,6 +156,54 @@ public class memberController extends HttpServlet  {
 			
 						
 		}
+		// 네이버 로그인 부분
+		else if(action.equals("naverlogin")){
+			HttpSession session = request.getSession();
+			
+			String naver_email = (String) session.getAttribute("naver_email");
+			String naver_nick = (String) session.getAttribute("naver_nick");
+			
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+				System.out.println("naver_email : " + naver_email);
+				System.out.println("naver_nick : " + naver_nick);
+				
+				MemberVO mvo = null;
+				
+				if(dao.n_userCheck(naver_email) == 1){
+					System.out.println("DB의 NAVER ID 존재");
+					mvo = dao.getMember(naver_email);
+				} else if(dao.n_userCheck(naver_email) != 0) {
+					System.out.println("DB의 NAVER ID 없음");
+					
+					mvo = new MemberVO();
+					
+					mvo.setEmail(naver_email);
+					mvo.setName(naver_nick);
+					
+					int result = dao.insertMember(mvo);
+					
+					if(result >= 1){
+						System.out.println("DB입력 성공");
+					}
+					else {
+						System.out.println("DB입력 실패");
+					}
+					mvo = dao.getMember(naver_email);
+				}
+				
+				session.setAttribute("nick", mvo.getName());
+				session.setAttribute("admin", mvo.getAdmin());
+				
+			
+				
+			viewPath = "index.jsp";
+			
+			
+		}
+		
+		//
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
 		dispatcher.forward(request, response);
