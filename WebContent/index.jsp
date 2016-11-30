@@ -48,6 +48,12 @@ $(function() {
 		dataType:"json",
 		success:function(data){
    			    $('#currentUserLocation').text(data.result.items[0].address);
+   			    $.ajax({
+   			    	url:"list",
+   					type:"post",
+   					data:"command=mapAjax&sessionLocation="+data.result.items[0].addrdetail.sigugun,
+   	   			    })
+   				 sessionStorage.setItem('userCurrentLocation', data.result.items[0].addrdetail.sigugun);
 				
 			},
 		error:function(exception){
@@ -56,9 +62,7 @@ $(function() {
 		})
 // 		위 위치정보를 세션에 넣어두고 다니면 로딩시간이 줄어들것이야. 
     
-    infowindow.setContent('<div style="padding:20px;">' +
-        'latitude: '+ location.lat() +'<br />' +
-        'longitude: '+ location.lng() +'</div>');
+    infowindow.setContent('요기!');
 
     infowindow.open(map, location);
 }
@@ -100,14 +104,20 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 		data:"command=mapAjax&lat="+e.coord.lat()+"&lng="+e.coord.lng(),
 		dataType:"json",
 		success:function(data){
-   			    $('#testMap').text(data.result.items[0].address);
+//    			    $('#testMap').text(data.result.items[0].address);
+   			 var location = new naver.maps.LatLng(e.coord.lat(),
+   					e.coord.lng());
+				infowindow.setContent(data.result.items[0].address);
+
+				infowindow.open(map, location);
 				
 			},
 		error:function(exception){
 				alert(exception.message)
 			}	
 		})
-
+		
+		
 	
 
 //     markerList.push(marker);
@@ -131,17 +141,6 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
 		
-		<nav>
-    <div class="nav-wrapper">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
 
 
 
@@ -152,7 +151,7 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 		${categoryList } 
 		<script type="text/javascript">
-				$('#uselessIndex').remove(); // categoryCarousel만 지움
+              $('#uselessIndex').remove(); // categoryCarousel만 지움
 			</script>
 		<!-- 	현성이형이 작업하신 부분입니다.  --> 
 <!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  -->
@@ -164,10 +163,11 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br>
-			<div class="row center">
-				<h5 class="header col s12 light">배달 프로 젝트 구성</h5>
-				<div id="map" style="width:50%;height:300px;"></div>
-				<div id="testMap"> 지도 내용이 나올 곳 </div>
+			<div class="row">
+				<div class="col s2 m2 l2"> </div>
+				<h5 class="header col s12 center">현재 위치 </h5>
+				<div class="col s8 m8 l8" id="map" style="width:100%;height:300px;"></div>
+				<div id="testMap">  </div>
 			</div>
 		</div>
 	</div>

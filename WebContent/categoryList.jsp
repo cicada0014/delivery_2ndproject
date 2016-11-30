@@ -8,8 +8,10 @@
 <title>categoryList.jsp</title>
 
 <script type="text/javascript">
+var sessionLocation = sessionStorage.getItem('userCurrentLocation');
 	$(document).ready(function(){
-			$('.carousel').carousel();
+		$('.carousel').carousel();
+		
 		})
 </script>
 
@@ -26,12 +28,13 @@
 </style>
 </head>
 <body>
-	
+		
 		<div class="row" id="categoryCarousel">
 			<div  class="carousel">
 				<c:forEach var="category" items="${requestScope.categoryList}"
 					varStatus="status">
-					<a class="carousel-item " href="list?command=takeList&option=${pageScope.category.categoryName}"><img
+					<a class="carousel-item " 
+					href="list?command=takeList&option=${pageScope.category.categoryName}&sessionLocation=${sessionScope.sessionLocation}" ><img
 						src="images/${pageScope.category.categoryImg}"
 						alt="${pageScope.category.categoryName}" class='circle' ></a>
 					<!-- 						 <a -->
@@ -47,7 +50,7 @@
 		<c:forEach var="category" items="${requestScope.categoryList}"
 			varStatus="status">
 			<div class="col s6 m4 l2 ">
-			<a href="list?command=takeList&option=${pageScope.category.categoryName}">
+			<a href="list?command=takeList&option=${pageScope.category.categoryName}&sessionLocation=${sessionScope.sessionLocation} ">
 						<img class="circle" src="images/${pageScope.category.categoryImg}">
 				</a>
 <!-- 				<a -->
