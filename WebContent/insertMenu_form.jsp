@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-<!-- <link type="text/css" rel="stylesheet" href="template/css/materialize.min.css"  media="screen,projection"/> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
-<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script> -->
-<!-- <script type="text/javascript" src="template/js/materialize.min.js"></script> -->
+
+
 <title>insertMenu.jsp</title>
 <c:import url="design_reference.html" var="bootstrap"></c:import>
 <%=pageContext.getAttribute("bootstrap")%>
@@ -16,10 +13,10 @@
 	$(function(){
 		
 		$(document).ready(function(){
-			$('select').material_select();			//¼¿·ºÆ® ¹Ú½º
-			$('textarea').trigger('autoresize');	//¸Ş´ºÁ¤º¸
+			$('select').material_select();			//ì…€ë ‰íŠ¸ ë°•ìŠ¤
+			$('textarea').trigger('autoresize');	//ë©”ë‰´ì •ë³´
 			
-			var menuCategoryValue = $('value').val(); //¼¿·ºÆ® ¹Ú½º °ª °¡Á®¿Í¼­ Ä«Å×°í¸® ºĞ·ù
+			var menuCategoryValue = $('value').val(); //ì…€ë ‰íŠ¸ ë°•ìŠ¤ ê°’ ê°€ì ¸ì™€ì„œ ì¹´í…Œê³ ë¦¬ ë¶„ë¥˜
 		});
 	})
 </script>
@@ -38,7 +35,7 @@
 			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 			<span id="categorySpan">${categoryList }</span> 
 			<script type="text/javascript">
-				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel¸¸ Áö¿ò
+				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarouselë§Œ ì§€ì›€
 			</script>
 		</div>
 	</div>
@@ -49,59 +46,58 @@
 			<div class="row">
 				<div class="input-field col s9">
 					<input name="restaurantName" type="text" class="validate">
-					<label for="restaurantName">½Ä´çÀÌ¸§</label>
+					<label for="restaurantName">ì‹ë‹¹ì´ë¦„</label>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s9">
 					<select name="menuCategory">
-						<option value="" disabled selected>Ä«Å×°í¸® ¼±ÅÃ</option>
-						<option value="1">¸ŞÀÎ¸Ş´º</option>
-						<option value="2">»çÀÌµå¸Ş´º</option>
-						<option value="3">À½·á</option>
-						<option value="4">±âÅ¸</option>
+						<option value="" disabled selected>ì¹´í…Œê³ ë¦¬ ì„ íƒ</option>
+						<option value="1">ë©”ì¸ë©”ë‰´</option>
+						<option value="2">ì‚¬ì´ë“œë©”ë‰´</option>
+						<option value="3">ìŒë£Œ</option>
+						<option value="4">ê¸°íƒ€</option>
 					</select>
-					<label>Ä«Å×°í¸®</label>
+					<label>ì¹´í…Œê³ ë¦¬</label>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s9">
 					<input name="menuName" type="text" class="validate">
-					<label for="menuName">¸Ş´ºÀÌ¸§</label>
+					<label for="menuName">ë©”ë‰´ì´ë¦„</label>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s9">
 					<input name="menuPrice" type="text" class="validate">
-					<label for="menuPrice">¸Ş´º°¡°İ</label>
+					<label for="menuPrice">ë©”ë‰´ê°€ê²©</label>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s9">
 					<textarea name="menuInfo" class="materialize-textarea" length="120"></textarea>
-					<label for="menuInfo">¸Ş´ºÁ¤º¸</label>
+					<label for="menuInfo">ë©”ë‰´ì •ë³´</label>
 				</div>
 			</div>
 			
 			<div class="row">
-				
 				<div class="file-field input-field">
 					<div class="file-path-wrapper col s7">
-					<input name="imgPath" class="file-path validate" type="text" placeholder="¸Ş´º»çÁø" disabled>
+					<input name="menuImgPath" class="file-path validate" type="text" placeholder="ë©”ë‰´ì‚¬ì§„" disabled>
 					</div>
 					<div class="btn">
-						<input type="file" id="photoSelect">
-						<span>»çÁø¼±ÅÃ</span>
+						<input type="file" id="menuPhotoSelect">
+						<span>ì‚¬ì§„ì„ íƒ</span>
 					</div>
 				</div>
 			</div>
 			
 			<div class="row">
-				<a href="/menuList.do?action=insertResult"><button class="btn waves-effect waves-light btn-large" id="submit" name="action" value="insertMenu">¸Ş´ºµî·Ï</button></a>
+				<a href="/menuList.do?action=insertResult"><button class="btn waves-effect waves-light btn-large" id="submit" name="action" value="insertMenu">ë©”ë‰´ë“±ë¡</button></a>
 			</div>
 		</form>
 	</div>
