@@ -13,6 +13,7 @@ import com.mc.delivery.jdbcutil.DBHelper;
 import com.mc.delivery.vo.CategoryVO;
 import com.mc.delivery.vo.RestaurantVO;
 
+
 public class RestaurantDAO {
 	private DataSource dataSource;
 	
@@ -263,6 +264,35 @@ public class RestaurantDAO {
 			
 		}return vo;
 		
+	}
+	
+	//
+	
+	public List<String> rs_NameSelectAll(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<String> result = new ArrayList<>();
+		
+		
+		String sql = "select restaurant_name from restaurants";
+		
+		try {
+			con= dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				result.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("dao select all err");
+			e.printStackTrace();
+		} finally {
+		}
+		
+		return result; 
 	}
 	
 }
