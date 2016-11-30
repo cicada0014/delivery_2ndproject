@@ -195,6 +195,8 @@ public class memberController extends HttpServlet  {
 				
 				session.setAttribute("nick", mvo.getName());
 				session.setAttribute("admin", mvo.getAdmin());
+				session.setAttribute("point", mvo.getPoint());
+				session.setAttribute("email", mvo.getEmail());
 				
 			
 				
