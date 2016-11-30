@@ -43,7 +43,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "INSERT INTO RESTAURANTS_MENU(restaurant_id,menu_category,menu_name,menu_info,menu_price,menu_imagePath) "
-				+ "VALUES(?,?,?,?,?,?,?)";
+				+ "VALUES(?,?,?,?,?,?)";
 		
 		try {
 			conn = dataSource.getConnection();

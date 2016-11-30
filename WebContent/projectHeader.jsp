@@ -29,7 +29,7 @@
 <!-- 			jstl 써서 관리자 입장시에만 보이도록 할 -->
 			<li><a class="grey-text" href="list?command=insertRestaurantInfoForm">식당정보
 				입력하기</a></li>
-			
+			<li><a class="grey-text" href="menuList.do?action=insertMenuForm">메뉴정보 입력하기</a></li>
 		</ul>
 		
 		<ul id="nav-mobile" class="side-nav">
