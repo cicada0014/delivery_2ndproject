@@ -20,6 +20,11 @@ public class ListController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//
+	System.out.println(req.getParameter("search"));	
+	//
+	
 	//나중에 이 모델이 정보를 담고 뷰단으로 갈수도 있고, 서버단으로도 쓰일수있다. 단 . 컨트롤러로 제어권을 가져와야한다. 
 	HashMap<String, Object> model= new HashMap<>();	
 		
