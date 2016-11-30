@@ -88,13 +88,14 @@ $(document).ready(function() {
     			</div>
  	 		</div>	
  		
-				
+			 		
+				<button class="btn waves-effect waves-light" type="submit" onclick="return joinCheck()">확인
+  				</button>		
+				 			
+				<button class="btn waves-effect waves-light" type="reset" >취소
+  				</button>
+							
 			
-			
-			
-				<input type="submit" value="확인" onclick="return joinCheck()" class="waves-effect waves-light btn" >
-				<input type="reset" value="취소" class="waves-effect waves-light btn" >
-	
 	</form>
 
 </div>

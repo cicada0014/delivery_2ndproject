@@ -109,10 +109,11 @@ public class memberController extends HttpServlet  {
 			if(result == 1){
 				MemberVO mvo = dao.getMember(email);
 				HttpSession session = request.getSession();
+				session.setAttribute("point", mvo.getPoint());
 				session.setAttribute("email", mvo.getEmail());
 				session.setAttribute("nick", mvo.getName());
 				session.setAttribute("admin", mvo.getAdmin());
-				
+				System.out.println(mvo);
 				viewPath = "index.jsp";
 			} else {
 				request.setAttribute("result", result);
@@ -199,12 +200,38 @@ public class memberController extends HttpServlet  {
 				
 			viewPath = "index.jsp";
 			
+			//point test용 
+		} else if (action.equals("point_get")){
+			String priceStr = request.getParameter("price");
+			HttpSession session = request.getSession();
+			String email = (String) session.getAttribute("email");
+			System.out.println(email);
+			int price = 0;
+			int point = 0;
+			if(priceStr != null && priceStr.length() > 0){
+				price = Integer.parseInt(priceStr)  ;
+				
+			}
+			point = (int) (price * 0.01);
+			System.out.println(point);
+			System.out.println(email);
 			
+			MemberDAO dao = MemberDAO.getMemberDAO();
+			
+			int result = dao.plusPoint(point, email);
+			
+			if(result == 1){
+				System.out.println("point 적립 성공");
+			} else {
+				System.out.println("point 적립 실패");
+			}
+			
+			viewPath = "index.jsp";
+
+				
 		}
 		
-		//
-		
-		
+			
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
 		dispatcher.forward(request, response);
 		

@@ -28,17 +28,18 @@
 			
 			<c:if test="${not empty sessionScope.nick}">
 			<li class="grey-text">
-	   		 ${sessionScope.nick}님 어서오십시오.
+	   		 ${sessionScope.nick}님 어서오십시오.  point=${sessionScope.point}
 	   		 </li> 
 	   		 
 	   		 <li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
 			<li><a class="grey-text" href="member.do?action=update&email=${sessionScope.email}">정보수정</a></li>	
+			
 			</c:if>
 			
 			
 <!-- 			jstl 써서 관리자 입장시에만 보이도록 할 -->
 			<li><a class="grey-text" href="list?command=insertRestaurantInfoForm">식당정보
-				입력하기</a></li>
+				입력하기</a></li> 
 			
 		</ul>
 		

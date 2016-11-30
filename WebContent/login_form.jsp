@@ -50,15 +50,13 @@ $(document).ready(function() {
 				</div>		
 			
 			</div>	
-						
-				 <a class="waves-effect waves-light btn">
-				 <input type="submit" value="로그인" onclick="return loginCheck()">  
-				</a>	
-				<a class="waves-effect waves-light btn">				
-				 <input type="reset" value="취소">
-				</a>				
-
-			
+				
+				<button class="btn waves-effect waves-light" type="submit" onclick="return loginCheck()">로그인
+  			</button>		
+				 			
+				<button class="btn waves-effect waves-light" type="reset" >취소
+  			</button>
+							
 			
 		</form>
 	</div>
