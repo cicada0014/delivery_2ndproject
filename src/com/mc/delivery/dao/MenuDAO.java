@@ -46,7 +46,6 @@ public class MenuDAO {
 				+ "VALUES(?,?,?,?,?,?,?)";
 		
 		try {
-//			conn = new DBHelper().makeConnection();
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getRestaurantId());
