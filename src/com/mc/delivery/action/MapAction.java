@@ -15,7 +15,8 @@ public class MapAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/xml;charset=UTF-8");
+		
+		request.setCharacterEncoding("UTF-8");
 		String sessionLocation = request.getParameter("sessionLocation");
 		if(sessionLocation != null){
 			request.getSession().setAttribute("sessionLocation", sessionLocation);
@@ -39,9 +40,9 @@ public class MapAction implements Action {
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
 			if (responseCode == 200) { // 정상 호출
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 			} else { // 에러 발생
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
 			}
 			String inputLine;
 			StringBuffer result = new StringBuffer();
@@ -52,6 +53,7 @@ public class MapAction implements Action {
 			br.close();
 			
 			System.out.println(result.toString());
+			
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(result.toString());
 			

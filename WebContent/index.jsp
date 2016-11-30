@@ -180,16 +180,15 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 	</div>
 	<div class="container">
-		<div class="row">
-			<form class="col s6 m6 l6" action="" method="post">
-				<div class="input-field col s6 m6 l6">
+			<form class="col row" action="" method="post">
+				<div class="input-field col s4 m4 l4">
 					<i class="material-icons prefix">my_location</i> <input
 						id="newlocation" type="text" class="validate" name="newlocation">
 					<label for="newlocation">새로운 위치지정</label>
+				<a id="resetLocationBtn" class="col s4 m4 l4 waves-effect waves-light btn-large">
+				<i class="material-icons left">cloud</i> 위치값 재 설정!</a>
 				</div>
 			</form>
-			<button id="resetLocationBtn" > aa</button>
-		</div>
 	</div>
 	<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
 	<div class="section no-pad-bot" id="index-banner">
