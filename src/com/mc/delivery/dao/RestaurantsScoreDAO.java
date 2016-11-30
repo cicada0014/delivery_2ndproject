@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.mc.delivery.jdbcutil.DBHelper;
+import com.mc.delivery.vo.RestaurantVO;
 import com.mc.delivery.vo.RestaurantsScoreVO;
 
 public class RestaurantsScoreDAO {
