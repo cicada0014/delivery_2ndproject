@@ -28,9 +28,9 @@ $(document).ready(function() {
 			<input type="text" name="email" >
 			</div>
 				<input type="hidden" name="action" value="emailcheck" >
-			<a class="waves-effect waves-light btn">			
-				<input type="submit" value="중복 체크" >
-			</a>	
+			<button class="btn waves-effect waves-light" type="submit">중복 체크
+  			</button>
+		
 		</div>
 			
 			 <c:if test="${result == 1}">
@@ -45,9 +45,9 @@ $(document).ready(function() {
 		     <c:if test="${result == -1}">
 				${email}는 사용 가능한 이메일입니다.	
 			
-			<a class="waves-effect waves-light btn" onclick="use()">			
-			사용
-			</a>
+			 <button class="btn waves-effect waves-light" type="button" onclick="use()">사용
+  			</button>
+			
 <!-- 			<input type="button" value="사용"  onclick="use()" > 				 -->
 			
 		<script type="text/javascript">		

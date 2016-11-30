@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
 	<nav class="nav-extended navbar-fixed white ">
 		<div class="nav-wrapper container ">
 			<a id="logo-container" href="./index.jsp" class="brand-logo center">
@@ -40,6 +41,7 @@
 
 					</ul>
 					<li class="grey-text">${sessionScope.nick}님어서오십시오.</li>
+					<li class="grey-text"> point :${sessionScope.point}</li>
 					<li><a class="dropdown-button grey-text" href="#!"
 						data-activates="dropdownList">설정<i
 							class="material-icons right">arrow_drop_down</i></a></li>
@@ -57,6 +59,7 @@
 			<!-- 			<ul class="tabs tabs-transparent"> -->
 			<!--       		</ul> -->
 		</div>
+
 
 	</nav>
 
