@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.mc.delivery.dao.RestaurantDAO;
@@ -25,13 +26,18 @@ public class AjaxAction implements Action {
 	 	RestaurantDAO dao = (RestaurantDAO) sc.getAttribute("restaurantDAO");
 	 	String option= request.getParameter("option");
 		int count= Integer.parseInt(request.getParameter("count"));
+		HttpSession session = request.getSession();
+		String sessionLocation = "강북구";
+		if(session.getAttribute("sessionLocation")!=null){
+			sessionLocation=(String) session.getAttribute("sessionLocation");
+		}
 	 	
 		List<RestaurantVO> voList= null;
 		String restaurantList = null;
 		List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
 		for(CategoryVO ct : categoryList){
 			if(option.equals(ct.getCategoryName())){
-				voList = dao.selectAjaxOption(option, count);
+				voList = dao.selectAjaxOption(option,sessionLocation, count);
 				restaurantList = gson.toJson(voList);
 				break;
 			}

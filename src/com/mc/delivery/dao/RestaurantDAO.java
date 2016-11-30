@@ -129,8 +129,46 @@ public class RestaurantDAO {
 		 
 	}
 	
+	
+	public int selectOptionCount(String option, String sessionLocation){
+		int result = 0;
+		 Connection con = null;
+		 PreparedStatement pstmt =null;
+		 ResultSet rs= null;
+		 String sql="SELECT COUNT(*)"
+		 		+ " FROM "
+				 +"restaurants as r LEFT JOIN locations as l "
+				 + "ON r.restaurant_location=l.location_id "
+				 +"WHERE restaurant_category= "
+				 + "(SELECT category_id FROM category WHERE category_name=?) AND location_name=? ;";
+		 
+		 
+		 try {
+			 con= dataSource.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, option);
+			pstmt.setString(2, sessionLocation);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBHelper.close(rs);
+			DBHelper.close(pstmt);
+
+			DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
+//			커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
+
+		}return result;
+		
+		
+	}
+	
 	// �꽑�깮�븳 移댄뀒怨좊━�뿉 留욌뒗 �떇�떦 由ъ뒪�듃�뱾 媛��졇�삤湲�
-	public List<RestaurantVO> selectOption(String option){
+	public List<RestaurantVO> selectOption(String option, String sessionLocation){
 		List<RestaurantVO> voList = new ArrayList<>();
 		 Connection con = null;
 		 PreparedStatement pstmt =null;
@@ -141,13 +179,14 @@ public class RestaurantDAO {
 				 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				 + "ON r.restaurant_location=l.location_id "
 				 +"WHERE restaurant_category= "
-				 + "(SELECT category_id FROM category WHERE category_name=?))AS a LIMIT 0,12;";
+				 + "(SELECT category_id FROM category WHERE category_name=?) AND location_name=? )AS a LIMIT 0,12 ;";
 		 
 		 
 		 try {
 			 con= dataSource.getConnection();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, option);
+			pstmt.setString(2, sessionLocation);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				RestaurantVO vo = new RestaurantVO();
@@ -174,7 +213,7 @@ public class RestaurantDAO {
 		}return voList;
 		 
 	}
-	public List<RestaurantVO> selectAjaxOption(String option,int count){
+	public List<RestaurantVO> selectAjaxOption(String option,String sessionLocation,int count){
 		int queryCount = count*12;
 		List<RestaurantVO> voList = new ArrayList<>();
 		Connection con = null;
@@ -186,14 +225,15 @@ public class RestaurantDAO {
 				+"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 				+ "ON r.restaurant_location=l.location_id "
 				+"WHERE restaurant_category= "
-				+ "(SELECT category_id FROM category WHERE category_name=?))AS a LIMIT ?,12;";
+				+ "(SELECT category_id FROM category WHERE category_name=?) AND location_name=? )AS a LIMIT ?,12;";
 		
 		
 		try {
 			con= dataSource.getConnection();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, option);
-			pstmt.setInt(2, queryCount);
+			pstmt.setString(2, sessionLocation);
+			pstmt.setInt(3, queryCount);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				RestaurantVO vo = new RestaurantVO();

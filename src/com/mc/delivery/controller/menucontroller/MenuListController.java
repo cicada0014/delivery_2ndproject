@@ -1,5 +1,6 @@
 package com.mc.delivery.controller.menucontroller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mc.delivery.dao.MenuDAO;
 import com.mc.delivery.dao.RestaurantDAO;
 import com.mc.delivery.service.MenuService;
 import com.mc.delivery.vo.MenuVO;
 import com.mc.delivery.vo.RestaurantVO;
+import com.mc.delivery.vo.RestaurantsScoreVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet(urlPatterns="/menuList.do")
 public class MenuListController extends HttpServlet {
@@ -32,6 +37,7 @@ public class MenuListController extends HttpServlet {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String viewPath = "";
 		String action = req.getParameter("action");
+		req.setCharacterEncoding("UTF-8");
 		
 		MenuService service = MenuService.getInstance();
 		
@@ -49,9 +55,13 @@ public class MenuListController extends HttpServlet {
 			req.setAttribute("restaurant", restaurant);
 			viewPath = "menu.jsp";
 		}
-		else if(action.equals("insert"))
+		else if(action.equals("insertMenuForm"))
 		{
-			String restaurantIdStr = req.getParameter("restaurantId");
+			viewPath = "insertMenu_form.jsp";
+		}
+		else if(action.equals("insertMenu"))
+		{
+			String restaurantIdStr = req.getParameter("restaurantName");
 			int restaurantId = Integer.parseInt(restaurantIdStr);
 			
 			String menuCategory = req.getParameter("menuCategory");
@@ -70,7 +80,30 @@ public class MenuListController extends HttpServlet {
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);
-			viewPath = "menu.jsp";
+			viewPath = "insertMenu_result.jsp";
+		}
+		else if(action.equals("insertScoreForm"))
+		{
+			viewPath = "insertScore_form.jsp";
+		}
+		else if(action.equals("insertScore"))
+		{
+			String restaurantIdStr = req.getParameter("restaurantName");
+			int restaurantId = Integer.parseInt(restaurantIdStr);
+			
+			String userName = req.getParameter("userName");
+			String restaurantComment = req.getParameter("restaurantComment");
+			String commentImgPath = req.getParameter("commentImgPath");
+			
+			RestaurantsScoreVO vo = new RestaurantsScoreVO();
+			vo.setRestaurantId(restaurantId);
+			vo.setUserName(userName);
+			vo.setRestaurantComment(restaurantComment);
+			vo.setCommentImgPath(commentImgPath);
+			
+			int result = service.replyInsert(vo);
+			req.setAttribute("insertScore", result);
+			viewPath = "insertScore_result.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
 		dispatcher.forward(req, resp);

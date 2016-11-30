@@ -3,61 +3,101 @@
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<c:import url="design_reference.html" var="bootstrap"></c:import>
+<%=pageContext.getAttribute("bootstrap")%>
 <script type="text/javascript" src="js/member.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    Materialize.updateTextFields();
+  });
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <title>update_from.jsp</title>
 </head>
 <body>
-	<h2>회원정보수정</h2>
-	<form action="member.do" method="post" name="frm" >
+<div class="container">
+	<h1>회원정보수정</h1>
+	<form class="col s6 m12 l12" action="member.do" method="post" name="frm" >
 		<input type="hidden" name="action" value="update_get" >
-		<table>
+		
 						
-			<tr>
-				<td>이메일</td>
-				<td><input type="text" name="email" size="20" value="${mvo.email}" readonly></td>
-			</tr>
+			<div class="row">
+    			<div class="input-field col s0">
+      				<i class="material-icons">email</i> 
+      			</div>
+      			<div class="input-field col s6"> 		
+      				<input type="email" name="email" value="${mvo.email}" size="30" 
+							id="email" class="validate" readonly> 
+				</div>
+			</div>
 			
-			<tr>
-				<td>닉네임</td>
-				<td> <input type="text" name="name" size="20" value="${mvo.name}" > </td>
-			</tr>
+			<div class="row">
+    			<div class="input-field col s0">
+      				<i class="material-icons">contacts</i>
+      			</div>
+      			<div class="input-field col s6">
+      				<input type="text" name="name" value="${mvo.name}"
+					size="30" id="name"  class="validate">
+    			</div>
+ 	 		</div>
 			
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="pwd" size="21" ></td>
-			</tr>
+			<div class="row">
+    			<div class="input-field col s0">
+      				<i class="material-icons">lock</i>
+      			</div>
+      			<div class="input-field col s6">	
+      				<input type="password" name="pwd"
+					placeholder="비밀번호를 6~20자로 입력해주세요." size="31" 
+						id="pwd"  class="validate">
+    			</div>
 			
-			<tr height="30">
-				<td width="80" >암호확인</td>
-				<td><input type="password" name="pwd_check" size="21" ></td>
-			</tr>
-			
-			
-			<tr>
-				<td>휴대폰</td>
-				<td><input type="text" name="phone" size="20" value="${mvo.phone}"></td>
-			</tr>
-			
-			<tr>
-			<td>생년월일       </td>
-			<td><input type="text" name="brithday" size="30" value="${mvo.brithday}" ></td>
-			</tr>
+ 	 		</div>
+				<div class="row">
+    			<div class="input-field col s0">
+      				<i class="material-icons">done</i>
+				</div>
+      			<div class="input-field col s6">
+      				<input type="password" name="pwd_check"
+					placeholder="비밀번호를 재입력해주세요." size="31" 
+      					id="pwd_check"  class="validate">
+    			</div>
+ 	 		</div>
+							
+			<div class="row">
+    			<div class="input-field col s0">
+      				<i class="material-icons">phone</i>
+      			</div>
+      			
+      			<div class="input-field col s6">	
+      				<input type="text" name="phone"
+					value="${mvo.phone}"  
+     					id="phone" class="validate">
+ 	 			</div>
+	 	 	 </div>	
 		
 			
+	 	 	<div class="row">
+    			<div class="input-field col s0">
+      				생년월일
+      			</div>
+      			<div class="input-field col s6">
+      				<input name="brithday" value="${mvo.brithday}" size="30"
+      					id="brithday" type="text" class="validate">
+    			</div>
+ 	 		</div>	
+ 		
+			 		
+				<button class="btn waves-effect waves-light" type="submit" onclick="return joinCheck()">확인
+  				</button>		
+				 			
+				<button class="btn waves-effect waves-light" type="reset" >취소
+  				</button>
+							
 			
-			<tr>
-				<td colspan="2" align="center">
-				<input type="submit" value="확인" onclick="return joinCheck()" >
-				<input type="reset" value="취소" >
-				</td>
-				
-			</tr>
-
-
-
-		</table>
 	</form>
 
-
+</div>
 </body>
 </html>

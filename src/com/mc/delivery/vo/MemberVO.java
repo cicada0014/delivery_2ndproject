@@ -1,7 +1,7 @@
 package com.mc.delivery.vo;
 
 public class MemberVO {
-	private String userid;
+    private int point;
 	private String email;
 	private String name;
 	private String pwd;
@@ -10,11 +10,14 @@ public class MemberVO {
 	private int admin;
 	
 	
-	public String getUserid() {
-		return userid;
+	
+	
+	
+	public int getPoint() {
+		return point;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	public String getEmail() {
 		return email;
@@ -53,9 +56,9 @@ public class MemberVO {
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
-	public MemberVO(String id, String email, String name, String password, String phone, String brithday, int admin) {
+	public MemberVO(String email, String name, String password, String phone, String brithday, int admin) {
 	
-		this.userid = id;
+		
 		this.email = email;
 		this.name = name;
 		this.pwd = password;
@@ -63,12 +66,23 @@ public class MemberVO {
 		this.brithday = brithday;
 		this.admin = admin;
 	}
-	@Override
-	public String toString() {
-		return "MemberVO [userid=" + userid + ", email=" + email + ", name=" + name + ", pwd=" + pwd + ", phone="
-				+ phone + ", brithday=" + brithday + ", admin=" + admin + "]";
+	
+	public MemberVO(int point, String email, String name, String pwd, String phone, String brithday, int admin) {
+	
+		this.point = point;
+		this.email = email;
+		this.name = name;
+		this.pwd = pwd;
+		this.phone = phone;
+		this.brithday = brithday;
+		this.admin = admin;
 	}
 	public MemberVO(){}
+	@Override
+	public String toString() {
+		return "MemberVO [point=" + point + ", email=" + email + ", name=" + name + ", pwd=" + pwd + ", phone=" + phone
+				+ ", brithday=" + brithday + ", admin=" + admin + "]";
+	}
 	
 	
 	

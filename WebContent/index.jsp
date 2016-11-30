@@ -6,7 +6,7 @@
 <head>
 
 
-<!-- 아래 임포트되는 html 문서는 디자인 및 자바스크립트에 대한 여러 헤드태그를 모아두었습니다.  -->
+<!-- 아래 임포트되는 html 문서는 디자인 및 자바스크립트에 대한 여러 헤드태그를 모아두었습니d다.  -->
 <c:import url="design_reference.html" var="bootstrap"></c:import>
 <%=pageContext.getAttribute("bootstrap")%>
 
@@ -18,7 +18,7 @@
 <script type="text/javascript"
 src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JKvjluyyeKcMUDL2j_l6"></script>
 <script type="text/javascript">
-
+// fdsfsdfsd
 
 
 
@@ -33,13 +33,20 @@ $(function() {
 		
 		var map = new naver.maps.Map(mapDiv, mapOptions); 
 		var infowindow = new naver.maps.InfoWindow();
+
+function resetLocation(newlocation){
+	
+}
+		
 		
  function onSuccessGeolocation(position) {
+	if(sessionStorage.getItem('userCurrentLocation')==null){
     var location = new naver.maps.LatLng(position.coords.latitude,
                                          position.coords.longitude);
 	
     map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
     map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+
     
     $.ajax({
 		url:"list",
@@ -47,7 +54,13 @@ $(function() {
 		data:"command=mapAjax&lat="+location.lat()+"&lng="+location.lng(),
 		dataType:"json",
 		success:function(data){
-   			    $('#currentUserLocation').text(data.result.items[0].address);
+//    			    $('#currentUserLocation').text(data.result.items[0].address);
+   			    $.ajax({
+   			    	url:"list",
+   					type:"post",
+   					data:"command=mapAjax&sessionLocation="+data.result.items[0].addrdetail.sigugun,
+   	   			    })
+   				 sessionStorage.setItem('userCurrentLocation', data.result.items[0].addrdetail.sigugun);
 				
 			},
 		error:function(exception){
@@ -56,11 +69,10 @@ $(function() {
 		})
 // 		위 위치정보를 세션에 넣어두고 다니면 로딩시간이 줄어들것이야. 
     
-    infowindow.setContent('<div style="padding:20px;">' +
-        'latitude: '+ location.lat() +'<br />' +
-        'longitude: '+ location.lng() +'</div>');
+    infowindow.setContent('요기!');
 
     infowindow.open(map, location);
+	}
 }
 
 
@@ -87,25 +99,46 @@ if (navigator.geolocation) {
 
 
 
+$('#resetLocationBtn').on('click',function(){
+	var newlocation = $('#newlocation').val();
+	console.log(newlocation);
+	    $.ajax({
+	    	url:"list",
+			type:"post",
+			data:"command=mapAjax&sessionLocation="+newlocation
+			    })
+		 sessionStorage.setItem('userCurrentLocation',newlocation);
+	
+});
+
+
 naver.maps.Event.addListener(map, 'click', function(e) {
     var marker = new naver.maps.Marker({
         position: e.coord,
         map: map
     });
+
+    
 	$.ajax({
 		url:"list",
 		type:"post",
 		data:"command=mapAjax&lat="+e.coord.lat()+"&lng="+e.coord.lng(),
 		dataType:"json",
 		success:function(data){
-   			    $('#testMap').text(data.result.items[0].address);
+//    			    $('#testMap').text(data.result.items[0].address);
+   			 var location = new naver.maps.LatLng(e.coord.lat(),
+   					e.coord.lng());
+				infowindow.setContent(data.result.items[0].address);
+
+				infowindow.open(map, location);
 				
 			},
 		error:function(exception){
 				alert(exception.message)
 			}	
 		})
-
+		
+		
 	
 
 //     markerList.push(marker);
@@ -128,6 +161,7 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
+		
 
 <c:import url="SearchForm.html"></c:import>
 
@@ -138,22 +172,33 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 		${categoryList } 
 		<script type="text/javascript">
-				$('#uselessIndex').remove(); // categoryCarousel만 지움
+              $('#uselessIndex').remove(); // categoryCarousel만 지움
 			</script>
 		<!-- 	현성이형이 작업하신 부분입니다.  --> 
 <!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  -->
 
 
 	</div>
-
-<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
+	<div class="container">
+			<form class="col row" action="" method="post">
+				<div class="input-field col s4 m4 l4">
+					<i class="material-icons prefix">my_location</i> <input
+						id="newlocation" type="text" class="validate" name="newlocation">
+					<label for="newlocation">새로운 위치지정</label>
+				<a id="resetLocationBtn" class="col s4 m4 l4 waves-effect waves-light btn-large">
+				<i class="material-icons left">cloud</i> 위치값 재 설정!</a>
+				</div>
+			</form>
+	</div>
+	<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br>
-			<div class="row center">
-				<h5 class="header col s12 light">배달 프로 젝트 구성</h5>
-				<div id="map" style="width:50%;height:300px;"></div>
-				<div id="testMap"> 지도 내용이 나올 곳 </div>
+			<div class="row">
+				<div class="col s2 m2 l2"> </div>
+				<h5 class="header col s12 center">현재 위치 </h5>
+				<div class="col s8 m8 l8" id="map" style="width:100%;height:300px;"></div>
+				<div id="testMap">  </div>
 			</div>
 		</div>
 	</div>
