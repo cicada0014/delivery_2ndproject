@@ -33,13 +33,20 @@ $(function() {
 		
 		var map = new naver.maps.Map(mapDiv, mapOptions); 
 		var infowindow = new naver.maps.InfoWindow();
+
+function resetLocation(newlocation){
+	
+}
+		
 		
  function onSuccessGeolocation(position) {
+	if(sessionStorage.getItem('userCurrentLocation')==null){
     var location = new naver.maps.LatLng(position.coords.latitude,
                                          position.coords.longitude);
 	
     map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
     map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+
     
     $.ajax({
 		url:"list",
@@ -47,7 +54,7 @@ $(function() {
 		data:"command=mapAjax&lat="+location.lat()+"&lng="+location.lng(),
 		dataType:"json",
 		success:function(data){
-   			    $('#currentUserLocation').text(data.result.items[0].address);
+//    			    $('#currentUserLocation').text(data.result.items[0].address);
    			    $.ajax({
    			    	url:"list",
    					type:"post",
@@ -65,6 +72,7 @@ $(function() {
     infowindow.setContent('요기!');
 
     infowindow.open(map, location);
+	}
 }
 
 
@@ -89,6 +97,19 @@ if (navigator.geolocation) {
         infowindow.open(map, center);
     }
 
+
+
+$('#resetLocationBtn').on('click',function(){
+	var newlocation = $('#newlocation').val();
+	console.log(newlocation);
+	    $.ajax({
+	    	url:"list",
+			type:"post",
+			data:"command=mapAjax&sessionLocation="+newlocation
+			    })
+		 sessionStorage.setItem('userCurrentLocation',newlocation);
+	
+});
 
 
 naver.maps.Event.addListener(map, 'click', function(e) {
@@ -158,8 +179,19 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 
 	</div>
-
-<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
+	<div class="container">
+		<div class="row">
+			<form class="col s6 m6 l6" action="" method="post">
+				<div class="input-field col s6 m6 l6">
+					<i class="material-icons prefix">my_location</i> <input
+						id="newlocation" type="text" class="validate" name="newlocation">
+					<label for="newlocation">새로운 위치지정</label>
+				</div>
+			</form>
+			<button id="resetLocationBtn" > aa</button>
+		</div>
+	</div>
+	<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br>
