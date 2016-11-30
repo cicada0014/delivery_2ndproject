@@ -37,6 +37,7 @@ public class MenuListController extends HttpServlet {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String viewPath = "";
 		String action = req.getParameter("action");
+		req.setCharacterEncoding("UTF-8");
 		
 		MenuService service = MenuService.getInstance();
 		
@@ -69,11 +70,6 @@ public class MenuListController extends HttpServlet {
 			String menuPrice = req.getParameter("menuPrice");
 			String menuImgPath = req.getParameter("menuImgPath");
 			
-			String menuImgFolder = "http://70.12.109.97:9090/";
-			MultipartRequest mRequest = new MultipartRequest(req, menuImgFolder, 1024 * 1024 * 5, "utf-8", new DefaultFileRenamePolicy());
-			
-			File file = mRequest.getFile("uploadFile");
-			
 			MenuVO vo = new MenuVO();
 			vo.setRestaurantId(restaurantId);
 			vo.setMenuCategory(Integer.parseInt(menuCategory));
@@ -81,7 +77,6 @@ public class MenuListController extends HttpServlet {
 			vo.setMenuInfo(menuInfo);
 			vo.setMenuPrice(Integer.parseInt(menuPrice));
 			vo.setMenuImagePath(menuImgPath);
-//			vo.setMenuImagePath(file.getAbsolutePath());
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);

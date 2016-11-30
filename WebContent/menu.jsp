@@ -2,8 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.mc.delivery.service.MenuService"%>
 <%@page import="com.mc.delivery.vo.MenuVO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -33,7 +33,7 @@
 	{
 		font-size: 20px;
 	}
-/* 	·Î¿ìÅ¬·¡½º °Çµå¸®¸é ÀüÃ¼Àû À¯¾ÆÀÌ µÚÆ²¸³´Ï´Ù. */
+/* 	ë¡œìš°í´ë˜ìŠ¤ ê±´ë“œë¦¬ë©´ ì „ì²´ì  ìœ ì•„ì´ ë’¤í‹€ë¦½ë‹ˆë‹¤. */
 	.menuScreen     
 	{
 /* 		height:100%; */
@@ -63,7 +63,7 @@
 			<c:import url="list?command=selectCategoryList" var="categoryList"></c:import>
 			<span id="categorySpan">${categoryList }</span> 
 			<script type="text/javascript">
-				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarousel¸¸ Áö¿ò
+				$('#categorySpan').find('#categoryCarousel').remove(); // categoryCarouselë§Œ ì§€ì›€
 			</script>
 		</div>
 	</div>
@@ -78,14 +78,12 @@
 		id = Integer.parseInt(idStr);
 		System.out.println(id);
 	}else{
-		System.out.println("¿¡·¯");
-		
+		System.out.println("Error!");
 	}
 	
 	MenuService service = MenuService.getInstance();
 	List<MenuVO> menuList = service.readList(id);
 	List<RestaurantsScoreVO> scoreList = service.readReply(id);
-	System.out.println(scoreList);
 %>
 	<div class="container">
 		<div class="row menuScreen">
@@ -99,10 +97,10 @@
 			</div>
 			<div class="col s9">
 				<ul class="tabs">
-					<li class="tab col s2"><a href="#mainMenu">¸ŞÀÎ¸Ş´º</a></li>
-					<li class="tab col s3"><a href="#sideMenu">»çÀÌµå¸Ş´º</a></li>
-					<li class="tab col s2"><a href="#drinkMenu">À½·á</a></li>
-					<li class="tab col s2"><a href="#etcMenu">±âÅ¸</a></li>
+					<li class="tab col s2"><a href="#mainMenu">ë©”ì¸ë©”ë‰´</a></li>
+					<li class="tab col s3"><a href="#sideMenu">ì‚¬ì´ë“œë©”ë‰´</a></li>
+					<li class="tab col s2"><a href="#drinkMenu">ìŒë£Œ</a></li>
+					<li class="tab col s2"><a href="#etcMenu">ê¸°íƒ€</a></li>
 				</ul>
 			</div>
 			<div id="mainMenu" class="card-panel col s8">
@@ -113,7 +111,7 @@
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
-						<p><%=menuList.get(i).getMenuPrice() %>¿ø</p>
+						<p><%=menuList.get(i).getMenuPrice() %>ì›</p>
 						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
@@ -129,7 +127,7 @@
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
-						<p><%=menuList.get(i).getMenuPrice() %>¿ø</p>
+						<p><%=menuList.get(i).getMenuPrice() %>ì›</p>
 						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
@@ -145,7 +143,7 @@
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
-						<p><%=menuList.get(i).getMenuPrice() %>¿ø</p>
+						<p><%=menuList.get(i).getMenuPrice() %>ì›</p>
 						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
@@ -161,7 +159,7 @@
 						<a href="#"><li class="collection-item avatar">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
-						<p><%=menuList.get(i).getMenuPrice() %>¿ø</p>
+						<p><%=menuList.get(i).getMenuPrice() %>ì›</p>
 						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
@@ -173,10 +171,10 @@
 			<div class="col s4 ">
 				<div class="card white">
 					<div class="card-content black-text">
-						<span class="card-title">¸ÅÀå»ó¼¼Á¤º¸</span>
+						<span class="card-title">ë§¤ì¥ìƒì„¸ì •ë³´</span>
 						<p>
-						¿µ¾÷½Ã°£:	 ${restaurant.restaurantOpenTime} ~ ${restaurant.restaurantCloseTime}<br>
-						¸ÅÀåÁ¤º¸: ${restaurant.restaurantPhone}
+						ì˜ì—…ì‹œê°„:	 ${restaurant.restaurantOpenTime} ~ ${restaurant.restaurantCloseTime}<br>
+						ë§¤ì¥ì •ë³´: ${restaurant.restaurantPhone}
 						
  						</p>
 					</div>
@@ -184,20 +182,20 @@
 <!-- 						<a href="#">This is a link</a> <a href="#">This is a link</a> -->
 					</div>
 				</div>
-				<div style="text-align:center"><a class="waves-effect waves-light btn-large">Àå¹Ù±¸´Ï</a></div><br>
-				<div style="text-align:center"><a class="waves-effect waves-light btn-large">°áÁ¦ÇÏ±â</a></div>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">ì¥ë°”êµ¬ë‹ˆ</a></div><br>
+				<div style="text-align:center"><a class="waves-effect waves-light btn-large">ê²°ì œí•˜ê¸°</a></div>
 			</div>
 		</div>
 		
 		<div class="row menuScreen">
 			<div class="col s12" id="menuReply">
-				<div class="card-panel teal lighten-2 col s9" style="text-align:center">½Ä´çÆò°¡</div>
-				<a class="waves-effect waves-light btn col s2 push-s1" href="menuList.do?action=insertScoreForm">Æò°¡³²±â±â</a>
+				<div class="card-panel blue lighten-5 col s9" style="text-align:center">ì‹ë‹¹í‰ê°€</div>
+				<a class="waves-effect waves-light btn col s2 push-s1" href="menuList.do?action=insertScoreForm&restaurantId=<%=menuList.get(0).getRestaurantId() %>">í‰ê°€ë‚¨ê¸°ê¸°</a>
 			</div>
 			<%for(int i=0; i<scoreList.size(); i++) { %>
 			<div class="col s12">
-				<div class="card-panel teal lighten-2 col s2"><%=scoreList.get(i).getUserName() %></div>
-				<div class="card-panel teal lighten-2 col s10">
+				<div class="card-panel blue lighten-5 col s2"><%=scoreList.get(i).getUserName() %></div>
+				<div class="card-panel blue lighten-5 col s10">
 				<%=scoreList.get(i).getRestaurantComment() %>
 				<%if(scoreList.get(i).getCommentImgPath() != null) { %>
 					<img src="<%=scoreList.get(i).getCommentImgPath()%>">
@@ -209,7 +207,7 @@
 	</div>
 	
 	
-<!-- ÀÌºÎºĞÀº ÇÁ·ÎÁ§Æ®¿¡¼­ ¾²ÀÌ´Â ÇªÅÍºÎºĞÀÔ´Ï´Ù. ¹è´ŞÀÇ ¹ÎÁ· ÇÏ´Ü¿¡ ³ª¿ÍÀÖ´Â ¿©·¯ ¾à°üÀÌ³ª È¸»çÁ¤º¸µîÀÇ Á¤º¸¸¦ ³ªÅ¸³¾¼ö ÀÖ´Â °÷ÀÔ´Ï´Ù. ¿ª½Ã ÇÑÆäÀÌÁö·Î ºĞ¸®ÇÏ¿´½À´Ï´Ù.  -->
+<!-- ì´ë¶€ë¶„ì€ í”„ë¡œì íŠ¸ì—ì„œ ì“°ì´ëŠ” í‘¸í„°ë¶€ë¶„ì…ë‹ˆë‹¤. ë°°ë‹¬ì˜ ë¯¼ì¡± í•˜ë‹¨ì— ë‚˜ì™€ìˆëŠ” ì—¬ëŸ¬ ì•½ê´€ì´ë‚˜ íšŒì‚¬ì •ë³´ë“±ì˜ ì •ë³´ë¥¼ ë‚˜íƒ€ë‚¼ìˆ˜ ìˆëŠ” ê³³ì…ë‹ˆë‹¤. ì—­ì‹œ í•œí˜ì´ì§€ë¡œ ë¶„ë¦¬í•˜ì˜€ìŠµë‹ˆë‹¤.  -->
 <c:import url="projectFooter.jsp" var="footer"></c:import>
 <%=pageContext.getAttribute("footer")%>
 

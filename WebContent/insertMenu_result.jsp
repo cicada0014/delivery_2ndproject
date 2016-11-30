@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>menu_result</title>
 </head>
 <body>
 <script type="text/javascript">
-	alert("¸Ş´º°¡ Ãß°¡µÆ½À´Ï´Ù.");
+	alert("ë©”ë‰´ê°€ ì¶”ê°€ëìŠµë‹ˆë‹¤.");
 	location.href="/delivery_2ndproject/list";
 </script>
 </body>
