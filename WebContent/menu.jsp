@@ -191,7 +191,8 @@
 		
 		<div class="row menuScreen">
 			<div class="col s12" id="menuReply">
-				<div class="card-panel teal lighten-2 col s12" style="text-align:center">식당평가</div>
+				<div class="card-panel teal lighten-2 col s9" style="text-align:center">식당평가</div>
+				<a class="waves-effect waves-light btn col s2 push-s1" href="menuList.do?action=insertScoreForm">평가남기기</a>
 			</div>
 			<%for(int i=0; i<scoreList.size(); i++) { %>
 			<div class="col s12">

@@ -1,5 +1,6 @@
 package com.mc.delivery.controller.menucontroller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,9 @@ import com.mc.delivery.dao.RestaurantDAO;
 import com.mc.delivery.service.MenuService;
 import com.mc.delivery.vo.MenuVO;
 import com.mc.delivery.vo.RestaurantVO;
+import com.mc.delivery.vo.RestaurantsScoreVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet(urlPatterns="/menuList.do")
 public class MenuListController extends HttpServlet {
@@ -65,6 +69,11 @@ public class MenuListController extends HttpServlet {
 			String menuPrice = req.getParameter("menuPrice");
 			String menuImgPath = req.getParameter("menuImgPath");
 			
+			String menuImgFolder = "http://70.12.109.97:9090/";
+			MultipartRequest mRequest = new MultipartRequest(req, menuImgFolder, 1024 * 1024 * 5, "utf-8", new DefaultFileRenamePolicy());
+			
+			File file = mRequest.getFile("uploadFile");
+			
 			MenuVO vo = new MenuVO();
 			vo.setRestaurantId(restaurantId);
 			vo.setMenuCategory(Integer.parseInt(menuCategory));
@@ -72,10 +81,34 @@ public class MenuListController extends HttpServlet {
 			vo.setMenuInfo(menuInfo);
 			vo.setMenuPrice(Integer.parseInt(menuPrice));
 			vo.setMenuImagePath(menuImgPath);
+//			vo.setMenuImagePath(file.getAbsolutePath());
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);
 			viewPath = "insertMenu_result.jsp";
+		}
+		else if(action.equals("insertScoreForm"))
+		{
+			viewPath = "insertScore_form.jsp";
+		}
+		else if(action.equals("insertScore"))
+		{
+			String restaurantIdStr = req.getParameter("restaurantName");
+			int restaurantId = Integer.parseInt(restaurantIdStr);
+			
+			String userName = req.getParameter("userName");
+			String restaurantComment = req.getParameter("restaurantComment");
+			String commentImgPath = req.getParameter("commentImgPath");
+			
+			RestaurantsScoreVO vo = new RestaurantsScoreVO();
+			vo.setRestaurantId(restaurantId);
+			vo.setUserName(userName);
+			vo.setRestaurantComment(restaurantComment);
+			vo.setCommentImgPath(commentImgPath);
+			
+			int result = service.replyInsert(vo);
+			req.setAttribute("insertScore", result);
+			viewPath = "insertScore_result.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
 		dispatcher.forward(req, resp);

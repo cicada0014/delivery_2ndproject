@@ -12,9 +12,6 @@
 <title>insertMenu.jsp</title>
 <c:import url="design_reference.html" var="bootstrap"></c:import>
 <%=pageContext.getAttribute("bootstrap")%>
-<style type="text/css">
-
-</style>
 <script type="text/javascript">
 	$(function(){
 		
@@ -46,9 +43,6 @@
 		</div>
 	</div>
 </div>
-<%
-	
-%>
 <div class="container">
 	<div class="row">
 		<form class="col s11 push-s2" method="post" action="menuList.do">
