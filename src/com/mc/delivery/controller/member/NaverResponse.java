@@ -46,7 +46,7 @@ public class NaverResponse extends HttpServlet {
 		int resCode = 0;
 
 
-		String redirectURI = URLEncoder.encode("http://70.12.109.108:8080/callback.jsp", "UTF-8");
+		String redirectURI = URLEncoder.encode("http://70.12.109.97:9090/callback.jsp", "UTF-8");
 		String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 		apiURL += "client_id=" + clientId;
 		apiURL += "&client_secret=" + clientSecret;
