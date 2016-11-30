@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,11 @@ public class MapAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/xml;charset=UTF-8");
+		String sessionLocation = request.getParameter("sessionLocation");
+		if(sessionLocation != null){
+			request.getSession().setAttribute("sessionLocation", sessionLocation);
+			System.out.println(sessionLocation);
+		}
 		String lat = request.getParameter("lat");
 		String lng = request.getParameter("lng");
 
@@ -48,7 +52,11 @@ public class MapAction implements Action {
 			br.close();
 			
 			System.out.println(result.toString());
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(result.toString());
+			
+			
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}

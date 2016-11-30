@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 import com.mc.delivery.dao.MenuDAO;
-import com.mc.delivery.dao.MenuScoreDAO;
+import com.mc.delivery.dao.RestaurantsScoreDAO;
 import com.mc.delivery.dao.RestaurantDAO;
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
@@ -27,7 +27,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		InitialContext initialContext;
 		RestaurantDAO restaurantDAO = RestaurantDAO.getRestaurantDAO();
 		MenuDAO menuDAO = MenuDAO.getMenuDAO();
-		MenuScoreDAO menuScoreDAO = MenuScoreDAO.getMenuScoreDAO();
+		RestaurantsScoreDAO menuScoreDAO = RestaurantsScoreDAO.getMenuScoreDAO();
 		
 		try {
 			initialContext = new InitialContext();

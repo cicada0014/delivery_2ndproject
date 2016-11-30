@@ -1,5 +1,7 @@
 package com.mc.delivery.vo;
 
+import java.util.List;
+
 public class MenuVO {
 	private int restaurantId;
 	private int menuId;
@@ -12,7 +14,8 @@ public class MenuVO {
 	public MenuVO() {
 	}
 
-	public MenuVO(int restaurantId, int menuId, int menuCategory, String menuName, String menuInfo, int menuPrice, String menuImagePath) {
+	public MenuVO(int restaurantId, int menuId, int menuCategory, String menuName, String menuInfo, int menuPrice,
+			String menuImagePath) {
 		this.restaurantId = restaurantId;
 		this.menuId = menuId;
 		this.menuCategory = menuCategory;

@@ -4,14 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>insertScore</title>
+<title>menu_result</title>
 </head>
 <body>
-
-<form action="File" method="post" enctype="multipart/form-data">
-	메뉴이름<input type="text" name="menuName" value="" disabled="disabled"><br>
-	
-
-</form>
+<script type="text/javascript">
+	alert("메뉴가 추가됐습니다.");
+	location.href="/delivery_2ndproject/list";
+</script>
 </body>
 </html>
