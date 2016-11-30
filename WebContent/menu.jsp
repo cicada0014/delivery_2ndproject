@@ -67,7 +67,6 @@
 			</script>
 		</div>
 	</div>
-
 </div>
 
 <%

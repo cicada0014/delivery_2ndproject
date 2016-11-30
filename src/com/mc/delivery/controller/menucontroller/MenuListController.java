@@ -50,9 +50,13 @@ public class MenuListController extends HttpServlet {
 			req.setAttribute("restaurant", restaurant);
 			viewPath = "menu.jsp";
 		}
-		else if(action.equals("insert"))
+		else if(action.equals("insertMenuForm"))
 		{
-			String restaurantIdStr = req.getParameter("restaurantId");
+			viewPath = "insertMenu_form.jsp";
+		}
+		else if(action.equals("insertMenu"))
+		{
+			String restaurantIdStr = req.getParameter("restaurantName");
 			int restaurantId = Integer.parseInt(restaurantIdStr);
 			
 			String menuCategory = req.getParameter("menuCategory");
@@ -71,7 +75,7 @@ public class MenuListController extends HttpServlet {
 			
 			int result = service.insert(vo);
 			req.setAttribute("insertResult", result);
-			viewPath = "insertMenu.jsp";
+			viewPath = "insertMenu_result.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
 		dispatcher.forward(req, resp);
