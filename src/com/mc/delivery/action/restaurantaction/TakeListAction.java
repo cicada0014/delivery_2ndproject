@@ -38,9 +38,11 @@ public class TakeListAction implements Action{
 					System.out.println("옵션값 안들어옴");
 					String search = request.getParameter("search");
 					System.out.println(search);
+					String result = new String(search.getBytes("8859_1"), "UTF-8");
+					System.out.println("result : " + result);
 					List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
-							voList = dao.selectSearchName(search,sessionLocation);
-							request.setAttribute("resultSize", dao.selectOptionCount(search, sessionLocation));
+							voList = dao.selectSearchName(result,sessionLocation);
+							request.setAttribute("resultSize", dao.selectOptionCount(result, sessionLocation));
 							
 							request.setAttribute("restaurantList", voList);
 							request.setAttribute("category", voList.get(0).getRestaurantCategory());
