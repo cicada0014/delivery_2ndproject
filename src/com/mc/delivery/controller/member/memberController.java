@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mc.delivery.dao.MemberDAO;
+import com.mc.delivery.dao.RestaurantDAO;
 import com.mc.delivery.vo.MemberVO;
 
 
@@ -35,6 +37,8 @@ public class memberController extends HttpServlet  {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		String viewPath = "";
+		ServletContext sc = request.getServletContext();
+		MemberDAO dao = (MemberDAO) sc.getAttribute("memberDAO");
 		
 		//
 		System.out.println("memberController action : " + action);
@@ -64,7 +68,6 @@ public class memberController extends HttpServlet  {
 			mvo.setBrithday(brithday);
 			mvo.setAdmin(admin);
 		
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			
 			int result = dao.insertMember(mvo);
 			
@@ -82,7 +85,6 @@ public class memberController extends HttpServlet  {
 		
 		String email = request.getParameter("email");
 		viewPath = "idcheck.jsp";
-		MemberDAO dao = MemberDAO.getMemberDAO();
 		
 		int result = dao.confirmEmail(email);
 		
@@ -103,7 +105,6 @@ public class memberController extends HttpServlet  {
 			String email = request.getParameter("email");
 			String pwd = request.getParameter("pwd");
 			
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			int result= dao.userCheck(email, pwd);
 			
 			if(result == 1){
@@ -122,7 +123,6 @@ public class memberController extends HttpServlet  {
 						
 		} else if (action.equals("update")){
 			String email = request.getParameter("email");
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			
 			MemberVO mvo  = dao.getMember(email);
 			
@@ -146,7 +146,6 @@ public class memberController extends HttpServlet  {
 			mvo.setBrithday(brithday);
 			
 		//	System.out.println(mvo);
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			
 			int result = dao.updateMember(mvo);
 			
@@ -164,7 +163,6 @@ public class memberController extends HttpServlet  {
 			String naver_email = (String) session.getAttribute("naver_email");
 			String naver_nick = (String) session.getAttribute("naver_nick");
 			
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			
 				System.out.println("naver_email : " + naver_email);
 				System.out.println("naver_nick : " + naver_nick);
@@ -218,7 +216,6 @@ public class memberController extends HttpServlet  {
 			System.out.println(point);
 			System.out.println(email);
 			
-			MemberDAO dao = MemberDAO.getMemberDAO();
 			
 			int result = dao.plusPoint(point, email);
 			

@@ -5,11 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import com.mc.delivery.jdbcutil.DBHelper;
 import com.mc.delivery.vo.MemberVO;
 
 public class MemberDAO {
 	private static MemberDAO instance;
+	
+private DataSource dataSource;
+	
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	private MemberDAO() {
 
@@ -30,7 +39,7 @@ public class MemberDAO {
 		int result = 0;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "SELECT PASSWORD FROM MEMBER WHERE EMAIL=?";
 
 			pstmt = con.prepareStatement(sql);
@@ -72,7 +81,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "select * from member where email=?";
 
 			pstmt = con.prepareStatement(sql);
@@ -110,7 +119,7 @@ public class MemberDAO {
 		int result = -1;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "SELECT EMAIL FROM MEMBER WHERE EMAIL=?";
 
 			pstmt = con.prepareStatement(sql);
@@ -143,7 +152,7 @@ public class MemberDAO {
 		int result = -1;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql =
 
 					"INSERT INTO MEMBER (EMAIL,NAME,PASSWORD,PHONE,BRITHDAY) VALUES(?,?,?,?,?)";
@@ -178,7 +187,7 @@ public class MemberDAO {
 		int result = -1;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "UPDATE MEMBER SET " + "NAME=? , PASSWORD=? , PHONE=? , BRITHDAY=? WHERE EMAIL=?";
 
 			// "UPDATE MEMBER SET EMAIL=? , NAME=? , PASSWORD=? , PHONE=? ,
@@ -215,7 +224,7 @@ public class MemberDAO {
 		int result = 0;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "SELECT EMAIL FROM MEMBER WHERE EMAIL=?";
 
 			pstmt = con.prepareStatement(sql);
@@ -253,7 +262,7 @@ public class MemberDAO {
 		int result = -1;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "UPDATE MEMBER SET POINT = POINT+? WHERE EMAIL=?";
 
 			// "UPDATE MEMBER SET EMAIL=? , NAME=? , PASSWORD=? , PHONE=? ,
@@ -286,7 +295,7 @@ public class MemberDAO {
 		int result = -1;
 
 		try {
-			con = new DBHelper().makeConnection();
+			con = dataSource.getConnection();
 			String sql = "UPDATE MEMBER SET POINT = POINT-? WHERE EMAIL=?";
 
 			// "UPDATE MEMBER SET EMAIL=? , NAME=? , PASSWORD=? , PHONE=? ,
