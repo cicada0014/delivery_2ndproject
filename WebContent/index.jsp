@@ -163,7 +163,6 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 		<%=pageContext.getAttribute("header")%>
 		
 
-<c:import url="SearchForm.html"></c:import>
 
 <!-- 이 부분은 카테고리관련한 페이지 입니다. 크롬개발자 도구를 통해 어떤 부분을 차지하고 있는지 쉽게볼수 있습니다.  -->
 
