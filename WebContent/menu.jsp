@@ -45,6 +45,31 @@
 	$(function(){
 		$(document).ready(function(){
 			$('ul.tabs').tabs();
+			$('.modal').modal();
+			$('.selections').on('click',function(){
+				$('#target').text($('.price').text());
+					console.log('a');
+
+				})
+			$('#payAgree').on('click',function(){
+				$.ajax({
+					url:"member.do",
+					type:"post",
+					data:"action=point_get&price=10000",
+					dataType:"json",
+					success: function(){
+						$('#resultModal').modal('open');
+						},
+					error: function(){
+
+						}	
+
+					})
+					
+
+
+				})
+				
 		});
 	})
 </script>
@@ -108,10 +133,10 @@
 				<%for(int i=0; i<menuList.size(); i++) {
 					if(menuList.get(i).getMenuCategory() == 1)
 							{%>
-						<a href="#"><li class="collection-item avatar">
-						<img src="images/default_img.png" alt="" class="circle">
+						<a class="modal-trigger selections" href="#selectMenuModal"><li class="collection-item avatar">
+						<img src="images/default_img.png" alt="<%=i%>" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
-						<p><%=menuList.get(i).getMenuPrice() %>원</p>
+						<p class="price"><%=menuList.get(i).getMenuPrice() %></p>  <b>원</b>
 						<p><%=menuList.get(i).getMenuInfo() %></p>
 						<%} %>
 					</li>
@@ -124,7 +149,7 @@
 				<%for(int i=0; i<menuList.size(); i++) {
 					if(menuList.get(i).getMenuCategory() == 2)
 							{%>
-						<a href="#"><li class="collection-item avatar">
+						<a href="#"><li class="collection-item avatar ">
 						<img src="images/default_img.png" alt="" class="circle">
 						<span class="title"><%=menuList.get(i).getMenuName() %></span>
 						<p><%=menuList.get(i).getMenuPrice() %>원</p>
@@ -182,8 +207,9 @@
 <!-- 						<a href="#">This is a link</a> <a href="#">This is a link</a> -->
 					</div>
 				</div>
-				<div style="text-align:center"><a class="waves-effect waves-light btn-large">장바구니</a></div><br>
-				<div style="text-align:center"><a class="waves-effect waves-light btn-large">결제하기</a></div>
+				<div style="text-align:center"><a id="shoppingBack" href="#selectMenuModal" class="modal-trigger waves-effect waves-light btn">장바구니</a></div><br>
+				
+				<div style="text-align:center"><a id="paing" href="#payModal" class="modal-trigger waves-effect waves-light btn">결제하기</a></div>
 			</div>
 		</div>
 		
@@ -205,6 +231,42 @@
 			<%} %>
 		</div>
 	</div>
+	
+<!-- Modal Structure -->
+				<div id="selectMenuModal" class="modal bottom-sheet">
+					<div class="modal-content">
+						<h4>선택하신 메뉴를 장바구니에 담으시겠습니까?</h4>
+						<p id="target"></p>
+					</div>
+					<div class="modal-footer">
+						<a href="#!"
+							class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+					</div>
+				</div>	
+				<div id="payModal" class="modal modal-fixed-footer">
+					<div class="modal-content">
+						<h4>현재 당신의 포인트  :  ${sessionScope.point}</h4>
+						<h4>선택하신 물품의 값 : 10000  </h4>
+						<p id=""></p>
+					</div>
+					<div class="modal-footer">
+						<a href="#!" id="payAgree"
+							class="modal-action modal-close waves-effect waves-green btn-flat ">무조건 결제 ㅋ</a>
+					</div>
+				</div>	
+				<div id="resultModal" class="modal modal-fixed-footer">
+					<div class="modal-content">
+						<h4>현재 당신의 포인트  :  ${sessionScope.point}</h4>
+						<h4></h4>
+						<p id=""></p>
+					</div>
+					<div class="modal-footer">
+						<a href="#!" id="payAgree"
+							class="modal-action modal-close waves-effect waves-green btn-flat ">무조건 결제 ㅋ</a>
+					</div>
+				</div>	
+	
+	
 	
 	
 <!-- 이부분은 프로젝트에서 쓰이는 푸터부분입니다. 배달의 민족 하단에 나와있는 여러 약관이나 회사정보등의 정보를 나타낼수 있는 곳입니다. 역시 한페이지로 분리하였습니다.  -->

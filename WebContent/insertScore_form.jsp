@@ -79,7 +79,7 @@
 			
 			<div class="row">
 				<input type="hidden" name="restaurantId" value=<%=id %>>
-				<a href="/menuList.do?action=insertScore"><button class="btn waves-effect waves-light btn-large" id="submit" name="action" value="insertScore">메뉴등록</button></a>
+				<a href="/menuList.do?action=insertScore"><button class="btn waves-effect waves-light btn-large" id="submit" name="action" value="insertScore">평가등록</button></a>
 			</div>
 		</form>
 	</div>
