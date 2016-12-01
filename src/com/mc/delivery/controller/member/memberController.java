@@ -217,8 +217,10 @@ public class memberController extends HttpServlet  {
 			System.out.println(email);
 			
 			
-			int result = dao.plusPoint(price, email);
-			session.setAttribute("point", point);
+			int result = dao.plusPoint(point, email);
+			MemberVO mvo = dao.getMember(email);
+			session.setAttribute("point", mvo.getPoint());
+			
 			if(result == 1){
 				System.out.println("point 적립 성공");
 			} else {
