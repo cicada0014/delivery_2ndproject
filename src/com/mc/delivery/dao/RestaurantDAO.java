@@ -223,15 +223,14 @@ public class RestaurantDAO {
 			 		+ "a.restaurant_introduce, a.restaurant_id FROM "
 					 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
 					 + "ON r.restaurant_location=l.location_id "
-					 +"WHERE restaurant_name LIKE '%?%' "
-					 + ")AS a LIMIT 0,12 ;";
+					 +"WHERE restaurant_name LIKE CONCAT('%',?,'%')  "
+					 + ")  AS a LIMIT 0,12 ;";
 			 
 			 
 			 try {
 				 con= dataSource.getConnection();
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, search);
-				
 				rs=pstmt.executeQuery();
 				while(rs.next()){
 					RestaurantVO vo = new RestaurantVO();
@@ -254,7 +253,7 @@ public class RestaurantDAO {
 
 				DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
 //				커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
-
+				System.out.println(voList.size());
 			}return voList;	
 		
 		

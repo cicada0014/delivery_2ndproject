@@ -43,7 +43,14 @@ public class TakeListAction implements Action{
 							request.setAttribute("resultSize", dao.selectOptionCount(search, sessionLocation));
 							
 							request.setAttribute("restaurantList", voList);
-							request.setAttribute("category", voList.get(0).getRestaurantCategory());
+						
+								
+							try {
+								request.setAttribute("category", voList.get(0).getRestaurantCategory());
+							} catch (Exception e) {
+								System.out.println("검색결과 없음!");
+							}
+						
 						
 					request.setCharacterEncoding("UTF-8");
 					response.setCharacterEncoding("UTF-8");

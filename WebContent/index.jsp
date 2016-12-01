@@ -175,6 +175,7 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 		<script type="text/javascript">
               $('#uselessIndex').remove(); // categoryCarousel만 지움
 			</script>
+		</div>	
 		<!-- 	현성이형이 작업하신 부분입니다.  --> 
 <!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  --
 >

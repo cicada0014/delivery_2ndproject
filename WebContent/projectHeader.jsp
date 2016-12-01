@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<!-- 이 쿼리가 정말 필요한지? 캐로우셀은 3.1.0.버전만 먹히므로 충돌 발생함. -->
 
 
 <title>Insert title here</title>
@@ -34,7 +32,6 @@
 						<li><a class="grey-text" href="member.do?action=logout">로그아웃</a></li>
 						<li><a class="grey-text"
 							href="member.do?action=update&email=${sessionScope.email}">정보수정</a></li>
-						<!-- 			jstl 써서 관리자 입장시에만 보이도록 할 -->
 						<li><a class="grey-text"
 							href="list?command=insertRestaurantInfoForm">식당정보 입력하기</a></li>
 						<li><a class="grey-text" href="menuList.do?action=insertMenuForm">메뉴정보 입력하기</a></li>	
@@ -51,13 +48,6 @@
 
 			</ul>
 
-			<ul id="nav-mobile" class="side-nav">
-				<li><a href="#">Navbar Link</a></li>
-			</ul>
-			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
-				class="material-icons">menu</i></a>
-			<!-- 			<ul class="tabs tabs-transparent"> -->
-			<!--       		</ul> -->
 		</div>
 
 
