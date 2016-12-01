@@ -213,6 +213,53 @@ public class RestaurantDAO {
 		}return voList;
 		 
 	}
+		public List<RestaurantVO> selectSearchName(String search, String sessionLocation){
+			List<RestaurantVO> voList = new ArrayList<>();
+			 Connection con = null;
+			 PreparedStatement pstmt =null;
+			 ResultSet rs= null;
+			 String sql="SELECT a.restaurant_name,a.location_name,a.restaurant_img,"
+			 		+ "a.restaurant_phone, a.restaurant_open_time, a.restaurant_close_time,"
+			 		+ "a.restaurant_introduce, a.restaurant_id FROM "
+					 +"(SELECT * FROM restaurants as r LEFT JOIN locations as l "
+					 + "ON r.restaurant_location=l.location_id "
+					 +"WHERE restaurant_name LIKE '%?%' "
+					 + ")AS a LIMIT 0,12 ;";
+			 
+			 
+			 try {
+				 con= dataSource.getConnection();
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, search);
+				
+				rs=pstmt.executeQuery();
+				while(rs.next()){
+					RestaurantVO vo = new RestaurantVO();
+					vo.setRestaurantName(rs.getString(1));
+					vo.setRestaurantLocation(rs.getString(2));
+					vo.setRestaurantImg(rs.getString(3));
+					vo.setRestaurantPhone(rs.getString(4));
+					vo.setRestaurantOpenTime(rs.getString(5));
+					vo.setRestaurantCloseTime(rs.getString(6));
+					vo.setRestaurantIntro(rs.getString(7));
+					vo.setRestaurantId(rs.getInt(8));
+					voList.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				DBHelper.close(rs);
+				DBHelper.close(pstmt);
+
+				DBHelper.close(con); // 데이타 소스를 이용한 커넥션연결에서 클로즈란 완전히 끊는 것이 아닌
+//				커넥션 대행객체를 ㄲ주는 거임. 대행객체가 닫힐때는 커넥션풀에 진짜 커넥션 객체를 반납한다고이해해야함.
+
+			}return voList;	
+		
+		
+		
+	}
 	public List<RestaurantVO> selectAjaxOption(String option,String sessionLocation,int count){
 		int queryCount = count*12;
 		List<RestaurantVO> voList = new ArrayList<>();

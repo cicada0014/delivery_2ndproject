@@ -36,23 +36,41 @@ public class TakeListAction implements Action{
 				
 				if(option==null){
 					System.out.println("옵션값 안들어옴");
-				}
-				System.out.println(option);
-				List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
-				
-				for(CategoryVO ct : categoryList){
-					if(option.equals(ct.getCategoryName())){
-						voList = dao.selectOption(option,sessionLocation);
-						request.setAttribute("resultSize", dao.selectOptionCount(option, sessionLocation));
+					String search = request.getParameter("search");
+					System.out.println(search);
+					List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
+							voList = dao.selectSearchName(search,sessionLocation);
+							request.setAttribute("resultSize", dao.selectOptionCount(search, sessionLocation));
+							
+							request.setAttribute("restaurantList", voList);
+							request.setAttribute("category", voList.get(0).getRestaurantCategory());
 						
-						request.setAttribute("restaurantList", voList);
-						request.setAttribute("category", option);
-						break;
-					}
+					request.setCharacterEncoding("UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
+					
 				}
-				request.setCharacterEncoding("UTF-8");
-				response.setCharacterEncoding("UTF-8");
-			ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
+				else{
+					
+					System.out.println(option);
+					List<CategoryVO> categoryList = (List<CategoryVO>)request.getSession().getAttribute("categoryListData");
+					
+					for(CategoryVO ct : categoryList){
+						if(option.equals(ct.getCategoryName())){
+							voList = dao.selectOption(option,sessionLocation);
+							request.setAttribute("resultSize", dao.selectOptionCount(option, sessionLocation));
+							
+							request.setAttribute("restaurantList", voList);
+							request.setAttribute("category", option);
+							break;
+						}
+					}
+					request.setCharacterEncoding("UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					ActionHelper.getActionHelper().actionFoward(request, response, viewPath);
+					
+				}
+				
 		
 	}
 

@@ -158,12 +158,14 @@ naver.maps.Event.addListener(map, 'click', function(e) {
 
 <body>
 <!-- 이 부분은 로고가 들어간 가장 상단부분입니다. 여러군데서 사용될가능성이 있기에 페이지를 따로 두었습니다. -->
-
+<div class="container-fluid">
 <c:import url="projectHeader.jsp" var="header"></c:import>
 		<%=pageContext.getAttribute("header")%>
 		
 
-
+<c:import url="SearchForm.jsp" var="search"></c:import>
+	<%=pageContext.getAttribute("search")%>
+</div>
 <!-- 이 부분은 카테고리관련한 페이지 입니다. 크롬개발자 도구를 통해 어떤 부분을 차지하고 있는지 쉽게볼수 있습니다.  -->
 
 	<div class="container">
@@ -174,20 +176,13 @@ naver.maps.Event.addListener(map, 'click', function(e) {
               $('#uselessIndex').remove(); // categoryCarousel만 지움
 			</script>
 		<!-- 	현성이형이 작업하신 부분입니다.  --> 
-<!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  -->
+<!-- 		해당 부분은 projectHedaer.jsp로 옮겨졌습니다  --
+>
 
 
 	</div>
 	<div class="container">
-			<form class="col row" action="" method="post">
-				<div class="input-field col s4 m4 l4">
-					<i class="material-icons prefix">my_location</i> <input
-						id="newlocation" type="text" class="validate" name="newlocation">
-					<label for="newlocation">새로운 위치지정</label>
-				<a id="resetLocationBtn" class="col s4 m4 l4 waves-effect waves-light btn-large">
-				<i class="material-icons left">cloud</i> 위치값 재 설정!</a>
-				</div>
-			</form>
+		
 	</div>
 	<!-- 마테리얼에서 준비해준 기본 템플릿입니다. 현재 사용하고 있지는 않습니다.  -->
 	<div class="section no-pad-bot" id="index-banner">

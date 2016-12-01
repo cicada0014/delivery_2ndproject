@@ -13,7 +13,7 @@
 
 </head>
 <body>
-
+	<div class="row">
 	<nav class="nav-extended navbar-fixed white ">
 		<div class="nav-wrapper container ">
 			<a id="logo-container" href="./index.jsp" class="brand-logo center">
@@ -64,6 +64,6 @@
 	</nav>
 
 	<div class='' id="currentUserLocation"></div>
-
+</div>
 </body>
 </html>
